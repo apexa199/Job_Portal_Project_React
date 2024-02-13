@@ -2,7 +2,7 @@ import { lazy } from 'react';
 import Loadable from 'app/components/Loadable';
 import { CreateJob } from './createJob';
 import Profile from './profile';
-import { ListJobs } from './listJobs';
+import ListJobs from './listJobs';
 import MyJobs from './myJobs';
 
 const recruiterRoutes = [

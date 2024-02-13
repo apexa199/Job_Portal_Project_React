@@ -83,7 +83,7 @@ const JobTile = (props) => {
   const [openUpdate, setOpenUpdate] = useState(false);
   const [jobDetails, setJobDetails] = useState(job);
 
-  const { data, isloading, error, listData } = useSelector((y) => y.getJobs);
+  const { listData, data } = useSelector((y) => y.getJobs);
 
   console.log(listData);
 
@@ -93,7 +93,7 @@ const JobTile = (props) => {
     dis(GetJobRequest(1));
   }, []);
 
-  console.log(jobDetails);
+  console.log(listData);
 
   const handleInput = (key, value) => {
     setJobDetails({
@@ -147,27 +147,40 @@ const JobTile = (props) => {
   return (
     <Paper className={classes.jobTileOuter} elevation={3}>
       <Grid container>
-        <Grid container item xs={9} spacing={1} direction="column">
-          <Grid item>
-            <Typography variant="h5">{job.title}</Typography>
-          </Grid>
-          <Grid item>
-            <Rating value={job.rating !== -1 ? job.rating : null} readOnly />
-          </Grid>
-          <Grid item>Role : {job.jobType}</Grid>
-          <Grid item>Salary : &#8377; {job.salary} per month</Grid>
-          <Grid item>Duration : {job.duration !== 0 ? `${job.duration} month` : `Flexible`}</Grid>
-          <Grid item>Date Of Posting: {postedOn.toLocaleDateString()}</Grid>
-          <Grid item>Number of Applicants: {job.maxApplicants}</Grid>
-          <Grid item>
-            Remaining Number of Positions: {job.maxPositions - job.acceptedCandidates}
-          </Grid>
-          <Grid item>
-            {job.skillsets.map((skill) => (
-              <Chip label={skill} style={{ marginRight: '2px' }} />
-            ))}
-          </Grid>
-        </Grid>
+        {/* {isloading && <div>Loading</div>}
+        {error && <div>{error}</div>} */}
+        {data && (
+          <ul className="col-sm-4">
+            {listData?.map((v) => {
+              return (
+                <Grid container item xs={9} spacing={1} direction="column">
+                  <Grid item>
+                    <Typography variant="h5">{v.title}</Typography>
+                  </Grid>
+                  <Grid item>
+                    <Rating value={v.rating !== -1 ? v.rating : null} readOnly />
+                  </Grid>
+                  <Grid item>Role : {v.jobType}</Grid>
+                  <Grid item>Salary : &#8377; {v.salary} per month</Grid>
+                  <Grid item>
+                    Duration : {v.duration !== 0 ? `${v.duration} month` : `Flexible`}
+                  </Grid>
+                  <Grid item>Date Of Posting: {postedOn.toLocaleDateString()}</Grid>
+                  <Grid item>Number of Applicants: {v.maxApplicants}</Grid>
+                  <Grid item>
+                    Remaining Number of Positions: {v.maxPositions - v.acceptedCandidates}
+                  </Grid>
+                  <Grid item>
+                    {v.skillsets.map((skill) => (
+                      <Chip label={skill} style={{ marginRight: '2px' }} />
+                    ))}
+                  </Grid>
+                </Grid>
+              );
+            })}
+          </ul>
+        )}
+
         <Grid item container direction="column" xs={3}>
           <Grid item xs>
             <Button
