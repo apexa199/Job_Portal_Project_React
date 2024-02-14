@@ -13,6 +13,7 @@ import { GetJobRequest } from 'slice/recruiter/getjobSlice';
 import SearchIcon from '@mui/icons-material/Search';
 import FilterListIcon from '@mui/icons-material/FilterList';
 import { useState } from 'react';
+import { Button } from 'react-bootstrap';
 
 const Container = styled('div')(({ theme }) => ({
   margin: '30px',
@@ -109,52 +110,55 @@ function MyJobs() {
             </Grid>
           </Grid>
 
-          {isloading && <div>Loading</div>}
-          {/* {error && <div>{error}</div>} */}
+          {listData.length > 0 ? (
+            listData?.map((v) => {
+              return (
+                <Card sx={{ maxWidth: 1200, margin: '25px', background: 'lightgrey' }}>
+                  <CardActionArea>
+                    <CardContent>
+                      <Typography gutterBottom variant="h6" component="div">
+                        {v.title}
+                      </Typography>
+                      <Typography gutterBottom variant="h6" component="div">
+                        <Rating value={v.rating !== -1 ? v.rating : null} readOnly />
+                      </Typography>
+                      <Typography gutterBottom variant="body" component="div">
+                        User Id : {v.userId}
+                      </Typography>
 
-          {listData?.map((v) => {
-            return (
-              <Card sx={{ maxWidth: 1200, margin: '25px' }}>
-                <CardActionArea>
-                  <CardContent>
-                    <Typography gutterBottom variant="h6" component="div">
-                      {v.title}
-                    </Typography>
-                    <Typography gutterBottom variant="h6" component="div">
-                      <Rating value={v.rating !== -1 ? v.rating : null} readOnly />
-                    </Typography>
-                    <Typography gutterBottom variant="body" component="div">
-                      User Id : {v.userId}
-                    </Typography>
-
-                    <Typography gutterBottom variant="body" component="div">
-                      Duration :{v.duration !== 0 ? `${v.duration} month` : `Flexible`}
-                    </Typography>
-                    <Typography gutterBottom variant="body" component="div">
-                      {v.role}
-                    </Typography>
-                    <Typography gutterBottom variant="body" component="div">
-                      Job Type : {v.jobType}
-                    </Typography>
-                    <Typography gutterBottom variant="body" component="div">
-                      Salary : &#8377; {v.salary}
-                    </Typography>
-                    <Typography gutterBottom variant="body" component="div">
-                      Number of Applicants: {v.maxApplicants}
-                    </Typography>
-                    <Typography gutterBottom variant="body" component="div">
-                      Remaining Number of Positions: {v.maxPositions - v.acceptedCandidates}
-                    </Typography>
-                    <Typography gutterBottom variant="body" component="div">
-                      {v.skillsets.map((skill) => (
-                        <Chip label={skill} style={{ marginRight: '2px' }} />
-                      ))}
-                    </Typography>
-                  </CardContent>
-                </CardActionArea>
-              </Card>
-            );
-          })}
+                      <Typography gutterBottom variant="body" component="div">
+                        Duration :{v.duration !== 0 ? `${v.duration} month` : `Flexible`}
+                      </Typography>
+                      <Typography gutterBottom variant="body" component="div">
+                        {v.role}
+                      </Typography>
+                      <Typography gutterBottom variant="body" component="div">
+                        Job Type : {v.jobType}
+                      </Typography>
+                      <Typography gutterBottom variant="body" component="div">
+                        Salary : &#8377; {v.salary}
+                      </Typography>
+                      <Typography gutterBottom variant="body" component="div">
+                        Number of Applicants: {v.maxApplicants}
+                      </Typography>
+                      <Typography gutterBottom variant="body" component="div">
+                        Remaining Number of Positions: {v.maxPositions - v.acceptedCandidates}
+                      </Typography>
+                      <Typography gutterBottom variant="body" component="div">
+                        {v.skillsets.map((skill) => (
+                          <Chip label={skill} style={{ marginRight: '2px' }} />
+                        ))}
+                      </Typography>
+                    </CardContent>
+                  </CardActionArea>
+                </Card>
+              );
+            })
+          ) : (
+            <Typography variant="h5" style={{ textAlign: 'center' }}>
+              No jobs found
+            </Typography>
+          )}
         </div>
       </Container>
     </>

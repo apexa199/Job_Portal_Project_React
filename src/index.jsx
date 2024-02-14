@@ -7,7 +7,7 @@ import * as serviceWorker from './serviceWorker';
 // third party style
 import 'perfect-scrollbar/css/perfect-scrollbar.css';
 
-import Profile from 'app/views/recruiter/profile';
+import Profile from 'app/components/recruiter/profile';
 import { Provider } from 'react-redux';
 import store from 'store/store';
 

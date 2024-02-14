@@ -5,7 +5,7 @@ import { authRoles } from './auth/authRoles';
 import Loadable from './components/Loadable';
 import MatxLayout from './components/MatxLayout/MatxLayout';
 import materialRoutes from 'app/views/material-kit/MaterialRoutes';
-import recruiterRoutes from './views/recruiter/RecruiterRoutes';
+import recruiterRoutes from './components/recruiter/RecruiterRoutes';
 
 // session pages
 const NotFound = Loadable(lazy(() => import('app/views/sessions/NotFound')));
@@ -35,8 +35,7 @@ const routes = [
         element: <Analytics />,
         auth: authRoles.admin
       },
-    
-  
+
       // e-chart rooute
       {
         path: '/charts/echarts',
@@ -51,11 +50,9 @@ const routes = [
   { path: '/session/signin', element: <JwtLogin /> },
   { path: '/session/signup', element: <JwtRegister /> },
   { path: '/session/forgot-password', element: <ForgotPassword /> },
-  
-  { path: '/', element: <Navigate to="dashboard/default" /> },
-  { path: '*', element: <NotFound /> },
 
- 
+  { path: '/', element: <Navigate to="dashboard/default" /> },
+  { path: '*', element: <NotFound /> }
 ];
 
 export default routes;
