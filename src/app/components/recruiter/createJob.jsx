@@ -1,9 +1,8 @@
 import React from 'react';
-import { useContext, useEffect, useState } from 'react';
+import {  useState } from 'react';
 import { Stack } from '@mui/material';
 import { Box, styled } from '@mui/material';
-import { Breadcrumb, SimpleCard } from 'app/components';
-import axios from 'axios';
+import { Breadcrumb} from 'app/components';
 import { Button, Grid, MenuItem, Paper, TextField, Typography } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { createJobRequest } from 'slice/recruiter/createjobSlice';
@@ -19,11 +18,12 @@ const Container = styled('div')(({ theme }) => ({
 
 export const CreateJob = () => {
   const data = useSelector((state) => state.jobs);
-
   console.log(data);
+ 
 
   const dis = useDispatch();
-
+  
+  
   const handleSubmit = () => {
     dis(createJobRequest(jobDetails));
   };
