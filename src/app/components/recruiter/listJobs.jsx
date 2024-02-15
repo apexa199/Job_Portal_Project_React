@@ -5,17 +5,13 @@ import {
   Chip,
   Grid,
   IconButton,
-  InputAdornment,
-  Paper,
+  InputAdornment,  
   Rating,
   Button,
-  TextField,
-  useMediaQuery
+  TextField,  
 } from '@mui/material';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import { Breadcrumb } from 'app/components';
 import Card from '@mui/material/Card';
@@ -28,7 +24,7 @@ import { GetJobRequest } from 'slice/recruiter/getjobSlice';
 import SearchIcon from '@mui/icons-material/Search';
 import FilterListIcon from '@mui/icons-material/FilterList';
 import { useState } from 'react';
-import { useTheme } from '@emotion/react';
+import { useHistory } from "react-router-dom";
 
 const style = {
   position: 'absolute',
@@ -69,15 +65,19 @@ function MyJobs() {
   const [openUpdate, setOpenUpdate] = useState(false);
   const handleClickOpenUpdate = () => setOpenUpdate(true);
   const handleCloseUpdate = () => setOpenUpdate(false);
-  const theme = useTheme();
-  const fullScreen = useMediaQuery(theme.breakpoints.down('md'));
+  // let history = useHistory();
+
+  // const handleClick = (location) => {
+  //   history.push(location);
+  // };
+
   return (
     <>
       <Container>
         <div>
           <Box className="breadcrumb">
             <Breadcrumb
-              routeSegments={[{ name: 'MyJobs', path: '/Recruiter' }, { name: 'My Jobs' }]}
+              routeSegments={[{ name: 'Recruiter', path: '/Recruiter' }, { name: 'My Jobs' }]}
             />
           </Box>
 
@@ -162,7 +162,7 @@ function MyJobs() {
                         
                         }}
                         size="small"
-                        onClick={() => handleClick(`/recruiter/applications`)}
+                        // onClick={() => handleClick(`/recruiter/applications`)}
                       >
                         View Application
                       </Button>
@@ -253,7 +253,7 @@ function MyJobs() {
 
         {/* /Update Popup Start----------> */}
         <Dialog
-          fullScreen={fullScreen}
+         
           open={openUpdate}
           keepMounted
           onClose={handleCloseUpdate}

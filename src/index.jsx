@@ -10,16 +10,33 @@ import 'perfect-scrollbar/css/perfect-scrollbar.css';
 import Profile from 'app/components/recruiter/profile';
 import { Provider } from 'react-redux';
 import store from 'store/store';
+import { ToastContainer } from 'react-bootstrap';
 
 const root = createRoot(document.getElementById('root'));
 
 root.render(
   <StyledEngineProvider injectFirst>
+     
     <Provider store={store}>
+    <ToastContainer
+position="top-center"
+autoClose={5000}
+hideProgressBar={false}
+newestOnTop={false}
+closeOnClick
+rtl={false}
+pauseOnFocusLoss
+draggable
+pauseOnHover
+theme="light"
+/>
       <BrowserRouter>
         <App />
       </BrowserRouter>
+   
     </Provider>
+
+  
   </StyledEngineProvider>
 );
 

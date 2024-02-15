@@ -5,6 +5,7 @@ import { Box } from '@mui/material';
 import makeStyles from '@emotion/styled';
 import { Breadcrumb, SimpleCard } from 'app/components';
 import { Button, Grid, Paper, TextField, Typography } from '@mui/material';
+import PhoneInput from "react-phone-input-2";
 
 const Container = styled('div')(({ theme }) => ({
   margin: '30px',
@@ -15,97 +16,13 @@ const Container = styled('div')(({ theme }) => ({
   }
 }));
 
-const useStyles = makeStyles((theme) => ({
-  body: {
-    height: 'inherit'
-  },
-  popupDialog: {
-    height: '100%',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center'
-    // padding: "30px",
-  }
-}));
 
-// const MultifieldInput = (props) => {
-//   const classes = useStyles();
-//   const { education, setEducation } = props;
 
-//   return (
-//     <>
-//       {education.map((obj, key) => (
-//         <Grid item container className={classes.inputBox} key={key}>
-//           <Grid item xs={6}>
-//             <TextField
-//               label={`Institution Name #${key + 1}`}
-//               value={education[key].institutionName}
-//               onChange={(event) => {
-//                 const newEdu = [...education];
-//                 newEdu[key].institutionName = event.target.value;
-//                 setEducation(newEdu);
-//               }}
-//               variant="outlined"
-//               fullWidth
-//             />
-//           </Grid>
-//           <Grid item xs={3}>
-//             <TextField
-//               label="Start Year"
-//               value={obj.startYear}
-//               variant="outlined"
-//               type="number"
-//               onChange={(event) => {
-//                 const newEdu = [...education];
-//                 newEdu[key].startYear = event.target.value;
-//                 setEducation(newEdu);
-//               }}
-//             />
-//           </Grid>
-//           <Grid item xs={3}>
-//             <TextField
-//               label="End Year"
-//               value={obj.endYear}
-//               variant="outlined"
-//               type="number"
-//               onChange={(event) => {
-//                 const newEdu = [...education];
-//                 newEdu[key].endYear = event.target.value;
-//                 setEducation(newEdu);
-//               }}
-//             />
-//           </Grid>
-//         </Grid>
-//       ))}
-//       <Grid item style={{ alignSelf: 'center' }}>
-//         <Button
-//           variant="contained"
-//           color="secondary"
-//           onClick={() =>
-//             setEducation([
-//               ...education,
-//               {
-//                 institutionName: '',
-//                 startYear: '',
-//                 endYear: ''
-//               }
-//             ])
-//           }
-//           className={classes.inputBox}
-//         >
-//           Add another institution details
-//         </Button>
-//       </Grid>
-//     </>
-//   );
-// };
 
 const Profile = () => {
-  const classes = useStyles();
 
-  const [userData, setUserData] = useState();
   const [open, setOpen] = useState(false);
-
+  const [phone, setPhone] = useState("");
   const [profileDetails, setProfileDetails] = useState({
     name: '',
     bio: '',
@@ -128,6 +45,7 @@ const Profile = () => {
   };
 
   return (
+    
     <Container>
       <div>
         <Box className="breadcrumb">
@@ -191,12 +109,12 @@ const Profile = () => {
                     justifyContent: 'center'
                   }}
                 >
-                  {/* <PhoneInput
-                  country={"in"}
-                  value={phone}
-                  onChange={(phone) => setPhone(phone)}
-                  style={{ width: "auto" }}
-                /> */}
+                    <PhoneInput
+                    country={"in"}
+                    value={phone}
+                    onChange={(phone) => setPhone(phone)}
+                    style={{ width: "auto" }}
+                  />
                 </Grid>
               </Grid>
               <Button
