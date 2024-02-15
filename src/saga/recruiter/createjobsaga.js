@@ -1,14 +1,14 @@
 import { Call } from '@mui/icons-material';
-import { takeEvery } from 'redux-saga/effects';
-import createJob from 'service/recruiter/recruiterjob';
+import { put, takeEvery } from 'redux-saga/effects';
+import createJobAPI from 'service/recruiter/recruiterjob';
 import { createJobFail, createJobRequest, createJobSuc } from 'slice/recruiter/createjobSlice';
 
 function* createjob(action) {
   try {
-    let mydata = yield Call(createJob, action.payload);
-    yield createJobSuc(mydata);
+    let mydata = yield Call(createJobAPI, action.payload);
+    yield put(createJobSuc(mydata));
   } catch (error) {
-    yield createJobFail(error);
+    yield put(createJobFail(error));
   }
 }
 
