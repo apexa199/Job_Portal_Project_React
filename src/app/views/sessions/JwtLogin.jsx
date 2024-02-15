@@ -6,6 +6,7 @@ import useAuth from 'app/hooks/useAuth';
 import { Formik } from 'formik';
 import { useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import * as Yup from 'yup';
 
 const FlexBox = styled(Box)(() => ({ display: 'flex', alignItems: 'center' }));
@@ -66,8 +67,15 @@ const JwtLogin = () => {
       })
         .then((y) => y.json())
         .then((y) => {
+          if(!y.message){
+            toast.success("Login Successfull")
           localStorage.setItem('token', JSON.stringify(y));
-          div('/recruiter/createjob');
+  
+          div('/');
+          }
+          else{
+            toast.error("Email and Password is Invalid!")
+          }
         })
         .catch((y) => {
           console.log(y);
