@@ -1,135 +1,118 @@
-import { useContext, useEffect, useState } from 'react';
-import axios from 'axios';
-import { Stack, styled } from '@mui/material';
-import { Box } from '@mui/material';
-import makeStyles from '@emotion/styled';
-import { Breadcrumb, SimpleCard } from 'app/components';
-import { Button, Grid, Paper, TextField, Typography } from '@mui/material';
-import PhoneInput from "react-phone-input-2";
-
-const Container = styled('div')(({ theme }) => ({
-  margin: '30px',
-  [theme.breakpoints.down('sm')]: { margin: '16px' },
-  '& .breadcrumb': {
-    marginBottom: '30px',
-    [theme.breakpoints.down('sm')]: { marginBottom: '16px' }
-  }
-}));
-
-
-
+import { Box, Button, Container, Grid, Paper, Stack, TextField, Typography } from '@mui/material'
+import { Breadcrumb } from 'app/components'
+import React, { useEffect } from 'react'
+import { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { UserRequest, userrequest } from 'slice/recruiter/userSlice'
 
 const Profile = () => {
-
-  const [open, setOpen] = useState(false);
-  const [phone, setPhone] = useState("");
-  const [profileDetails, setProfileDetails] = useState({
-    name: '',
-    bio: '',
-    contactNumber: ''
+  
+  const data = useSelector((state)=>state.user);
+  console.log(data);
+  const dis = useDispatch();
+  const[userdata, setUserData]=useState({
+    name: "",
+    contactNumber: "",
+    bio: ""
   });
-
-  const handleClose = () => {
-    setOpen(false);
-  };
-
-  const editDetails = () => {
-    setOpen(true);
-  };
-
   const handleInput = (key, value) => {
-    setProfileDetails({
-      ...profileDetails,
-      [key]: value
+    setUserData({
+      ...userdata,
+      [key]: value,
     });
-  };
-
-  return (
     
+  };
+  const handleSubmit =(e)=>{
+    e.preventDefault()
+    dis (UserRequest(userdata))
+}
+  return (
+   
     <Container>
-      <div>
-        <Box className="breadcrumb">
-          <Breadcrumb
-            routeSegments={[{ name: 'Recruiter', path: '/Recruiter' }, { name: 'Profile' }]}
-          />
-        </Box>
+    <div>
+    <Box style={{marginTop:"15px"}} className="breadcrumb">
+      <Breadcrumb routeSegments={[{ name: 'Recruiter', path: '/Recruiter' }, { name: 'Profile' }]} />
+    </Box>
 
-        <Stack spacing={3}>
-          <Grid item>
-            <Typography variant="h4" align="center">
-              Profile
-            </Typography>
-          </Grid>
-          <Grid item xs style={{ width: '100%' }}>
-            <Paper
+    <Stack spacing={3}>
+      <Grid item>
+        <Typography variant="h2" style={{display:'flex', justifyContent:'center'}}>Profile</Typography>
+      </Grid>
+      <Grid item xs style={{ width: "100%" }}>
+        <Paper
+          style={{
+            padding: "20px",
+            outline: "none",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center"
+          }}
+        >
+          <Grid container direction="column" alignItems="stretch" spacing={3}>
+            <Grid item>
+              <TextField
+                label="Name"
+                value={userdata.name}
+                onChange={(event) =>
+                  handleInput("name", event.target.value)
+                }
+                variant="outlined"
+                fullWidth
+                style={{ width: "100%" }}
+              />
+            </Grid>
+            <Grid item>
+              <TextField
+                label="Bio (upto 250 words)"
+                multiline
+                rows={8}
+                style={{ width: "100%" }}
+                variant="outlined"
+                value={userdata.bio}
+                onChange={(event) => {
+                  if (
+                    event.target.value.split(" ").filter(function (n) {
+                      return n != "";
+                    }).length <= 250
+                  ) {
+                    handleInput("bio", event.target.value);
+                  }
+                }}
+              />
+
+            </Grid>
+            <Grid item style={{display:"flex", justifyContent:"center"}}>
+
+            <TextField type='Number' id="outlined-basic" value={userdata.contactNumber} label="Number"
+              onChange={(event) =>
+                handleInput("contactNumber", event.target.value)
+              } variant="outlined" />
+            </Grid>
+            <Grid
+              item
               style={{
-                padding: '20px',
-                outline: 'none',
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'center',
-                alignItems: 'center'
-                //   width: "60%",
+                display: "flex",
+                justifyContent: "center",
               }}
             >
-              <Grid container direction="column" alignItems="stretch" spacing={3}>
-                <Grid item>
-                  <TextField
-                    label="Name"
-                    value={profileDetails.name}
-                    onChange={(event) => handleInput('name', event.target.value)}
-                    variant="outlined"
-                    fullWidth
-                    style={{ width: '100%' }}
-                  />
-                </Grid>
-                <Grid item>
-                  <TextField
-                    label="Bio (upto 250 words)"
-                    multiline
-                    rows={8}
-                    style={{ width: '100%' }}
-                    variant="outlined"
-                    value={profileDetails.bio}
-                    onChange={(event) => {
-                      if (
-                        event.target.value.split(' ').filter(function (n) {
-                          return n != '';
-                        }).length <= 250
-                      ) {
-                        handleInput('bio', event.target.value);
-                      }
-                    }}
-                  />
-                </Grid>
-                <Grid
-                  item
-                  style={{
-                    display: 'flex',
-                    justifyContent: 'center'
-                  }}
-                >
-                    <PhoneInput
-                    country={"in"}
-                    value={phone}
-                    onChange={(phone) => setPhone(phone)}
-                    style={{ width: "auto" }}
-                  />
-                </Grid>
-              </Grid>
-              <Button
-                variant="contained"
-                color="primary"
-                style={{ padding: '10px 50px', marginTop: '30px' }}
-              >
-                Update Details
-              </Button>
-            </Paper>
+            </Grid>
           </Grid>
-        </Stack>
-      </div>
-    </Container>
-  );
-};
+          <Button
+            variant="contained"
+            color="primary"
+            style={{ padding: "10px 50px", marginTop: "30px" }}
+            onClick={handleSubmit}
+          >
+            Update Details
+          </Button>
+        </Paper>
+      </Grid>
+    
+    </Stack>
+    </div>
+  </Container>
+  )
+}
 
 export default Profile;
