@@ -111,7 +111,7 @@ function MyJobs() {
           {listData.length > 0 ? (
             listData?.map((v) => {
               return (
-                <Card sx={{ maxWidth: 1200, margin: '25px', background: 'lightgrey' }}>
+                <Card sx={{ maxWidth: 1200, margin: '25px', background: '#DCDCDC' }}>
                   <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                     <CardContent>
                       <Typography gutterBottom variant="h6" component="div">
@@ -156,9 +156,10 @@ function MyJobs() {
                         style={{
                           backgroundColor: 'rgb(34 42 68)',
                           color: 'white',
-                          padding: '69px 118px',
+                          padding: '83px 113px',
                           borderRadius: '7px',
-                          border: 'none'
+                          border: 'none',
+                        
                         }}
                         size="small"
                         onClick={() => handleClick(`/recruiter/applications`)}
@@ -170,8 +171,8 @@ function MyJobs() {
                           backgroundColor: 'rgb(252, 143, 30)',
                           color: 'white',
                           margin: '0px 0px',
-                          padding: '10px 15px',
-                          borderRadius: '7px',
+                          padding: '12px 15px',
+                          borderRadius: '7px',    
                           border: 'none'
                         }}
                         size="small"
@@ -183,8 +184,8 @@ function MyJobs() {
                         style={{
                           backgroundColor: '#f50057',
                           color: 'white',
-                          margin: '0px 0px',
-                          padding: '10px 15px',
+                          margin: '0px 0px',                         
+                          padding: '12px 15px',
                           borderRadius: '7px',
                           border: 'none'
                         }}
