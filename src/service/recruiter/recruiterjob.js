@@ -1,6 +1,6 @@
 import authFetch, { authFetchGet } from 'service/recruiter/authfetch';
 
-const createJobAPI = (data) => {
+const createJob = (data) => {
 
     return authFetch("/api/jobs",'Post', data)
 }
@@ -11,9 +11,9 @@ export const getJobData = (pageId) => {
 }
 
 
-export const userGetAPI = (data1) => {
+export const userGet = (dataUser) => {
 
-    return authFetch("/api/user",'Put', data1)
+    return authFetch("/api/user",'Put', dataUser)
 }
 
-export default createJobAPI;
+export default createJob;

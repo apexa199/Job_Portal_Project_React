@@ -47,7 +47,7 @@ const Container = styled('div')(({ theme }) => ({
   }
 }));
 
-function MyJobs() {
+function ListJob() {
   const { listData, data, error, isloading } = useSelector((y) => y.getJobs);
 
   console.log(listData);
@@ -324,4 +324,4 @@ function MyJobs() {
   );
 }
 
-export default MyJobs;
+export default ListJob;
