@@ -151,12 +151,12 @@ function ListJob() {
 
                     {/* Button  code start--------------------------> */}
 
-                    <CardActions style={{ display: 'grid' }}>
+                    <CardActions style={{ display: 'grid', margin: "20px"}}>
                       <Button
                         style={{
                           backgroundColor: 'rgb(34 42 68)',
                           color: 'white',
-                          padding: '83px 113px',
+                          padding: '70px 95px',
                           borderRadius: '7px',
                           border: 'none',
                         
@@ -171,7 +171,7 @@ function ListJob() {
                           backgroundColor: 'rgb(252, 143, 30)',
                           color: 'white',
                           margin: '0px 0px',
-                          padding: '12px 15px',
+                          padding: '13px 0px',
                           borderRadius: '7px',    
                           border: 'none'
                         }}
@@ -185,7 +185,7 @@ function ListJob() {
                           backgroundColor: '#f50057',
                           color: 'white',
                           margin: '0px 0px',                         
-                          padding: '12px 15px',
+                          padding: '13px 0px',
                           borderRadius: '7px',
                           border: 'none'
                         }}
