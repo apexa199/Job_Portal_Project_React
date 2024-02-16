@@ -4,7 +4,7 @@ import React, { useEffect } from 'react'
 import { useState } from 'react'
 import styled from '@emotion/styled';
 import { useDispatch, useSelector } from 'react-redux'
-import { GetUserRequest, UserRequest} from 'slice/recruiter/userSlice'
+import { GetUserRequest, PutUserRequest} from 'slice/recruiter/userSlice'
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
@@ -34,7 +34,7 @@ const Profile = () => {
   });
   
   useEffect(() => {
-    dis (GetUserRequest())
+    dis (PutUserRequest())
   },[])
 
   useEffect(() => {
@@ -50,7 +50,7 @@ const Profile = () => {
   };
   const handleSubmit =(e)=>{
     e.preventDefault()
-    dis (UserRequest(userdata))
+    dis (GetUserRequest(userdata))
     toast.success("Update Profile Successfully.")
     navi("/recruiter/profile")
 }

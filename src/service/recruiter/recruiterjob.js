@@ -15,12 +15,12 @@ export const getJobData = (pageId) => {
 
 // For Profile update start-------->
 
-export const userGet = (dataUser) => {
+export const GetUserData = (dataUser) => {
 
     return authFetch("/api/user",'Put', dataUser)
 }
 
-export const getUserData = (data) => {
+export const PutUserData = (data) => {
 
     return authFetchGet("/api/user",'GET', data)
 }

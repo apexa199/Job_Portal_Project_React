@@ -11,28 +11,28 @@ const userSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
-    UserRequest: function (state) {
+   GetUserRequest: function (state) {
         state.isloading = true;
       },
-      SucUserRequest: function (state, { payload }) {
+      SucGetUserRequest: function (state, { payload }) {
         state.isloading = false;
         state.data = payload;
       },
-      FailUserRequest: function (state, { payload }) {
+      FailGetUserRequest: function (state, { payload }) {
         state.isloading = false;
         state.error = payload;
       },
 
       
 
-    GetUserRequest: function (state) {
+    PutUserRequest: function (state) {
       state.isloading = true;
     },
-    SucGetUserRequest: function (state, { payload }) {
+    SucPutUserRequest: function (state, { payload }) {
       state.isloading = false;
       state.data = payload;
     },
-    FailGetUserRequest: function (state, { payload }) {
+    FailPutUserRequest: function (state, { payload }) {
       state.isloading = false;
       state.error = payload;
     }
@@ -40,6 +40,6 @@ const userSlice = createSlice({
 });
 
 
-export const {SucUserRequest, UserRequest,FailUserRequest,GetUserRequest, SucGetUserRequest, FailGetUserRequest} = userSlice.actions
+export const {FailGetUserRequest,FailPutUserRequest, GetUserRequest, PutUserRequest, SucGetUserRequest,SucPutUserRequest} = userSlice.actions
 
 export default userSlice.reducer
