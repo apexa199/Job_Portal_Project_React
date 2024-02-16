@@ -16,4 +16,11 @@ export const userGet = (dataUser) => {
     return authFetch("/api/user",'Put', dataUser)
 }
 
-export default createJob;
+
+
+// export const userGetData = (pageId) => {
+
+//     return authFetchGet(`/api/user?myjobs=${pageId}`, 'GET');
+// }
+
+// export default createJob;

@@ -1,9 +1,20 @@
-import { Box, Button, Container, Grid, Paper, Stack, TextField, Typography } from '@mui/material'
+import { Box, Button, Grid, Paper, Stack, TextField, Typography } from '@mui/material'
 import { Breadcrumb } from 'app/components'
 import React, { useEffect } from 'react'
 import { useState } from 'react'
+import styled from '@emotion/styled';
 import { useDispatch, useSelector } from 'react-redux'
-import { UserRequest, userrequest } from 'slice/recruiter/userSlice'
+import { UserRequest} from 'slice/recruiter/userSlice'
+
+
+const Container = styled('div')(({ theme }) => ({
+  margin: '30px',
+  [theme.breakpoints.down('sm')]: { margin: '16px' },
+  '& .breadcrumb': {
+    marginBottom: '30px',
+    [theme.breakpoints.down('sm')]: { marginBottom: '16px' }
+  }
+}));
 
 const Profile = () => {
   
@@ -36,7 +47,7 @@ const Profile = () => {
 
     <Stack spacing={3}>
       <Grid item>
-        <Typography variant="h2" style={{display:'flex', justifyContent:'center'}}>Profile</Typography>
+        <Typography variant="h3" style={{display:'flex', justifyContent:'center'}}>Profile</Typography>
       </Grid>
       <Grid item xs style={{ width: "100%" }}>
         <Paper
@@ -84,7 +95,7 @@ const Profile = () => {
             </Grid>
             <Grid item style={{display:"flex", justifyContent:"center"}}>
 
-            <TextField type='Number' id="outlined-basic" value={userdata.contactNumber} label="Number"
+            <TextField type='Number' id="outlined-basic" value={userdata.contactNumber} label="Number : +91"
               onChange={(event) =>
                 handleInput("contactNumber", event.target.value)
               } variant="outlined" />

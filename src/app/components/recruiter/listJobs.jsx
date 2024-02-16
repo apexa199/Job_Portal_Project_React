@@ -26,17 +26,6 @@ import FilterListIcon from '@mui/icons-material/FilterList';
 import { useState } from 'react';
 import { useHistory } from "react-router-dom";
 
-const style = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: 400,
-  bgcolor: 'background.paper',
-  border: '2px solid #000',
-  boxShadow: 24,
-  p: 4
-};
 
 const Container = styled('div')(({ theme }) => ({
   margin: '30px',
@@ -83,7 +72,7 @@ function ListJob() {
 
           <Grid item container direction="column" justify="center" alignItems="center">
             <Grid item xs>
-              <Typography variant="h4">My Jobs</Typography>
+              <Typography variant="h3">My Jobs</Typography>
             </Grid>
             <Grid item xs>
               <TextField

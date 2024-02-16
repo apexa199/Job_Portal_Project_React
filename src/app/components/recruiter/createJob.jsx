@@ -56,7 +56,7 @@ export const CreateJob = () => {
 
         <Stack spacing={3}>
           <Grid item>
-            <Typography variant="h4" align="center">
+            <Typography variant="h3" align="center">
               Add Job
             </Typography>
           </Grid>
