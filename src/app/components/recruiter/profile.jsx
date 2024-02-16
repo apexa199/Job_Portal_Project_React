@@ -4,7 +4,9 @@ import React, { useEffect } from 'react'
 import { useState } from 'react'
 import styled from '@emotion/styled';
 import { useDispatch, useSelector } from 'react-redux'
-import { UserRequest} from 'slice/recruiter/userSlice'
+import { GetUserRequest, UserRequest} from 'slice/recruiter/userSlice'
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 
 const Container = styled('div')(({ theme }) => ({
@@ -18,14 +20,27 @@ const Container = styled('div')(({ theme }) => ({
 
 const Profile = () => {
   
-  const data = useSelector((state)=>state.user);
+  const data = useSelector((state)=>state.user.data);
   console.log(data);
+
   const dis = useDispatch();
+
+  const navi = useNavigate();
+
   const[userdata, setUserData]=useState({
     name: "",
     contactNumber: "",
     bio: ""
   });
+  
+  useEffect(() => {
+    dis (GetUserRequest())
+  },[])
+
+  useEffect(() => {
+    setUserData(data)
+  },[data])
+
   const handleInput = (key, value) => {
     setUserData({
       ...userdata,
@@ -36,6 +51,8 @@ const Profile = () => {
   const handleSubmit =(e)=>{
     e.preventDefault()
     dis (UserRequest(userdata))
+    toast.success("Update Profile Succesfully.")
+    navi("/recruiter/profile")
 }
   return (
    
@@ -64,7 +81,7 @@ const Profile = () => {
             <Grid item>
               <TextField
                 label="Name"
-                value={userdata.name}
+                value={userdata?.name}
                 onChange={(event) =>
                   handleInput("name", event.target.value)
                 }
@@ -80,7 +97,7 @@ const Profile = () => {
                 rows={8}
                 style={{ width: "100%" }}
                 variant="outlined"
-                value={userdata.bio}
+                value={userdata?.bio}
                 onChange={(event) => {
                   if (
                     event.target.value.split(" ").filter(function (n) {
@@ -95,7 +112,7 @@ const Profile = () => {
             </Grid>
             <Grid item style={{display:"flex", justifyContent:"center"}}>
 
-            <TextField type='Number' id="outlined-basic" value={userdata.contactNumber} label="Number : +91"
+            <TextField type='Number' id="outlined-basic" value={userdata?.contactNumber} label="Number : +91"
               onChange={(event) =>
                 handleInput("contactNumber", event.target.value)
               } variant="outlined" />

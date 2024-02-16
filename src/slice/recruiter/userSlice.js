@@ -16,15 +16,30 @@ const userSlice = createSlice({
       },
       SucUserRequest: function (state, { payload }) {
         state.isloading = false;
-        state.listData = payload;
+        state.data = payload;
       },
       FailUserRequest: function (state, { payload }) {
         state.isloading = false;
         state.error = payload;
-      }
+      },
+
+      
+
+    GetUserRequest: function (state) {
+      state.isloading = true;
+    },
+    SucGetUserRequest: function (state, { payload }) {
+      state.isloading = false;
+      state.data = payload;
+    },
+    FailGetUserRequest: function (state, { payload }) {
+      state.isloading = false;
+      state.error = payload;
+    }
   }
 });
 
-export const {SucUserRequest, UserRequest,FailUserRequest } = userSlice.actions
+
+export const {SucUserRequest, UserRequest,FailUserRequest,GetUserRequest, SucGetUserRequest, FailGetUserRequest} = userSlice.actions
 
 export default userSlice.reducer
