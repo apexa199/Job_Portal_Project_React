@@ -24,7 +24,9 @@ import { GetJobRequest } from 'slice/recruiter/getjobSlice';
 import SearchIcon from '@mui/icons-material/Search';
 import FilterListIcon from '@mui/icons-material/FilterList';
 import { useState } from 'react';
-import { useHistory } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
+import { GetUpdateRequest, PutUpdateRequest, UpdateDataRequest, UpdateJobRequest } from 'slice/recruiter/updatejobSlice';
+
 
 
 const Container = styled('div')(({ theme }) => ({
@@ -48,17 +50,56 @@ function ListJob() {
   }, []);
 
   const [open, setOpen] = useState(false);
-  const handleClickOpen = () => setOpen(true);
+  const handleClickOpen = (id) => { setOpen(true) 
+  
+  setid(id)
+  };
   const handleClose = () => setOpen(false);
+
+ 
 
   const [openUpdate, setOpenUpdate] = useState(false);
   const handleClickOpenUpdate = () => setOpenUpdate(true);
   const handleCloseUpdate = () => setOpenUpdate(false);
-  // let history = useHistory();
+  const [id,setid] = useState('');
+  
+//update jobs start--------------->
 
-  // const handleClick = (location) => {
-  //   history.push(location);
-  // };
+
+const updateJob = useSelector((state)=>state.update.data);
+console.log(updateJob);
+
+const navi = useNavigate();
+
+const[update, setUpdate]=useState({
+  dateOfPosting :"",
+  maxApplicants : "",
+  maxPositions :""
+});
+
+useEffect(() => {
+  dis (GetUpdateRequest())
+},[])
+
+useEffect(() => {
+  setUpdate(updateJob)
+},[updateJob])
+
+const handleInput = (key, value) => {
+  setUpdate({
+    ...update,
+    [key]: value,
+  });
+  
+};
+const handleSubmit =(e)=>{
+  e.preventDefault()
+  dis (PutUpdateRequest(update))
+  // toast.success("Update Profile Successfully.")
+  // navi("/recruiter/profile")
+}
+
+  
 
   return (
     <>
@@ -146,7 +187,7 @@ function ListJob() {
                           backgroundColor: 'rgb(34 42 68)',
                           color: 'white',
                           padding: '70px 95px',
-                          borderRadius: '7px',
+                          borderRadius: '5px',
                           border: 'none',
                         
                         }}
@@ -161,11 +202,11 @@ function ListJob() {
                           color: 'white',
                           margin: '0px 0px',
                           padding: '13px 0px',
-                          borderRadius: '7px',    
+                          borderRadius: '5px',    
                           border: 'none'
                         }}
                         size="small"
-                        onClick={handleClickOpenUpdate}
+                        onClick={handleClickOpenUpdate(v._id)}
                       >
                         Update Details
                       </Button>
@@ -175,13 +216,13 @@ function ListJob() {
                           color: 'white',
                           margin: '0px 0px',                         
                           padding: '13px 0px',
-                          borderRadius: '7px',
+                          borderRadius: '5px',
                           border: 'none'
                         }}
                         size="small"
-                        onClick={handleClickOpen}
+                        onClick={()=>{handleClickOpen(v._id)}}
                       >
-                        Delete
+                        Delete 
                       </Button>
                     </CardActions>
                     {/* Button  code end----------------------------> */}
@@ -255,25 +296,37 @@ function ListJob() {
           <TextField
             label="Application Deadline"
             type="datetime-local"
+            value={update?.dateOfPosting}
+            onChange={(event) =>
+              handleInput("dateOfPosting", event.target.value)
+            }
             InputLabelProps={{
               shrink: true
             }}
             variant="outlined"
-            style={{ marginBottom: '10px' }}
+            style={{ marginBottom: '10px', margin:"10px 15px" }}
           />
           <TextField
             label="Maximum Number Of Applicants"
             type="number"
+            value={update?.maxApplicants}
+            onChange={(event) =>
+              handleInput("maxApplicants", event.target.value)
+            }
             variant="outlined"
             InputProps={{ inputProps: { min: 1 } }}
-            style={{ marginBottom: '10px' }}
+            style={{ marginBottom: '10px',margin:"10px 15px"}}
           />
           <TextField
             label="Positions Available"
             type="number"
+            value={update?.maxPositions}
+            onChange={(event) =>
+              handleInput("maxPositions", event.target.value)
+            }
             variant="outlined"
             InputProps={{ inputProps: { min: 1 } }}
-            style={{ marginBottom: '10px' }}
+            style={{ marginBottom: '10px',margin:"10px 15px" }}
           />
 
           <DialogActions style={{ display: 'flex', justifyContent: 'space-around' }}>
@@ -287,7 +340,7 @@ function ListJob() {
                 border: 'none'
               }}
               size="small"
-              onClick={handleCloseUpdate}
+              onClick={handleSubmit}
             >
               UPDATE
             </Button>
