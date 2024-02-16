@@ -7,7 +7,7 @@ import * as serviceWorker from './serviceWorker';
 // third party style
 import 'perfect-scrollbar/css/perfect-scrollbar.css';
 
-import Profile from 'app/components/recruiter/profile';
+
 import { Provider } from 'react-redux';
 import store from 'store/store';
 import { ToastContainer } from 'react-bootstrap';
@@ -17,8 +17,11 @@ const root = createRoot(document.getElementById('root'));
 root.render(
   <StyledEngineProvider injectFirst>
      
+    <BrowserRouter>
+
     <Provider store={store}>
-    <ToastContainer
+
+      <ToastContainer
 position="top-center"
 autoClose={5000}
 hideProgressBar={false}
@@ -30,11 +33,12 @@ draggable
 pauseOnHover
 theme="light"
 />
-      <BrowserRouter>
         <App />
+
+        </Provider>
       </BrowserRouter>
    
-    </Provider>
+
 
   
   </StyledEngineProvider>
