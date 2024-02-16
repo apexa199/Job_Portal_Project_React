@@ -25,7 +25,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import FilterListIcon from '@mui/icons-material/FilterList';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { GetUpdateRequest, PutUpdateRequest, UpdateDataRequest, UpdateJobRequest } from 'slice/recruiter/updatejobSlice';
+import { GetUpdateRequest, PutUpdateRequest,} from 'slice/recruiter/updatejobSlice';
 
 
 
