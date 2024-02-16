@@ -1,6 +1,7 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
 import createJob from 'service/recruiter/recruiterjob';
 
+
 import { createJobFail, createJobRequest, createJobSuc } from 'slice/recruiter/createjobSlice';
 
 function* createjob(action) {
