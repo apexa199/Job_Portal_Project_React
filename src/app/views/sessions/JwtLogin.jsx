@@ -7,6 +7,7 @@ import { Formik } from 'formik';
 import { useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
+
 import * as Yup from 'yup';
 
 const FlexBox = styled(Box)(() => ({ display: 'flex', alignItems: 'center' }));
@@ -70,7 +71,7 @@ const JwtLogin = () => {
           if(!y.message){
             toast.success("Login Successfull")
           localStorage.setItem('token', JSON.stringify(y));
-          toast.success("Login Successfull")
+         
           div('/');
           }
           else{

@@ -3,6 +3,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { StyledEngineProvider } from '@mui/material';
 import App from './app/App';
 import * as serviceWorker from './serviceWorker';
+import 'react-toastify/dist/ReactToastify.css';
 
 // third party style
 import 'perfect-scrollbar/css/perfect-scrollbar.css';
@@ -10,7 +11,8 @@ import 'perfect-scrollbar/css/perfect-scrollbar.css';
 
 import { Provider } from 'react-redux';
 import store from 'store/store';
-import { ToastContainer } from 'react-bootstrap';
+import { ToastContainer } from 'react-toastify';
+
 
 const root = createRoot(document.getElementById('root'));
 
@@ -18,21 +20,12 @@ root.render(
   <StyledEngineProvider injectFirst>
      
     <BrowserRouter>
+    <ToastContainer
 
+/>
     <Provider store={store}>
 
-      <ToastContainer
-position="top-center"
-autoClose={5000}
-hideProgressBar={false}
-newestOnTop={false}
-closeOnClick
-rtl={false}
-pauseOnFocusLoss
-draggable
-pauseOnHover
-theme="light"
-/>
+
         <App />
 
         </Provider>
