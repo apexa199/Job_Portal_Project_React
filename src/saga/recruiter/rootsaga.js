@@ -1,7 +1,5 @@
 import { all } from 'redux-saga/effects';
-import { watchcreatejob } from './createjobsaga';
-import { watchgetjob } from './getjobsaga';
-
+import { watchcreatejob, watchgetjob } from './createjobsaga';
 import { watchgetUpdate, watchputUpdate } from './updateJobSaga';
 import { watchGetUser, watchPutUser } from './usersaga';
 

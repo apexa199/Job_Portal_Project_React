@@ -20,12 +20,14 @@ import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { GetJobRequest } from 'slice/recruiter/getjobSlice';
+
 import SearchIcon from '@mui/icons-material/Search';
 import FilterListIcon from '@mui/icons-material/FilterList';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { GetUpdateRequest, PutUpdateRequest,} from 'slice/recruiter/updatejobSlice';
+import { getJobRequest } from 'slice/recruiter/createjobSlice';
+
 
 
 
@@ -39,31 +41,27 @@ const Container = styled('div')(({ theme }) => ({
 }));
 
 function ListJob() {
-  const { listData, data, error, isloading } = useSelector((y) => y.getJobs);
+  const { listData, data, error, isloading } = useSelector((y) => y.jobs);
 
   console.log(listData);
 
   const dis = useDispatch();
 
   useEffect(() => {
-    dis(GetJobRequest(1));
+    dis(getJobRequest(1));
   }, []);
 
-  const [open, setOpen] = useState(false);
-  const handleClickOpen = (id) => { setOpen(true) 
-  
-  setid(id)
-  };
-  const handleClose = () => setOpen(false);
+  const [openDelete, setOpenDelete] = useState(false);  
+  const handleClickOpenDelete = () => { setOpenDelete(true)};
+  const handleCloseDelete = () => setOpenDelete(false);
 
  
-
   const [openUpdate, setOpenUpdate] = useState(false);
   const handleClickOpenUpdate = () => setOpenUpdate(true);
   const handleCloseUpdate = () => setOpenUpdate(false);
   const [id,setid] = useState('');
   
-//update jobs start--------------->
+// update jobs start--------------->
 
 
 const updateJob = useSelector((state)=>state.update.data);
@@ -206,7 +204,7 @@ const handleSubmit =(e)=>{
                           border: 'none'
                         }}
                         size="small"
-                        onClick={handleClickOpenUpdate(v._id)}
+                        onClick={handleClickOpenUpdate}
                       >
                         Update Details
                       </Button>
@@ -220,7 +218,7 @@ const handleSubmit =(e)=>{
                           border: 'none'
                         }}
                         size="small"
-                        onClick={()=>{handleClickOpen(v._id)}}
+                        onClick={handleClickOpenDelete}
                       >
                         Delete 
                       </Button>
@@ -239,9 +237,9 @@ const handleSubmit =(e)=>{
         {/*Delete Pop Up-----------------> */}
 
         <Dialog
-          open={open}
+          open={openDelete}
           keepMounted
-          onClose={handleClose}
+          onClose={handleCloseDelete}
           aria-describedby="alert-dialog-slide-description"
         >
           <DialogTitle variant="h4" align="center">
@@ -258,7 +256,7 @@ const handleSubmit =(e)=>{
                 border: 'none'
               }}
               size="small"
-              onClick={handleClose}
+              onClick={handleCloseDelete}
             >
               DELETE
             </Button>
@@ -272,7 +270,7 @@ const handleSubmit =(e)=>{
                 border: 'none'
               }}
               size="small"
-              onClick={handleClose}
+              onClick={handleCloseDelete}
             >
               CANCEL
             </Button>

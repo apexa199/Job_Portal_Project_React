@@ -2,8 +2,9 @@ import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
     isloading :false,
-    data:"null",
-    error:"null"
+    data:null,
+    error:null,
+    listData: []
     
 
 }
@@ -26,10 +27,24 @@ const createjobslice = createSlice({
     state.isloading = false;
     state.error = payload;
     },
+
+
+    getJobRequest: function (state) {
+      state.isloading = true;
+    },
+    sucGetJobRequest: function (state, { payload }) {
+      state.isloading = false;
+    state.listData = payload;
+    },
+    FailGetJobRequest: function (state, { payload }) {
+      state.isloading = false;
+      state.error = payload;
+    }
 }
 
 });
 
-export const {createJobFail,createJobRequest,createJobSuc} = createjobslice.actions
+export const {createJobFail,createJobRequest,createJobSuc,
+  FailGetJobRequest,getJobRequest,sucGetJobRequest} = createjobslice.actions
 
 export default createjobslice.reducer;
