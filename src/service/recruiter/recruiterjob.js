@@ -32,9 +32,9 @@ export const getJobUpdateData = (data) => {
 
     return authFetchGet("/api/jobs",'GET', data)
 }
-export const putJobUpdateData = (id) => {
+export const putJobUpdateData = (id,data) => {
 
-    return authFetch(`/api/jobs/${id}`,'Put')
+    return authFetch(`/api/jobs/${id}`,'Put',data)
 }
 
 
