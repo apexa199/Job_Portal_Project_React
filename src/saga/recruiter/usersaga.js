@@ -21,7 +21,8 @@ function* PutUser(action) {
   try {
     let mydata = yield call(PutUserData, action.payload);
     yield put(SucPutUserRequest(mydata));
-  } catch (error) {
+
+    } catch (error) {
     yield put(FailPutUserRequest(error));
   }
 }

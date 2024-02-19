@@ -44,7 +44,7 @@ function* deleteJob(action) {
 
     yield put(deleteJobSuccess(mydata2));
 
-    toast.success("Job Deleted");
+    toast.success("Job Deleted Successfully.");
 
     yield put(getJobRequest());
   } catch (error) {  

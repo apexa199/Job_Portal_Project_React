@@ -51,8 +51,8 @@ const Profile = () => {
   const handleSubmit =(e)=>{
     e.preventDefault()
     dis (GetUserRequest(userdata))
-    toast.success("Update Profile Successfully.")
-    navi("/recruiter/profile")
+   
+    toast.success("Job Updated Successfully.");
 }
   return (
    

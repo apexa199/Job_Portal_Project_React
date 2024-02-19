@@ -32,13 +32,13 @@ export const getJobUpdateData = (data) => {
 
     return authFetchGet("/api/jobs",'GET', data)
 }
-export const putJobUpdateData = (dataupdate,id) => {
+export const putJobUpdateData = (id) => {
 
-    return authFetch(`/api/jobs/${id}`,'Put', dataupdate)
+    return authFetch(`/api/jobs/${id}`,'Put')
 }
 
 
-//Delete data poppup --->
+//Delete data  --->
 
 export const deleteJobData = (id) => {
 

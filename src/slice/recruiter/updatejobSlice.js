@@ -42,7 +42,7 @@ const updatejobSlice = createSlice({
       deleteJobRequest: (state) => {
         state.isloading = true;
       },
-      deleteJobSuccess: (state, action) => {
+      deleteJobSuccess: (state) => {
         state.isloading = false;
          
       },

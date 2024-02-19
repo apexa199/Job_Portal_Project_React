@@ -52,6 +52,7 @@ function ListJob() {
   }, []);
 
   //Delete Job ------>
+
   const [idToDelete, setIdToDelete] = useState('');
 
   const [openDelete, setOpenDelete] = useState(false);  
@@ -99,7 +100,7 @@ const handleInput = (key, value) => {
   });
   
 };
-const handleSubmit =(e)=>{
+const handleUpdate =(e)=>{
   e.preventDefault()
   dis (PutUpdateRequest(update));
   handleCloseUpdate()
@@ -214,7 +215,7 @@ const handleSubmit =(e)=>{
                           border: 'none'
                         }}
                         size="small"
-                        onClick={ handleClickOpenUpdate}
+                        onClick={() =>{handleClickOpenUpdate(v._id)}}
                       >
                         Update Details
                       </Button>
@@ -348,7 +349,7 @@ const handleSubmit =(e)=>{
                 border: 'none'
               }}
               size="small"
-              onClick={handleSubmit}
+              onClick={handleUpdate}
             >
               UPDATE
             </Button>
