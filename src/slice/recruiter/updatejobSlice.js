@@ -4,13 +4,15 @@ const initialState = {
     isloading: false,
     data: 'null',
     error: 'null',
+    
 }
 
 const updatejobSlice = createSlice({
   name: "updateJob",
   initialState,
   reducers: {
-   GetUpdateRequest: function (state) {
+
+      GetUpdateRequest: function (state) {
         state.isloading = true;
       },
       SucGetUpdateRequest: function (state, { payload }) {
@@ -35,11 +37,23 @@ const updatejobSlice = createSlice({
         state.error = payload;
       },
 
+      // delete job -------->
 
+      deleteJobRequest: (state) => {
+        state.isloading = true;
+      },
+      deleteJobSuccess: (state, action) => {
+        state.isloading = false;
+         
+      },
+      deleteJobFailure: (state, action) => {
+        state.isloading = false;
+        state.error = action.payload;
+      },
      
   }
 });
 
-export const {FailGetUpdateRequest, FailPutUpdateRequest,PutUpdateRequest, GetUpdateRequest, SucGetUpdateRequest,SucPutUpdateRequest} = updatejobSlice.actions
+export const {FailGetUpdateRequest, FailPutUpdateRequest,PutUpdateRequest, GetUpdateRequest, SucGetUpdateRequest,SucPutUpdateRequest,deleteJobFailure,deleteJobRequest,deleteJobSuccess} = updatejobSlice.actions
 
 export default updatejobSlice.reducer

@@ -11,7 +11,6 @@ export const getJobData = (pageId) => {
 
     return authFetchGet(`/api/jobs?myjobs=${pageId}`, 'GET');
 }
-//Craeate & list Job end----->
 
 // For Profile update start-------->
 
@@ -24,24 +23,26 @@ export const PutUserData = (data) => {
 
     return authFetchGet("/api/user",'GET', data)
 }
-// Profile update End------------->
-
-export const deleteJobData = (pageId) => {
-
-    return authFetchGet(`/api/job/${pageId}`, 'DELETE');
-}
 
 
-// Update popup-------->
+
+// Update Data popup-------->
 
 export const getJobUpdateData = (data) => {
 
     return authFetchGet("/api/jobs",'GET', data)
 }
-export const putJobUpdateData = (dataupdate) => {
+export const putJobUpdateData = (dataupdate,id) => {
 
-    return authFetch("/api/jobs",'Put', dataupdate)
+    return authFetch(`/api/jobs/${id}`,'Put', dataupdate)
 }
 
+
+//Delete data poppup --->
+
+export const deleteJobData = (id) => {
+
+    return authFetchGet(`/api/jobs/${id}`, 'DELETE');
+}
 
 export default createJob;

@@ -25,7 +25,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import FilterListIcon from '@mui/icons-material/FilterList';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { GetUpdateRequest, PutUpdateRequest,} from 'slice/recruiter/updatejobSlice';
+import { GetUpdateRequest, PutUpdateRequest, deleteJobRequest,} from 'slice/recruiter/updatejobSlice';
 import { getJobRequest } from 'slice/recruiter/createjobSlice';
 
 
@@ -51,17 +51,26 @@ function ListJob() {
     dis(getJobRequest(1));
   }, []);
 
+  //Delete Job ------>
+  const [idToDelete, setIdToDelete] = useState('');
+
   const [openDelete, setOpenDelete] = useState(false);  
-  const handleClickOpenDelete = () => { setOpenDelete(true)};
+  const handleClickOpenDelete = (id) => { setOpenDelete(true)
+
+    console.log(id);
+    setIdToDelete(id)};
   const handleCloseDelete = () => setOpenDelete(false);
 
- 
-  const [openUpdate, setOpenUpdate] = useState(false);
-  const handleClickOpenUpdate = () => setOpenUpdate(true);
-  const handleCloseUpdate = () => setOpenUpdate(false);
-  const [id,setid] = useState('');
+  const handleDelete = () => {
+      dis(deleteJobRequest(idToDelete));  
+    handleCloseDelete();
+  };
   
-// update jobs start--------------->
+// update jobs --------------->
+
+const [openUpdate, setOpenUpdate] = useState(false);
+const handleClickOpenUpdate = () => setOpenUpdate(true);
+const handleCloseUpdate = () => setOpenUpdate(false);
 
 
 const updateJob = useSelector((state)=>state.update.data);
@@ -70,9 +79,9 @@ console.log(updateJob);
 const navi = useNavigate();
 
 const[update, setUpdate]=useState({
-  dateOfPosting :"",
-  maxApplicants : "",
-  maxPositions :""
+  dateOfPosting :updateJob.dateOfPosting,
+  maxApplicants : updateJob.maxApplicants,
+  maxPositions :updateJob.maxPositions
 });
 
 useEffect(() => {
@@ -92,7 +101,8 @@ const handleInput = (key, value) => {
 };
 const handleSubmit =(e)=>{
   e.preventDefault()
-  dis (PutUpdateRequest(update))
+  dis (PutUpdateRequest(update));
+  handleCloseUpdate()
   // toast.success("Update Profile Successfully.")
   // navi("/recruiter/profile")
 }
@@ -204,7 +214,7 @@ const handleSubmit =(e)=>{
                           border: 'none'
                         }}
                         size="small"
-                        onClick={handleClickOpenUpdate}
+                        onClick={ handleClickOpenUpdate}
                       >
                         Update Details
                       </Button>
@@ -218,7 +228,7 @@ const handleSubmit =(e)=>{
                           border: 'none'
                         }}
                         size="small"
-                        onClick={handleClickOpenDelete}
+                        onClick={()=>{ handleClickOpenDelete(v._id) }}
                       >
                         Delete 
                       </Button>
@@ -256,7 +266,7 @@ const handleSubmit =(e)=>{
                 border: 'none'
               }}
               size="small"
-              onClick={handleCloseDelete}
+              onClick={handleDelete}
             >
               DELETE
             </Button>
@@ -275,7 +285,7 @@ const handleSubmit =(e)=>{
               CANCEL
             </Button>
           </DialogActions>
-        </Dialog>
+        </Dialog> 
 
         {/* /delete popup end-------------> */}
 

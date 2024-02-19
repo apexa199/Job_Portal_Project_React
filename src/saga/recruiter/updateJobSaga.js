@@ -1,6 +1,8 @@
+import { toast } from 'react-toastify';
 import { call, put, takeEvery } from 'redux-saga/effects';
-import { getJobUpdateData, putJobUpdateData } from 'service/recruiter/recruiterjob';
-import { FailGetUpdateRequest, FailPutUpdateRequest, GetUpdateRequest, PutUpdateRequest, SucGetUpdateRequest, SucPutUpdateRequest } from 'slice/recruiter/updatejobSlice';
+import { deleteJobData, getJobUpdateData, putJobUpdateData } from 'service/recruiter/recruiterjob';
+import { getJobRequest } from 'slice/recruiter/createjobSlice';
+import { FailGetUpdateRequest, FailPutUpdateRequest, GetUpdateRequest, PutUpdateRequest, SucGetUpdateRequest, SucPutUpdateRequest, deleteJobFailure, deleteJobRequest, deleteJobSuccess } from 'slice/recruiter/updatejobSlice';
 
 
 
@@ -20,8 +22,8 @@ export function* watchgetUpdate() {
 
 function* putUpdate(action) {
   try {
-    let mydata = yield call(putJobUpdateData, action.payload);
-    yield put(SucPutUpdateRequest(mydata));
+    let mydata1 = yield call(putJobUpdateData, action.payload);
+    yield put(SucPutUpdateRequest(mydata1));
   } catch (error) {
     yield put(FailPutUpdateRequest(error));
   }
@@ -32,4 +34,23 @@ export function* watchputUpdate() {
 }
 
 
+// delete job -----> 
 
+function* deleteJob(action) {
+  try {
+ 
+  let mydata2 =  yield call(deleteJobData, action.payload);  
+
+
+    yield put(deleteJobSuccess(mydata2));
+
+    toast.success("Job Deleted");
+
+    yield put(getJobRequest());
+  } catch (error) {  
+    yield put(deleteJobFailure(error));
+  }
+}
+export function* watchDeleteJob() {
+ return yield takeEvery(deleteJobRequest, deleteJob);
+}
