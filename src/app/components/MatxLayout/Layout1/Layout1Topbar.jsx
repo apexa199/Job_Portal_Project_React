@@ -1,5 +1,5 @@
 import { memo } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import {
   Avatar,
   Hidden,
@@ -22,6 +22,7 @@ import { topBarHeight } from 'app/utils/constant';
 import { Span } from '../../Typography';
 import NotificationBar from '../../NotificationBar/NotificationBar';
 import ShoppingCart from '../../ShoppingCart';
+
 
 const StyledIconButton = styled(IconButton)(({ theme }) => ({
   color: theme.palette.text.primary
@@ -81,6 +82,8 @@ const IconBox = styled('div')(({ theme }) => ({
   [theme.breakpoints.down('md')]: { display: 'none !important' }
 }));
 
+
+
 const Layout1Topbar = () => {
   const theme = useTheme();
   const { settings, updateSettings } = useSettings();
@@ -101,7 +104,14 @@ const Layout1Topbar = () => {
     }
     updateSidebarMode({ mode });
   };
-
+  
+  const navi = useNavigate()
+  const logOut = () => {
+    localStorage.removeItem('token')
+    navi('/session/signin')
+  }
+  
+ 
   return (
     <TopbarRoot>
       <TopbarContainer>
@@ -154,7 +164,7 @@ const Layout1Topbar = () => {
             </StyledItem>
 
             <StyledItem>
-              <Link to="/page-layouts/user-profile">
+              <Link to="/recruiter/profile">
                 <Icon> person </Icon>
                 <Span> Profile </Span>
               </Link>
@@ -165,7 +175,7 @@ const Layout1Topbar = () => {
               <Span> Settings </Span>
             </StyledItem>
 
-            <StyledItem onClick={logout}>
+            <StyledItem onClick={logOut}>
               <Icon> power_settings_new </Icon>
               <Span> Logout </Span>
             </StyledItem>
