@@ -20,6 +20,7 @@ import { getJobRequest } from 'slice/recruiter/createjobSlice';
 import makeStyles from '@emotion/styled';
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
+import { toast } from 'react-toastify';
 
 
 
@@ -454,8 +455,8 @@ const handleUpdate =(e)=>{
   e.preventDefault()
   dis (PutUpdateRequest(update));
   handleCloseUpdate()
-  // toast.success("Update Profile Successfully.")
-  // navi("/recruiter/profile")
+  
+  
 }
 
 //Popup up filter state--------------------------------> 

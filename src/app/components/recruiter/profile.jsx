@@ -52,7 +52,7 @@ const Profile = () => {
     e.preventDefault()
     dis (GetUserRequest(userdata))
    
-    toast.success("Job Updated Successfully.");
+    toast.success("Profile Updated Successfully.");
 }
   return (
    
