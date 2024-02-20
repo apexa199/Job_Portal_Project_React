@@ -6,6 +6,8 @@ import Loadable from './components/Loadable';
 import MatxLayout from './components/MatxLayout/MatxLayout';
 import materialRoutes from 'app/views/material-kit/MaterialRoutes';
 import recruiterRoutes from './components/recruiter/RecruiterRoutes';
+import { JwtLoginForApplicant } from './views/sessions/JwtLoginForApplicant';
+import {  JwtRegisterForApplicant } from './views/sessions/JwtRegisterForApplicant';
 
 // session pages
 const NotFound = Loadable(lazy(() => import('app/views/sessions/NotFound')));
@@ -49,6 +51,8 @@ const routes = [
   { path: '/session/404', element: <NotFound /> },
   { path: '/session/signin', element: <JwtLogin /> },
   { path: '/session/signup', element: <JwtRegister /> },
+  { path: '/session/signinForApplicant', element: <JwtLoginForApplicant/> },
+  { path: '/session/signupForApplicant', element: < JwtRegisterForApplicant/> },
   { path: '/session/forgot-password', element: <ForgotPassword /> },
 
   { path: '/', element: <Navigate to="dashboard/default" /> },
