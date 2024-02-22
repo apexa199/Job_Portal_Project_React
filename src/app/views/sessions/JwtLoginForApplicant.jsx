@@ -94,7 +94,7 @@ export const JwtLoginForApplicant = () => {
         <Grid container>
           <Grid item sm={6} xs={12}>
             <JustifyBox p={4} height="100%" sx={{ minWidth: 320 }}>
-              <img src="/assets/images/illustrations/dreamer.svg" width="100%" alt="" />
+              <img src="https://img.freepik.com/premium-vector/virtual-job-fair-illustration-concept_108061-1031.jpg?w=740" width="100%" alt="" />
             </JustifyBox>
           </Grid>
 
@@ -171,7 +171,7 @@ export const JwtLoginForApplicant = () => {
                     <Paragraph>
                       Don't have an account?
                       <NavLink
-                        to="/session/signup"
+                        to="/session/signupForApplicant"
                         style={{ color: theme.palette.primary.main, marginLeft: 5 }}
                       >
                         Register

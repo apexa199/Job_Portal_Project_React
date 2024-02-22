@@ -120,7 +120,7 @@ export const JwtRegisterForApplicant = () => {
             <img
               width="100%"
               alt="Register"
-              src="/assets/images/illustrations/posting_photo.svg"
+              src="https://img.freepik.com/premium-vector/virtual-job-fair-illustration-concept_108061-1031.jpg?w=740"
             />
           </ContentBox>
         </Grid>
