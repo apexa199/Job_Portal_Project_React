@@ -5,6 +5,7 @@ import { getJobRequest } from 'slice/recruiter/createjobSlice';
 import { FailGetUpdateRequest, FailPutUpdateRequest, GetUpdateRequest, PutUpdateRequest, SucGetUpdateRequest, SucPutUpdateRequest, deleteJobFailure, deleteJobRequest, deleteJobSuccess } from 'slice/recruiter/updatejobSlice';
 
 
+//update job
 
 function* getUpdate(action) {
   try {
