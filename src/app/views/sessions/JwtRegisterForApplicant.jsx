@@ -58,10 +58,7 @@ const initialValues = {
     name: "",
     education: [],
     skills: [],
-    resume: "",
-    profile: "",
-    bio: "",
-    contactNumber: "",
+     
 };
 
 // form field validation schema
@@ -84,7 +81,36 @@ export const JwtRegisterForApplicant = () => {
     const handleFormSubmit = (values) => {
       alert('r');
       setLoading(true);
+    
+
+    try {
+      fetch('http://localhost:4444/auth/signup', {
+        method: 'post',
+        body: JSON.stringify(values),
+        headers: {
+          'content-type': 'application/json'
+        }
+      })
+        .then((y) => y.json())
+        .then((y) => {
+          setLoading(false);
+
+          if (!y.errors && !y.driver) {
+            navigate('/session/signinForApplicant');
+            localStorage.setItem("Token For Applicant" , JSON.stringify((y)))
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+          alert('This Email is Already exiting');
+        });
+    } catch (e) {
+      console.log(e);
+      setLoading(false);
     }
+    }
+
+
   return (
     <JWTRegisterForApplicant>
     <Card className="card">
@@ -253,7 +279,7 @@ export const JwtRegisterForApplicant = () => {
                   <Paragraph>
                     Already have an account?
                     <NavLink
-                      to="/session/signin"
+                      to="/session/signinForApplicant"
                       style={{ color: theme.palette.primary.main, marginLeft: 5 }}
                     >
                       Login

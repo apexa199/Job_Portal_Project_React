@@ -57,7 +57,7 @@ const JwtRegister = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
 
-  const handleFormSubmit = (values) => {
+  const handleFormSubmit = (values) => {  
     alert('r');
     setLoading(true);
 
