@@ -16,7 +16,7 @@ import FilterListIcon from '@mui/icons-material/FilterList';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { GetUpdateRequest, PutUpdateRequest, deleteJobRequest,} from 'slice/recruiter/updatejobSlice';
-import { getJobRequest } from 'slice/recruiter/createjobSlice';
+import { getJobRequest, searchgetJobRequest } from 'slice/recruiter/createjobSlice';
 import makeStyles from '@emotion/styled';
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
@@ -395,6 +395,8 @@ function ListJob() {
 
   console.log(listData);
 
+  console.log(data);
+
   const dis = useDispatch();
 
   useEffect(() => {
@@ -402,15 +404,25 @@ function ListJob() {
     
   }, []);
 
+  const handleSearch = (e)=>{
+
+    dis(searchgetJobRequest({
+
+      pageNumber: 1,
+      searchTerm :e.target.value
+    }));
+
+  }
+
   //Delete Job ------------------------>
 
   const [idToDelete, setIdToDelete] = useState('');
-
   const [openDelete, setOpenDelete] = useState(false);  
-  const handleClickOpenDelete = (id) => { setOpenDelete(true)
+  const handleClickOpenDelete = (id) => { 
 
-    console.log(id);
+    setOpenDelete(true)
     setIdToDelete(id)};
+
   const handleCloseDelete = () => setOpenDelete(false);
 
   const handleDelete = () => {
@@ -420,25 +432,30 @@ function ListJob() {
   
 // update jobs ---------------------->
 
+const [idToUpdate,setIdToUpdate] = useState('');
 const [openUpdate, setOpenUpdate] = useState(false);
-const handleClickOpenUpdate = () => setOpenUpdate(true);
+const handleClickOpenUpdate = (id) =>  {
+  
+  setOpenUpdate(true);
+  setIdToUpdate(id)
+
+
+};
 const handleCloseUpdate = () => setOpenUpdate(false);
 
 
 const updateJob = useSelector((state)=>state.update.data);
 console.log(updateJob);
 
-const navi = useNavigate();
-
 const[update, setUpdate]=useState({
-  dateOfPosting :updateJob.dateOfPosting,
+  jobType :updateJob.jobType,
   maxApplicants : updateJob.maxApplicants,
   maxPositions :updateJob.maxPositions
 });
 
 useEffect(() => {
-  dis (GetUpdateRequest())
-},[])
+  dis (GetUpdateRequest(idToUpdate))
+},[idToUpdate])
 
 useEffect(() => {
   setUpdate(updateJob)
@@ -509,13 +526,15 @@ const [searchOptions, setSearchOptions] = useState({
                   endAdornment: (
                     <InputAdornment>
                       <IconButton>
-                        <SearchIcon  />
+                        <SearchIcon   />
                       </IconButton>
                     </InputAdornment>
                   )
                 }}
                 style={{ width: '500px' }}
-                variant="outlined"
+                variant="outlined"  
+                onBlur={handleSearch}
+              
               />
             </Grid>
             <Grid item>
@@ -691,11 +710,11 @@ const [searchOptions, setSearchOptions] = useState({
             Update Details
           </DialogTitle>
           <TextField
-            label="Application Deadline"
-            type="datetime-local"
-            value={update?.dateOfPosting}
+            label="Job Type"
+            type="text"
+            value={update?.jobType}
             onChange={(event) =>
-              handleInput("dateOfPosting", event.target.value)
+              handleInput("jobType", event.target.value)
             }
             InputLabelProps={{
               shrink: true
@@ -710,6 +729,9 @@ const [searchOptions, setSearchOptions] = useState({
             onChange={(event) =>
               handleInput("maxApplicants", event.target.value)
             }
+            InputLabelProps={{
+              shrink: true
+            }}
             variant="outlined"
             InputProps={{ inputProps: { min: 1 } }}
             style={{ marginBottom: '10px',margin:"10px 15px"}}
@@ -721,6 +743,9 @@ const [searchOptions, setSearchOptions] = useState({
             onChange={(event) =>
               handleInput("maxPositions", event.target.value)
             }
+            InputLabelProps={{
+              shrink: true
+            }}
             variant="outlined"
             InputProps={{ inputProps: { min: 1 } }}
             style={{ marginBottom: '10px',margin:"10px 15px" }}
