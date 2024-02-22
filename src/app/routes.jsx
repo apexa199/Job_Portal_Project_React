@@ -6,6 +6,7 @@ import Loadable from './components/Loadable';
 import MatxLayout from './components/MatxLayout/MatxLayout';
 import materialRoutes from 'app/views/material-kit/MaterialRoutes';
 import recruiterRoutes from './components/recruiter/RecruiterRoutes';
+import applicantRoutes from './components/applicant/ApplicantRoute'
 import { JwtLoginForApplicant } from './views/sessions/JwtLoginForApplicant';
 import {  JwtRegisterForApplicant } from './views/sessions/JwtRegisterForApplicant';
 
@@ -31,6 +32,7 @@ const routes = [
     children: [
       ...materialRoutes,
       ...recruiterRoutes,
+      ...applicantRoutes,
       // dashboard route
       {
         path: '/dashboard/default',
