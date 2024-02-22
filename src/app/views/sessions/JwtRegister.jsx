@@ -43,6 +43,7 @@ const initialValues = {
   type: 'recruiter'
 };
 
+
 // form field validation schema
 const validationSchema = Yup.object().shape({
   password: Yup.string()
@@ -74,6 +75,8 @@ const JwtRegister = () => {
           setLoading(false);
 
           if (!y.errors && !y.driver) {
+            localStorage.setItem("Token" , JSON.stringify((y)))
+            localStorage.setItem('name',values.name)
             navigate('/session/signin');
           }
         })
