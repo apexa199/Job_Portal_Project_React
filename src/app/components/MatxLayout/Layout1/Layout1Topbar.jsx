@@ -22,6 +22,8 @@ import { topBarHeight } from 'app/utils/constant';
 import { Span } from '../../Typography';
 import NotificationBar from '../../NotificationBar/NotificationBar';
 import ShoppingCart from '../../ShoppingCart';
+import { useState } from 'react';
+import { useEffect } from 'react';
 
 
 const StyledIconButton = styled(IconButton)(({ theme }) => ({
@@ -111,7 +113,14 @@ const Layout1Topbar = () => {
     navi('/session/signin')
   }
   
- 
+  const[name,setName] = useState();
+
+  useEffect( () => {
+    
+    setName(localStorage.getItem('name'))
+    
+  },[])
+  
   return (
     <TopbarRoot>
       <TopbarContainer>
@@ -149,7 +158,7 @@ const Layout1Topbar = () => {
               <UserMenu>
                 <Hidden xsDown>
                   <Span>
-                    Hi <strong>{user.name}</strong>
+                    Hi <strong>{name}</strong>
                   </Span>
                 </Hidden>
                 <Avatar src={user.avatar} sx={{ cursor: 'pointer' }} />

@@ -51,7 +51,7 @@ const Profile = () => {
   const handleSubmit =(e)=>{
     e.preventDefault()
     dis (GetUserRequest(userdata))
-   
+   localStorage.setItem('name' , userdata.name)
     toast.success("Profile Updated Successfully.");
 }
   return (

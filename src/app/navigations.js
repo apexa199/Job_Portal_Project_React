@@ -4,6 +4,7 @@ export const navigations = [
   { name: 'CreateJob', path: '/recruiter/createjob',icon: 'create' },
   { name: 'ListJobs', path: '/recruiter/listjobs', icon: 'assignment'  },
   
+  
 
  
  
