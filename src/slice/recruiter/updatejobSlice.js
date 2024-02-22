@@ -4,6 +4,7 @@ const initialState = {
     isloading: false,
     data: 'null',
     error: 'null',
+    listData : []
     
 }
 
@@ -11,7 +12,7 @@ const updatejobSlice = createSlice({
   name: "updateJob",
   initialState,
   reducers: {
-
+    //Update job
       GetUpdateRequest: function (state) {
         state.isloading = true;
       },
@@ -30,7 +31,7 @@ const updatejobSlice = createSlice({
       },
       SucPutUpdateRequest: function (state, { payload }) {
         state.isloading = false;
-        state.data = payload;
+        state.listData = payload;
       },
       FailPutUpdateRequest: function (state, { payload }) {
         state.isloading = false;
