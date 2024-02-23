@@ -416,6 +416,23 @@ function ListJob() {
 
   }
 
+  // Advanced Search Job -------------------->
+
+
+  const advancedhandleSearch = (e)=>{
+
+    dis(searchgetJobRequest({
+
+      pageNumber: 1,
+      jobType : "FullTime",
+      salary: [0, 100],
+      duration : 1,
+      sort : "salary"
+
+
+    }));
+
+  }
   //Delete Job ------------------------>
 
   const [idToDelete, setIdToDelete] = useState('');
@@ -473,6 +490,7 @@ const handleInput = (key, value) => {
 const handleUpdate =(e)=>{
   e.preventDefault()
   dis (PutUpdateRequest(update));
+  toast.success("Updated Successfully!")
   handleCloseUpdate()
   
   

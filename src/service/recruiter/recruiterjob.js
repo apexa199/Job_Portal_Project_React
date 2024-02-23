@@ -17,7 +17,31 @@ export const getJobData = (pageId) => {
 
 export const getJobDataSearch = (obj) => {
 
+    
     return authFetchGet(`/api/jobs?myjobs=${obj.pageNumber}&q=${obj.searchTerm}`, 'GET');
+}
+
+// Advanced job search------------>
+
+export const getJobDataSearchAdvanced = (obj) => {
+
+    let url =`/api/jobs?myjobs=${obj.pageNumber}`
+
+    if(obj.jobType)
+    {
+        url = url + "&jobType=" + obj.jobType
+    }    
+    if(obj.salaryMax)
+    {
+        url = url + "&salaryMax=" + obj.salaryMax
+    }
+    if(obj.duration)
+    {
+        url = url + "&duration=" + obj.duration
+    }
+    
+    
+    return authFetchGet(url, 'GET');
 }
 
 // Profile update -------->
@@ -40,9 +64,9 @@ export const getJobUpdateData = (data) => {
 
     return authFetchGet("/api/jobs/"+data,'GET');
 }
-export const putJobUpdateData = (data,jobId) => {
+export const putJobUpdateData = (data) => {
 
-    return authFetch(`/api/jobs/${jobId}`,'Put',data)
+    return authFetch(`/api/jobs/${data._id}`,'Put',data)
 }
 
 

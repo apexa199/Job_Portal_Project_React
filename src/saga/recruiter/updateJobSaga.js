@@ -25,7 +25,7 @@ function* putUpdate(action) {
   try {
     let mydata1 = yield call(putJobUpdateData, action.payload);
     yield put(SucPutUpdateRequest(mydata1));
-    toast.success("Job Updated Successfully.");
+   
 
     yield put(getJobRequest());
   } catch (error) {

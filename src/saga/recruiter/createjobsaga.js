@@ -1,7 +1,7 @@
 import { toast } from 'react-toastify';
 import { call, put, takeEvery } from 'redux-saga/effects';
-import createJob, { getJobData, getJobDataSearch } from 'service/recruiter/recruiterjob';
-import { FailGetJobRequest,createJobFail, createJobRequest, createJobSuc,  getJobRequest, searchFailGetJobRequest, searchgetJobRequest, searchsucGetJobRequest, sucGetJobRequest } from 'slice/recruiter/createjobSlice';
+import createJob, { getJobData, getJobDataSearch, getJobDataSearchAdvanced } from 'service/recruiter/recruiterjob';
+import { FailGetJobRequest,createJobFail, createJobRequest, createJobSuc,  getJobRequest, searchFailGetJobRequest, searchFailGetJobRequestAdvanced, searchgetJobRequest, searchgetJobRequestAdvanced, searchsucGetJobRequest, searchsucGetJobRequestAdvanced, sucGetJobRequest } from 'slice/recruiter/createjobSlice';
 
 function* createjob(action) {
   try {
@@ -32,7 +32,7 @@ export function* watchgetjob() {
 }
 
 
-//search job 
+//search job --------->
 
 function* searchgetjob(action) {
   try {
@@ -46,4 +46,20 @@ function* searchgetjob(action) {
 
 export function* watchsearchgetjob() {
   return yield takeEvery(searchgetJobRequest, searchgetjob);
+}
+
+// Advanced search job ---------->
+
+function* searchgetjobAdvanced(action) {
+  try {
+    let mydata = yield call(getJobDataSearchAdvanced, action.payload);
+    yield put(searchsucGetJobRequestAdvanced(mydata));
+   
+  } catch (error) {
+    yield put(searchFailGetJobRequestAdvanced(error));
+  }
+}
+
+export function* watchsearchgetjobAdvanced() {
+  return yield takeEvery(searchgetJobRequestAdvanced, searchgetjobAdvanced);
 }

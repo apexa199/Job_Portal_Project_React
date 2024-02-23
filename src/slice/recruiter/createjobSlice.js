@@ -53,12 +53,26 @@ const createjobslice = createSlice({
     searchFailGetJobRequest: function (state, { payload }) {
       state.isloading = false;
       state.error = payload;
+    },
+
+    // Search Advanced--------------->
+
+    searchgetJobRequestAdvanced : function (state) {
+      state.isloading = true;
+    },
+    searchsucGetJobRequestAdvanced : function (state, { payload }) {
+      state.isloading = false;
+    state.listData = payload;
+    },
+    searchFailGetJobRequestAdvanced : function (state, { payload }) {
+      state.isloading = false;
+      state.error = payload;
     }
 }
 
 });
 
 export const {createJobFail,createJobRequest,createJobSuc,
-  FailGetJobRequest,getJobRequest,sucGetJobRequest,searchgetJobRequest,searchsucGetJobRequest,searchFailGetJobRequest} = createjobslice.actions
+  FailGetJobRequest,getJobRequest,sucGetJobRequest,searchgetJobRequest,searchsucGetJobRequest,searchFailGetJobRequest,searchFailGetJobRequestAdvanced,searchgetJobRequestAdvanced,searchsucGetJobRequestAdvanced} = createjobslice.actions
 
 export default createjobslice.reducer;
