@@ -1,11 +1,12 @@
 import React from 'react'
 import { useTheme } from '@emotion/react';
 import { LoadingButton } from '@mui/lab';
-import { Card, Checkbox, Grid, TextField } from '@mui/material';
+import { Card, Checkbox, Grid, TextField} from '@mui/material';
 import { Box, styled } from '@mui/material';
 import { Paragraph } from 'app/components/Typography';
 import useAuth from 'app/hooks/useAuth';
 import { Formik } from 'formik';
+import makeStyles from '@emotion/styled';
 import { useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
@@ -69,7 +70,92 @@ const validationSchema = Yup.object().shape({
   email: Yup.string().email('Invalid Email address').required('Email is required!')
 });
 
+const useStyles = makeStyles((theme) => ({
+  body: {
+    height: "inherit",
+  },
+  popupDialog: {
+    height: "100%",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    // padding: "30px",
+  },
+}));
 
+const MultifieldInput = (props) => {
+  const classes = useStyles();
+  const { education, setEducation } = props;
+
+  return (
+    <>
+      {education.map((obj, key) => (
+        <Grid item container className={classes.inputBox} key={key}>
+          <Grid item xs={6}   sx={{ mb: 3 }}>
+            <TextField
+              label={`Institution Name #${key + 1}`}
+              value={education[key].institutionName}
+              onChange={(event) => {
+                const newEdu = [...education];
+                newEdu[key].institutionName = event.target.value;
+                setEducation(newEdu);
+              }}
+              variant="outlined"
+              fullWidth
+            />
+          </Grid>
+          <Grid item xs={3}>
+            <TextField
+              label="Start Year"
+              value={obj.startYear}
+              variant="outlined"
+              type="number"
+              onChange={(event) => {
+                const newEdu = [...education];
+                newEdu[key].startYear = event.target.value;
+                setEducation(newEdu);
+              }}
+            />
+          </Grid>
+          <Grid item xs={3}>
+            <TextField
+              label="End Year"
+              value={obj.endYear}
+              variant="outlined"
+              type="number"
+              onChange={(event) => {
+                const newEdu = [...education];
+                newEdu[key].endYear = event.target.value;
+                setEducation(newEdu);
+              }}
+            />
+          </Grid>
+        </Grid>
+      ))}
+      <Grid item style={{ alignSelf: "center" }}>
+        <Button
+          variant="contained"
+          color="secondary"
+          fullWidth
+          sx={{ mb: 3 }}
+          onClick={() =>
+            setEducation([
+              ...education,
+              {
+                institutionName: "",
+                startYear: "",
+                endYear: "",
+              },
+            ])
+          }
+          className={classes.inputBox}
+        >
+          Add another institution details
+        </Button>
+      </Grid>
+    </>
+  );
+};
 
 export const JwtRegisterForApplicant = () => {
 
@@ -77,7 +163,14 @@ export const JwtRegisterForApplicant = () => {
     const { register } = useAuth();
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
-  
+    const [education, setEducation] = useState([
+      {
+        institutionName: "",
+        startYear: "",
+        endYear: "",
+      },
+    ]);
+
     const handleFormSubmit = (values) => {
       alert('r');
       setLoading(true);
@@ -193,7 +286,16 @@ export const JwtRegisterForApplicant = () => {
                    sx={{ mb: 3 }}
                  /> 
                  
-                <ButtonGroup  fullWidth variant="outlined" aria-label="Basic button group" sx={{ mb: 3 }}>
+                 <MultifieldInput
+                education={education}
+                setEducation={setEducation}
+                name="education"
+                label="education"
+                variant="outlined"
+                sx={{ mb: 3 }}
+              />
+            
+              <ButtonGroup  fullWidth variant="outlined" aria-label="Basic button group" sx={{ mb: 3 }}>
                     <Button
                         component="label"
                         role={undefined}

@@ -31,7 +31,7 @@ const updatejobSlice = createSlice({
       },
       SucPutUpdateRequest: function (state, { payload }) {
         state.isloading = false;
-        state.listData = payload;
+        state.data = payload;
       },
       FailPutUpdateRequest: function (state, { payload }) {
         state.isloading = false;

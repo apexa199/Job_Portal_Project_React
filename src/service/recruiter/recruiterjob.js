@@ -20,7 +20,7 @@ export const getJobDataSearch = (obj) => {
     return authFetchGet(`/api/jobs?myjobs=${obj.pageNumber}&q=${obj.searchTerm}`, 'GET');
 }
 
-// For Profile update start-------->
+// Profile update -------->
 
 export const GetUserData = (dataUser) => {
 
@@ -40,9 +40,9 @@ export const getJobUpdateData = (data) => {
 
     return authFetchGet("/api/jobs/"+data,'GET');
 }
-export const putJobUpdateData = (id,data) => {
+export const putJobUpdateData = (data,jobId) => {
 
-    return authFetch(`/api/jobs/${id}`,'Put',data)
+    return authFetch(`/api/jobs/${jobId}`,'Put',data)
 }
 
 

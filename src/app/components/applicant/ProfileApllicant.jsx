@@ -1,15 +1,10 @@
 import React from 'react'
 import { useTheme } from '@emotion/react';
-import { LoadingButton } from '@mui/lab';
-import { Card, Checkbox, Grid, Paper, TextField, Typography } from '@mui/material';
+import { Card,Grid, Paper, TextField, Typography } from '@mui/material';
 import { Box, styled } from '@mui/material';
-import { Paragraph } from 'app/components/Typography';
-import useAuth from 'app/hooks/useAuth';
 import { Formik } from 'formik';
 import makeStyles from '@emotion/styled';
 import { useState } from 'react';
-import { NavLink, useNavigate } from 'react-router-dom';
-import * as Yup from 'yup';
 import Button from '@mui/material/Button';
 import ButtonGroup from '@mui/material/ButtonGroup';
 import DescriptionIcon from '@mui/icons-material/Description';
@@ -17,6 +12,7 @@ import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import { useEffect } from 'react';
 import { Breadcrumb } from '..';
+import { Stack } from 'react-bootstrap';
 
 const VisuallyHiddenInput = styled('input')({
     clip: 'rect(0 0 0 0)',
@@ -34,33 +30,12 @@ const VisuallyHiddenInput = styled('input')({
     margin: '30px',
     [theme.breakpoints.down('sm')]: { margin: '16px' },
     '& .breadcrumb': {
-      marginBottom: '30px',
+      marginBottom: '15px',
       [theme.breakpoints.down('sm')]: { marginBottom: '16px' }
     }
   }));
   
-const FlexBox = styled(Box)(() => ({ display: 'flex', alignItems: 'center' }));
 
-const JustifyBox = styled(FlexBox)(() => ({ justifyContent: 'center' }));
-
-const ContentBox = styled(JustifyBox)(() => ({
-  height: '100%',
-  padding: '32px',
-  background: 'rgba(0, 0, 0, 0.01)'
-}));
-
-const ProfileApplicant = styled(JustifyBox)(() => ({
-  background: '#1A2038',
-  minHeight: '100vh !important',
-  '& .card': {
-    maxWidth: 800,
-    minHeight: 400,
-    margin: '1rem',
-    display: 'flex',
-    borderRadius: 12,
-    alignItems: 'center'
-  }
-}));
 
 const useStyles = makeStyles((theme) => ({
     body: {
@@ -194,31 +169,22 @@ export const ProfileApllicant = () => {
           routeSegments={[{ name: 'Applicant', path: '/Applicant' }, { name: 'Profile' }]}
         />
       </Box>
+      <Stack spacing={2}>
+      <Grid item sx={{ mb: 2 }} >
+        <Typography variant="h3" align='center'>Profile</Typography>
+      </Grid>
+
     <Grid
       container
       item
-      direction="column"
-      alignItems="center"
-      style={{ padding: "30px", minHeight: "93vh"}}
-    >
-       
-      <Grid item>
-        <Typography variant="h3">Profile</Typography>
-      </Grid>
-      <Grid item xs>
-        <Paper
-          style={{
-            padding: "20px",
-            outline: "none",
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
+      direction="column" alignItems="stretch" spacing={3}      
+      style={{  minHeight: "93vh"}}
+    >      
+      
+      <Grid item xs>     
     
-    <Card className="card">
-      <Grid container style={{width : "150%"}}>     
+    <Card className="card" >
+      <Grid container style={{width : "150%", marginLeft : "120px"}} >     
 
         <Grid item sm={6} xs={12}>
           <Box p={4} height="100%">
@@ -273,13 +239,13 @@ export const ProfileApllicant = () => {
                         role={undefined}
                         variant="contained"
                         tabIndex={-1}
-                        style={{width : "40%"}}
+                        style={{width : "30%"}}
                         startIcon={<DescriptionIcon />}
                         >
                         <VisuallyHiddenInput type="file" />
                         </Button>
 
-                        <Button style={{width : "221%",color : "#c4c4c4", borderColor:"#c4c4c4"}}>
+                        <Button style={{width : "211%",color : "#c4c4c4", borderColor:"#c4c4c4"}}>
                         Resume (.pdf)              
                     
                     </Button>
@@ -287,7 +253,7 @@ export const ProfileApllicant = () => {
                             component="label"
                             role={undefined}
                             disabled
-                            style={{width : "40%"}}
+                            style={{width : "30%"}}
                             variant="contained"
                             tabIndex={-1}
                             startIcon={<CloudUploadIcon  />}
@@ -302,13 +268,13 @@ export const ProfileApllicant = () => {
                         role={undefined}
                         variant="contained"
                         tabIndex={-1}
-                        style={{width : "40%"}}
+                        style={{width : "30%"}}
                         startIcon={<AccountBoxIcon />}
                         >
                         <VisuallyHiddenInput type="file" />
                         </Button>
 
-                        <Button style={{width : "221%", color : "#c4c4c4", borderColor:"#c4c4c4"}}>
+                        <Button style={{width : "211%", color : "#c4c4c4", borderColor:"#c4c4c4"}}>
                         Profile Photo (.jpg/.png)        
                     
                     </Button>
@@ -316,7 +282,7 @@ export const ProfileApllicant = () => {
                             component="label"
                             role={undefined}
                             disabled
-                            style={{width : "40%"}}
+                            style={{width : "30%"}}
                             variant="contained"
                             tabIndex={-1}
                             startIcon={<CloudUploadIcon  />}
@@ -327,7 +293,8 @@ export const ProfileApllicant = () => {
                 <Button
               variant="contained"
               color="primary"
-              style={{ padding: "10px 50px",display : "flex", justifyContent : "center" }}
+              align = 'center'
+              style={{ padding: "7px 65px" }}
           
             >
               Update Details
@@ -340,10 +307,10 @@ export const ProfileApllicant = () => {
       </Grid>
     </Card>
   
-    </Paper>
+    
         </Grid>
       </Grid>
-     
+     </Stack>
     </Container>
     </>
   );

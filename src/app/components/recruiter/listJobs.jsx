@@ -28,7 +28,7 @@ const Container = styled('div')(({ theme }) => ({
   margin: '30px',
   [theme.breakpoints.down('sm')]: { margin: '16px' },
   '& .breadcrumb': {
-    marginBottom: '30px',
+    marginBottom: '15px',
     [theme.breakpoints.down('sm')]: { marginBottom: '16px' }
   }
 }));
@@ -391,7 +391,7 @@ const useStyles = makeStyles((theme) => ({
 
 
 function ListJob() {
-  const { listData, data, error, isloading } = useSelector((y) => y.jobs);
+  const { listData, data } = useSelector((y) => y.jobs);
 
   console.log(listData);
 
@@ -403,6 +403,8 @@ function ListJob() {
     dis(getJobRequest(1));
     
   }, []);
+
+  // search job ----------------------->
 
   const handleSearch = (e)=>{
 
@@ -515,8 +517,8 @@ const [searchOptions, setSearchOptions] = useState({
             />
           </Box>
 
-          <Grid item container direction="column" justify="center" alignItems="center">
-            <Grid item xs>
+          <Grid item container direction="column" justify="center" alignItems="center" >
+            <Grid item xs sx={{ mb: 2 }}>
               <Typography variant="h3">My Jobs</Typography>
             </Grid>
             <Grid item xs>

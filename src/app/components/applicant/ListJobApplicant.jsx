@@ -16,7 +16,7 @@ import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 import { toast } from 'react-toastify';
 import { useState } from 'react';
-import { getJobRequest } from 'slice/recruiter/createjobSlice';
+import { getJobRequest, searchgetJobRequest } from 'slice/recruiter/createjobSlice';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -25,7 +25,7 @@ const Container = styled('div')(({ theme }) => ({
     margin: '30px',
     [theme.breakpoints.down('sm')]: { margin: '16px' },
     '& .breadcrumb': {
-      marginBottom: '30px',
+      marginBottom: '15px',
       [theme.breakpoints.down('sm')]: { marginBottom: '16px' }
     }
   }));
@@ -388,7 +388,8 @@ const Container = styled('div')(({ theme }) => ({
   };
 
 export const ListJobApplicant = () => {
-    const { listData, data, error, isloading } = useSelector((y) => y.jobs);
+
+    const { listData, data} = useSelector((y) => y.jobs);
 
     console.log(listData);
   
@@ -401,7 +402,19 @@ export const ListJobApplicant = () => {
       
     }, []);
 
+   // search job ----------------------->
 
+   const handleSearch = (e)=>{
+
+    dis(searchgetJobRequest({
+
+      pageNumber: 1,
+      searchTerm :e.target.value
+    }));
+
+  }
+
+  
 //Popup up filter state--------------------------------> 
 
 
@@ -448,6 +461,7 @@ const [searchOptions, setSearchOptions] = useState({
             <Grid item xs>
               <TextField
                 label="Search Jobs"
+                onBlur={handleSearch}
                 InputProps={{
                   endAdornment: (
                     <InputAdornment>

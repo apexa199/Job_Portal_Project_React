@@ -13,7 +13,7 @@ const Container = styled('div')(({ theme }) => ({
   margin: '30px',
   [theme.breakpoints.down('sm')]: { margin: '16px' },
   '& .breadcrumb': {
-    marginBottom: '30px',
+    marginBottom: '15px',
     [theme.breakpoints.down('sm')]: { marginBottom: '16px' }
   }
 }));
@@ -58,7 +58,7 @@ export const CreateJob = () => {
           />
         </Box>
 
-        <Stack spacing={3}>
+        <Stack spacing={2}>
           <Grid item>
             <Typography variant="h3" align="center">
               Add Job
