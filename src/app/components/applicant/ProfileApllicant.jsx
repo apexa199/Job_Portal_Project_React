@@ -293,6 +293,7 @@ export const ProfileApllicant = () => {
                 <Button
               variant="contained"
               color="primary"
+              fullWidth
               align = 'center'
               style={{ padding: "7px 65px" }}
           
