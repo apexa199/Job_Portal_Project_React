@@ -378,7 +378,7 @@ const useStyles = makeStyles((theme) => ({
               variant="contained"
               color="primary"
               style={{ padding: '10px 50px' }}
-              onClick={() => getData()}
+              onClick={() => {handleClose();  getData(); }}
             >
               Apply
             </Button>
@@ -421,15 +421,17 @@ function ListJob() {
 
   const advancedhandleSearch = (e)=>{
 
+    console.log(searchOptions);
+
     dis(searchgetJobRequestAdvanced({
       ...searchOptions,
-      pageNumber: 1
-     
+      pageNumber: 1  
 
 
     }));
 
-  }
+    }
+
   //Delete Job ------------------------>
 
   const [idToDelete, setIdToDelete] = useState('');
@@ -464,9 +466,9 @@ const updateJob = useSelector((state)=>state.update.data);
 console.log(updateJob);
 
 const[update, setUpdate]=useState({
-  jobType :updateJob.jobType,
+  jobType : updateJob.jobType,
   maxApplicants : updateJob.maxApplicants,
-  maxPositions :updateJob.maxPositions
+  maxPositions : updateJob.maxPositions
 });
 
 useEffect(() => {
@@ -492,11 +494,13 @@ const handleUpdate =(e)=>{
   
   
 }
+const clearAll = () => {
+  dis(getJobRequest(1));
+}
 
 //Popup up filter state--------------------------------> 
 
 
-const [jobs, setJobs] = useState([]);
 const [filterOpen, setFilterOpen] = useState(false);
 const [searchOptions, setSearchOptions] = useState({
   query: "",
@@ -551,8 +555,11 @@ const [searchOptions, setSearchOptions] = useState({
                 style={{ width: '500px' }}
                 variant="outlined"  
                 onBlur={handleSearch}
-              
               />
+              
+              <Button variant="outlined" style={{margin : "0px 10px", padding : "14px"}} onClick={clearAll}>Clear</Button>
+            
+            
             </Grid>
             <Grid item>
               <IconButton>
@@ -565,10 +572,7 @@ const [searchOptions, setSearchOptions] = useState({
         searchOptions={searchOptions}
         setSearchOptions={setSearchOptions}
         handleClose={() => setFilterOpen(false)}
-        getData={() => {
-
-          setFilterOpen(false);
-        }}
+        getData={advancedhandleSearch}
       />
 
           {listData.length > 0 ? (
