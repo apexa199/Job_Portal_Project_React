@@ -13,6 +13,8 @@ import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import { useEffect } from 'react';
 import { Breadcrumb } from '..';
 import { Stack } from 'react-bootstrap';
+import { useDispatch, useSelector } from 'react-redux';
+import { GetProfileAppliRequest, PutProfileAppliRequest } from 'slice/applicant/profileUpdateSlice';
 
 const VisuallyHiddenInput = styled('input')({
     clip: 'rect(0 0 0 0)',
@@ -69,6 +71,7 @@ const MultifieldInput = (props) => {
                 }}
                 variant="outlined"
                 fullWidth
+              
               />
             </Grid>
             <Grid item xs={3}>
@@ -127,6 +130,12 @@ const MultifieldInput = (props) => {
 
 export const ProfileApllicant = () => {
     const classes = useStyles();
+
+    const data = useSelector((state) => state.profileApplicant.data);
+    console.log(data)
+
+    const dis = useDispatch();
+
     const [loading, setLoading] = useState(false);
     const [userData, setUserData] = useState();
     const [open, setOpen] = useState(false);
@@ -147,6 +156,14 @@ export const ProfileApllicant = () => {
       },
     ]);
   
+    useEffect(() => {
+      dis(GetProfileAppliRequest())
+    },[])
+
+    useEffect(() => {
+      setProfileDetails(data)
+    },[data])
+    
     const handleInput = (key, value) => {
       setProfileDetails({
         ...profileDetails,
@@ -158,6 +175,7 @@ export const ProfileApllicant = () => {
   
     const handleFormSubmit = (values) => {
       alert('r');
+      dis(PutProfileAppliRequest())
       setLoading(true);
     }  
 
@@ -201,9 +219,10 @@ export const ProfileApllicant = () => {
                     name="name"
                     label="Name"
                     variant="outlined"
-                    onBlur={handleBlur}
-                    // value={values.name}
-                    onChange={handleChange}
+                    onBlur={handleBlur}                    
+                    onChange={(e) => {
+                      handleInput("name", e.target.value)
+                    }}
                     helperText={touched.name && errors.name}
                     error={Boolean(errors.name && touched.name)}
                     sx={{ mb: 3 }}
@@ -226,8 +245,9 @@ export const ProfileApllicant = () => {
                    label="Skills"
                    variant="outlined"
                    onBlur={handleBlur}
-                //    value={values.skills}
-                   onChange={handleChange}
+                   onChange={(e) => {
+                    handleInput("name", e.target.value)
+                  }}
                    helperText={touched.skills && errors.skills}
                    error={Boolean(errors.skills && touched.skills)}
                    sx={{ mb: 3 }}

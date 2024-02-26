@@ -1,6 +1,7 @@
 import createSagaMiddleware from "@redux-saga/core";
 import { configureStore } from "@reduxjs/toolkit";
 import rootsaga from "saga/recruiter/rootsaga";
+import profileUpdateSlice from "slice/applicant/profileUpdateSlice";
 import createjobslice from "slice/recruiter/createjobSlice";
 import updatejobSlice from "slice/recruiter/updatejobSlice";
 import userSlice from "slice/recruiter/userSlice";
@@ -12,7 +13,8 @@ const store = configureStore({
   reducer: {
     jobs : createjobslice,
     user : userSlice,
-    update : updatejobSlice
+    update : updatejobSlice,
+    profileApplicant : profileUpdateSlice
   },
   middleware: [sagaMiddleware],
 });

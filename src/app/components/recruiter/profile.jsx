@@ -34,7 +34,7 @@ const Profile = () => {
   });
   
   useEffect(() => {
-    dis (PutUserRequest())
+    dis (GetUserRequest())
   },[])
 
   useEffect(() => {
@@ -50,7 +50,7 @@ const Profile = () => {
   };
   const handleSubmit =(e)=>{
     e.preventDefault()
-    dis (GetUserRequest(userdata))
+    dis (PutUserRequest(userdata))
    localStorage.setItem('name' , userdata.name)
     toast.success("Profile Updated Successfully.");
 }
@@ -74,7 +74,7 @@ const Profile = () => {
             display: "flex",
             flexDirection: "column",
             justifyContent: "center",
-            alignItems: "center"
+            alignItems: "center" 
           }}
         >
           <Grid container direction="column" alignItems="stretch" spacing={3}>

@@ -25,37 +25,53 @@ export const getJobDataSearch = (obj) => {
 
 export const getJobDataSearchAdvanced = (obj) => {
 
-    let url =`/api/jobs?myjobs=${obj.pageNumber}`
+    // let url =`/api/jobs?myjobs=${obj.pageNumber}`
 
-    if(obj.jobType)
-    {
-        url = url + "&jobType=" + obj.jobType
-    }    
-    if(obj.salaryMax)
-    {
-        url = url + "&salaryMax=" + obj.salaryMax
-    }
-    if(obj.duration)
-    {
-        url = url + "&duration=" + obj.duration
-    }
+    // if(obj.jobType)
+    // {
+    //     url = url + "&jobType=" + obj.jobType
+    // }    
+    // if(obj.salaryMax)
+    // {
+    //     url = url + "&salaryMax=" + obj.salaryMax
+    // }
+    // if(obj.duration)
+    // {
+    //     url = url + "&duration=" + obj.duration
+    // }
+    // if(obj.sort)
+    // {
+    //     url = url + "&sort=" + obj.sort
+    // }
     
     
-    return authFetchGet(url, 'GET');
+    return authFetchGet(`/api/jobs?myjobs=${obj.pageNumber}&jobType=${obj.searchOptions.jobType.fullTime}&salary=${obj.searchOptions.salary}&duration=${obj.searchOptions.duration}&asc=${obj.searchOptions.sort.salary}`, 'GET');
 }
 
 // Profile update -------->
 
-export const GetUserData = (dataUser) => {
+export const PutUserData = (dataUser) => {
 
     return authFetch("/api/user",'Put', dataUser)
 }
 
-export const PutUserData = (data) => {
+export const GetUserData = (data) => {
 
     return authFetchGet("/api/user",'GET', data)
 }
 
+// Profile Applicant update------------>
+
+
+export const GetProfileAppliData = (dataUser) => {
+
+    return authFetchGet("/api/user",'GET', dataUser)
+}
+
+export const PutProfileAppliData = (data) => {
+
+    return authFetch("/api/user",'PUT', data)
+}
 
 
 // Update List Data popup-------->
@@ -70,11 +86,14 @@ export const putJobUpdateData = (data) => {
 }
 
 
-//Delete list Data popup --->
+//Delete list Data popup ------------->
 
 export const deleteJobData = (id) => {
 
     return authFetchGet(`/api/jobs/${id}`, 'DELETE');
 }
+
+
+
 
 export default createJob;

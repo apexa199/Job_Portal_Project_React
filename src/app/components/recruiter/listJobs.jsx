@@ -16,7 +16,7 @@ import FilterListIcon from '@mui/icons-material/FilterList';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { GetUpdateRequest, PutUpdateRequest, deleteJobRequest,} from 'slice/recruiter/updatejobSlice';
-import { getJobRequest, searchgetJobRequest } from 'slice/recruiter/createjobSlice';
+import { getJobRequest, searchgetJobRequest, searchgetJobRequestAdvanced } from 'slice/recruiter/createjobSlice';
 import makeStyles from '@emotion/styled';
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
@@ -421,13 +421,10 @@ function ListJob() {
 
   const advancedhandleSearch = (e)=>{
 
-    dis(searchgetJobRequest({
-
-      pageNumber: 1,
-      jobType : "FullTime",
-      salary: [0, 100],
-      duration : 1,
-      sort : "salary"
+    dis(searchgetJobRequestAdvanced({
+      ...searchOptions,
+      pageNumber: 1
+     
 
 
     }));
@@ -577,7 +574,7 @@ const [searchOptions, setSearchOptions] = useState({
           {listData.length > 0 ? (
             listData?.map((v) => {
               return (
-                <Card sx={{ maxWidth: 1200, margin: '25px', background: '#DCDCDC' }}>
+                <Card sx={{ maxWidth: 1200, margin: '25px', background: '#E8E8E8' }}>
                   <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                     <CardContent>
                       <Typography gutterBottom variant="h6" component="div">
