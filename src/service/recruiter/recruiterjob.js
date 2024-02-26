@@ -90,11 +90,13 @@ export const getJobDataSearchAdvanced = (obj) => {
 
 // Veiw Application--------------->
 
-export const GetApplicants =(jobid) =>
+export const ViewApplications =(job) =>
 {
 
-    return authFetchGet(`http://localhost:4444/api/applicants?jobId`+jobid);
+    return authFetchGet(`api/applicants?jobId=`+job._id , 'GET');
 }
+
+
 // Profile update ---------------->
 
 export const PutUserData = (dataUser) => {

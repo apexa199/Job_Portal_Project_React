@@ -14,13 +14,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import SearchIcon from '@mui/icons-material/Search';
 import FilterListIcon from '@mui/icons-material/FilterList';
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { GetUpdateRequest, PutUpdateRequest, deleteJobRequest,} from 'slice/recruiter/updatejobSlice';
-import { getJobRequest, searchgetJobRequest, searchgetJobRequestAdvanced } from 'slice/recruiter/createjobSlice';
+import { ViewGetJobRequest, getJobRequest, searchgetJobRequest, searchgetJobRequestAdvanced } from 'slice/recruiter/createjobSlice';
 import makeStyles from '@emotion/styled';
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 
 
 
@@ -491,12 +491,31 @@ const handleUpdate =(e)=>{
   dis (PutUpdateRequest(update));
   toast.success("Updated Successfully!")
   handleCloseUpdate()
-  
-  
+    
 }
+
 const clearAll = () => {
   dis(getJobRequest(1));
 }
+
+// View Applications---------->
+
+const navi = useNavigate();
+
+const[idToView,setIdToView] = useState("");
+console.log(idToView)
+
+const viewApplicationHandleSubmit = (id) =>  {
+  
+  setIdToView(id)
+  console.log(id)
+  navi( "/recruiter/viewapplications" )
+  
+};
+
+useEffect(() => {
+  dis(ViewGetJobRequest(idToView))
+},[idToView])
 
 //Popup up filter state--------------------------------> 
 
@@ -619,6 +638,7 @@ const [searchOptions, setSearchOptions] = useState({
                     {/* Button  code start--------------------------> */}
 
                     <CardActions style={{ display: 'grid', margin: "20px"}}>
+                     
                       <Button
                         style={{
                           backgroundColor: 'rgb(34 42 68)',
@@ -629,10 +649,11 @@ const [searchOptions, setSearchOptions] = useState({
                         
                         }}
                         size="small"
-                        // onClick={() => handleClick(`/recruiter/applications`)}
+                        onClick={() => {viewApplicationHandleSubmit(v._id)}}
                       >
                         View Application
                       </Button>
+                    
                       <Button
                         style={{
                           backgroundColor: 'rgb(252, 143, 30)',

@@ -67,12 +67,31 @@ const createjobslice = createSlice({
     searchFailGetJobRequestAdvanced : function (state, { payload }) {
       state.isloading = false;
       state.error = payload;
-    }
+    },
+
+
+    //View Applications---------------->
+
+    ViewGetJobRequest: function (state) {
+      state.isloading = true;
+    },
+    SucViewGetJobRequest: function (state, { payload }) {
+      state.isloading = false;
+    state.listData = payload;
+    },
+    FailViewGetJobRequest: function (state, { payload }) {
+      state.isloading = false;
+      state.error = payload;
+    },
 }
 
 });
 
 export const {createJobFail,createJobRequest,createJobSuc,
-  FailGetJobRequest,getJobRequest,sucGetJobRequest,searchgetJobRequest,searchsucGetJobRequest,searchFailGetJobRequest,searchFailGetJobRequestAdvanced,searchgetJobRequestAdvanced,searchsucGetJobRequestAdvanced} = createjobslice.actions
+  FailGetJobRequest,getJobRequest,sucGetJobRequest,searchgetJobRequest,searchsucGetJobRequest,searchFailGetJobRequest,
+  searchFailGetJobRequestAdvanced,searchgetJobRequestAdvanced,searchsucGetJobRequestAdvanced,
+  FailViewGetJobRequest,SucViewGetJobRequest,ViewGetJobRequest
+
+} = createjobslice.actions
 
 export default createjobslice.reducer;
