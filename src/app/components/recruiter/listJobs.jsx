@@ -20,7 +20,7 @@ import makeStyles from '@emotion/styled';
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 import { toast } from 'react-toastify';
-import { useNavigate } from 'react-router-dom';
+import { createSearchParams, useNavigate, useParams } from 'react-router-dom';
 
 
 
@@ -502,20 +502,14 @@ const clearAll = () => {
 
 const navi = useNavigate();
 
-const[idToView,setIdToView] = useState("");
-console.log(idToView)
-
 const viewApplicationHandleSubmit = (id) =>  {
-  
-  setIdToView(id)
+    
   console.log(id)
-  navi( "/recruiter/viewapplications" )
+  navi({ pathname : '/recruiter/viewapplications', search : createSearchParams({id : id}).toString() 
+})
   
 };
 
-useEffect(() => {
-  dis(ViewGetJobRequest(idToView))
-},[idToView])
 
 //Popup up filter state--------------------------------> 
 

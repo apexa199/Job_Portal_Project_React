@@ -5,6 +5,7 @@ import { Breadcrumb } from '..';
 import { useDispatch, useSelector } from 'react-redux';
 import { ViewGetJobRequest } from 'slice/recruiter/createjobSlice';
 import { useEffect } from 'react';
+import { useSearchParams } from 'react-router-dom';
 
 const Container = styled('div')(({ theme }) => ({
   margin: '30px',
@@ -18,6 +19,8 @@ const Container = styled('div')(({ theme }) => ({
 
 export const Applications = () => {
 
+  const[val] = useSearchParams()
+  console.log(val)
 
   return (
     <>

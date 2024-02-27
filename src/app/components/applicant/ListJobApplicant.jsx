@@ -19,6 +19,8 @@ import { useState } from 'react';
 import { getJobRequest, searchgetJobRequest } from 'slice/recruiter/createjobSlice';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import DialogContent from '@mui/material/DialogContent';
+import CloseIcon from '@mui/icons-material/Close';
 
 
 const Container = styled('div')(({ theme }) => ({
@@ -29,6 +31,16 @@ const Container = styled('div')(({ theme }) => ({
       [theme.breakpoints.down('sm')]: { marginBottom: '16px' }
     }
   }));
+
+  const BootstrapDialog = styled(Dialog)(({ theme }) => ({
+    '& .MuiDialogContent-root': {
+      padding: theme.spacing(2),
+    },
+    '& .MuiDialogActions-root': {
+      padding: theme.spacing(1),
+    },
+  }));
+
 
   const useStyles = makeStyles((theme) => ({
     body: {
@@ -382,6 +394,8 @@ const Container = styled('div')(({ theme }) => ({
               </Button>
             </Grid>
           </Grid>
+
+
         </Paper>
       </Modal>
     );
@@ -413,6 +427,14 @@ export const ListJobApplicant = () => {
     }));
 
   }
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   
 //Popup up filter state--------------------------------> 
@@ -541,7 +563,7 @@ const [searchOptions, setSearchOptions] = useState({
                         
                         }}
                         size="small"
-                        // onClick={() => handleClick(`/recruiter/applications`)}
+                        onClick={handleClickOpen}
                       >
                         APPLY
                       </Button>
@@ -549,6 +571,7 @@ const [searchOptions, setSearchOptions] = useState({
                     {/* Button  code end----------------------------> */}
                   </div>
                 </Card>
+                
               );
             })
           ) : (
@@ -557,6 +580,40 @@ const [searchOptions, setSearchOptions] = useState({
             </Typography>
           )}
           </div>
-      </Container>
+
+{/* Apply Pop up ---------------->        */}
+
+<React.Fragment   style={{width:"33%",height:"44%"}}>
+      <Dialog
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogContent   style={{width:"550px", height:"250px",padding:"30px"}}>
+        <Box
+      sx={{
+        width: 500,
+        maxWidth: '100%',
+        height: 200,
+        maxHeight:"50%",
+      }}
+    >
+      <TextField
+          id="outlined-multiline-static"
+          label="Write SOP (upto 250 words)"
+          fullWidth
+
+          multiline
+          rows={9}
+        />
+    </Box>
+        </DialogContent>
+        <DialogActions style={{justifyContent:"center", padding:"17px 0px 17px 0px"}}>
+          <Button style={{backgroundColor:"#1976d2",color:"white",padding:"8px 18px"}} >SUBMIT</Button>
+        </DialogActions>
+      </Dialog>
+    </React.Fragment>
+   </Container>
   )
 }
