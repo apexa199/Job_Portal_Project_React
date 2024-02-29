@@ -488,7 +488,7 @@ const handleInput = (key, value) => {
 };
 const handleUpdate =(e)=>{
   e.preventDefault()
-  dis (PutUpdateRequest(update));
+  dis (PutUpdateRequest({...update,_id:idToUpdate}));
   toast.success("Updated Successfully!")
   handleCloseUpdate()
     
@@ -522,7 +522,7 @@ const [searchOptions, setSearchOptions] = useState({
     partTime: false,
     wfh: false,
   },
-  salary: [0, 100],
+  salary: [0, 0],
   duration: "0",
   sort: {
     salary: {
