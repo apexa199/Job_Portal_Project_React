@@ -10,7 +10,7 @@ const initialState = {
 const profileUpdateSlice = createSlice({
     name: "profileApplicant",
     initialState,
-  reducers: {
+    reducers: {
     GetProfileAppliRequest: function (state) {
         state.isloading = true;
       },

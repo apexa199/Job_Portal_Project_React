@@ -41,8 +41,11 @@ export const getJobDataSearchAdvanced = (obj) => {
     }    
     if(obj.salary && obj.salary.length> 0)
     {
+        if(obj.salary[1] >0)
+        {
         url = url + "&salaryMin=" + obj.salary[0]
         url = url + "&salaryMax=" + obj.salary[1]
+        }
     }
     if(obj.duration && obj.duration != "0")
     {
@@ -142,6 +145,12 @@ export const deleteJobData = (id) => {
     return authFetchGet(`/api/jobs/${id}`, 'DELETE');
 }
 
+
+export const getApplication = (id) =>{
+
+
+    return authFetchGet(`http://localhost:4444/api/applicants?jobId=${id}&desc=dateOfApplication`)
+}
 
 
 
