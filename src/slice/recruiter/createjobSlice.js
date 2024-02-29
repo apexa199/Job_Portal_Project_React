@@ -69,20 +69,6 @@ const createjobslice = createSlice({
       state.error = payload;
     },
 
-
-    //View Applications---------------->
-
-    ViewGetJobRequest: function (state) {
-      state.isloading = true;
-    },
-    SucViewGetJobRequest: function (state, { payload }) {
-      state.isloading = false;
-    state.listData = payload;
-    },
-    FailViewGetJobRequest: function (state, { payload }) {
-      state.isloading = false;
-      state.error = payload;
-    },
 }
 
 });
@@ -90,7 +76,6 @@ const createjobslice = createSlice({
 export const {createJobFail,createJobRequest,createJobSuc,
   FailGetJobRequest,getJobRequest,sucGetJobRequest,searchgetJobRequest,searchsucGetJobRequest,searchFailGetJobRequest,
   searchFailGetJobRequestAdvanced,searchgetJobRequestAdvanced,searchsucGetJobRequestAdvanced,
-  FailViewGetJobRequest,SucViewGetJobRequest,ViewGetJobRequest
 
 } = createjobslice.actions
 

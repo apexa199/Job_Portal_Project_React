@@ -93,10 +93,10 @@ export const getJobDataSearchAdvanced = (obj) => {
 
 // Veiw Application--------------->
 
-export const ViewApplications =(job) =>
+export const ViewApplications =(obj) =>
 {
 
-    return authFetchGet(`api/applicants?jobId=`+job._id , 'GET');
+    return authFetchGet(`/api/applicants?jobId=${obj._id}&desc=dateOfApplication`,'GET')
 }
 
 
@@ -144,14 +144,6 @@ export const deleteJobData = (id) => {
 
     return authFetchGet(`/api/jobs/${id}`, 'DELETE');
 }
-
-
-export const getApplication = (id) =>{
-
-
-    return authFetchGet(`http://localhost:4444/api/applicants?jobId=${id}&desc=dateOfApplication`)
-}
-
 
 
 export default createJob;

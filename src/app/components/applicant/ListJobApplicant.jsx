@@ -20,7 +20,7 @@ import { getJobRequest, searchgetJobRequest } from 'slice/recruiter/createjobSli
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import DialogContent from '@mui/material/DialogContent';
-import CloseIcon from '@mui/icons-material/Close';
+
 
 
 const Container = styled('div')(({ theme }) => ({
@@ -30,15 +30,6 @@ const Container = styled('div')(({ theme }) => ({
       marginBottom: '15px',
       [theme.breakpoints.down('sm')]: { marginBottom: '16px' }
     }
-  }));
-
-  const BootstrapDialog = styled(Dialog)(({ theme }) => ({
-    '& .MuiDialogContent-root': {
-      padding: theme.spacing(2),
-    },
-    '& .MuiDialogActions-root': {
-      padding: theme.spacing(1),
-    },
   }));
 
 
@@ -403,11 +394,11 @@ const Container = styled('div')(({ theme }) => ({
 
 export const ListJobApplicant = () => {
 
-    const { listData, data} = useSelector((y) => y.jobs);
+    const { listData} = useSelector((y) => y.jobs);
 
     console.log(listData);
   
-    console.log(data);
+    
   
     const dis = useDispatch();
   

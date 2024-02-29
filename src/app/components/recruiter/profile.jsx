@@ -59,7 +59,7 @@ const Profile = () => {
     <Container>
     <div>
     <Box style={{marginTop:"15px"}} className="breadcrumb">
-      <Breadcrumb routeSegments={[{ name: 'Recruiter', path: '/Recruiter' }, { name: 'Profile' }]} />
+      <Breadcrumb routeSegments={[{ name: 'Recruiter', path: '/recruiter/profile' }, { name: 'Profile' }]} />
     </Box>
 
     <Stack spacing={3}>

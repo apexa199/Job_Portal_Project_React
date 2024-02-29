@@ -11,7 +11,7 @@ const recruiterRoutes = [
   { path: '/recruiter/createJob', element: <CreateJob /> },
   { path: '/recruiter/profile', element: <Profile /> },
   { path: '/recruiter/listJobs', element: <ListJob /> },
-  { path: '/recruiter/viewapplications', element: <Applications /> },
+  { path: '/recruiter/applications', element: <Applications /> },
 
 ];
 

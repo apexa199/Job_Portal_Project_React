@@ -1,7 +1,7 @@
 import { toast } from 'react-toastify';
 import { call, put, takeEvery } from 'redux-saga/effects';
-import createJob, { ViewApplications, getJobData, getJobDataSearch, getJobDataSearchAdvanced } from 'service/recruiter/recruiterjob';
-import { FailGetJobRequest,FailViewGetJobRequest,SucViewGetJobRequest,ViewGetJobRequest,createJobFail, createJobRequest, createJobSuc,  getJobRequest, searchFailGetJobRequest, searchFailGetJobRequestAdvanced, searchgetJobRequest, searchgetJobRequestAdvanced, searchsucGetJobRequest, searchsucGetJobRequestAdvanced, sucGetJobRequest } from 'slice/recruiter/createjobSlice';
+import createJob, {getJobData, getJobDataSearch, getJobDataSearchAdvanced } from 'service/recruiter/recruiterjob';
+import { FailGetJobRequest,createJobFail, createJobRequest, createJobSuc,  getJobRequest, searchFailGetJobRequest, searchFailGetJobRequestAdvanced, searchgetJobRequest, searchgetJobRequestAdvanced, searchsucGetJobRequest, searchsucGetJobRequestAdvanced, sucGetJobRequest } from 'slice/recruiter/createjobSlice';
 
 function* createjob(action) {
   try {
@@ -64,19 +64,3 @@ export function* watchsearchgetjobAdvanced() {
   return yield takeEvery(searchgetJobRequestAdvanced, searchgetjobAdvanced);
 }
 
-// Veiw Applications---------------->
-
-
-function* viewgetjob(action) {
-  try {
-    let mydata = yield call(ViewApplications, action.payload);
-    yield put(SucViewGetJobRequest(mydata));
-   
-  } catch (error) {
-    yield put(FailViewGetJobRequest(error));
-  }
-}
-
-export function* watchviewgetjob() {
-  return yield takeEvery(ViewGetJobRequest, viewgetjob);
-}

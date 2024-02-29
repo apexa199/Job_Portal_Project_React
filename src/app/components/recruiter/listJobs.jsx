@@ -545,7 +545,7 @@ const [searchOptions, setSearchOptions] = useState({
         <div>
           <Box className="breadcrumb">
             <Breadcrumb
-              routeSegments={[{ name: 'Recruiter', path: '/Recruiter' }, { name: 'My Jobs' }]}
+              routeSegments={[{ name: 'Recruiter', path: '/recruiter/listJobs' }, { name: 'My Jobs' }]}
             />
           </Box>
 
@@ -602,7 +602,7 @@ const [searchOptions, setSearchOptions] = useState({
                         <Rating value={v.rating !== -1 ? v.rating : null} readOnly />
                       </Typography>
                       <Typography gutterBottom variant="body" component="div">
-                        User Id : {v.userId}
+                        Date: {(v.dateOfPosting).todate}
                       </Typography>
                       <Typography gutterBottom variant="body" component="div">
                         Duration :{v.duration !== 0 ? `${v.duration} month` : `Flexible`}

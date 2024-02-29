@@ -54,7 +54,7 @@ export const CreateJob = () => {
       <div>
         <Box className="breadcrumb">
           <Breadcrumb
-            routeSegments={[{ name: 'Recruiter', path: '/Recruiter' }, { name: 'CreateJob' }]}
+            routeSegments={[{ name: 'Recruiter', path: '/recruiter/createJob' }, { name: 'CreateJob' }]}
           />
         </Box>
 
