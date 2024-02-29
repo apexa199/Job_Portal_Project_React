@@ -129,17 +129,14 @@ const MultifieldInput = (props) => {
 
 
 export const ProfileApllicant = () => {
-    const classes = useStyles();
+   
 
-    const data = useSelector((state) => state.profileApplicant.data);
-    console.log(data)
+    const data1 = useSelector((state) => state.profileApplicant.data);
+    console.log(data1)
 
     const dis = useDispatch();
 
-    const [loading, setLoading] = useState(false);
-    const [userData, setUserData] = useState();
-    const [open, setOpen] = useState(false);
-  
+    const [loading, setLoading] = useState(false);      
     const [profileDetails, setProfileDetails] = useState({
       name: "",
       education: [],
@@ -161,8 +158,8 @@ export const ProfileApllicant = () => {
     },[])
 
     useEffect(() => {
-      setProfileDetails(data)
-    },[data])
+      setProfileDetails(data1)
+    },[data1])
     
     const handleInput = (key, value) => {
       setProfileDetails({
