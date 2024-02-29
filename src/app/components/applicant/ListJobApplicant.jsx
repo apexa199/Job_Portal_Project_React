@@ -16,7 +16,7 @@ import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 import { toast } from 'react-toastify';
 import { useState } from 'react';
-import { getJobRequest, searchgetJobRequest } from 'slice/recruiter/createjobSlice';
+import { getJobRequest, searchgetJobRequest, searchgetJobRequestAdvanced } from 'slice/recruiter/createjobSlice';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import DialogContent from '@mui/material/DialogContent';
@@ -78,8 +78,7 @@ const Container = styled('div')(({ theme }) => ({
             outline: 'none',
             minWidth : '58%',
             height :'80%',
-            marginTop :"58px"
-            
+            marginTop :"58px"           
           
           }}
         >
@@ -379,7 +378,7 @@ const Container = styled('div')(({ theme }) => ({
                 variant="contained"
                 color="primary"
                 style={{ padding: '10px 50px' }}
-                onClick={() => getData()}
+                onClick={() => {handleClose();  getData(); }}
               >
                 Apply
               </Button>
@@ -407,6 +406,16 @@ export const ListJobApplicant = () => {
       
     }, []);
 
+
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+  const handleClose = () => {
+    setOpen(false);
+  };
+
    // search job ----------------------->
 
    const handleSearch = (e)=>{
@@ -418,16 +427,27 @@ export const ListJobApplicant = () => {
     }));
 
   }
-  const [open, setOpen] = React.useState(false);
 
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-  const handleClose = () => {
-    setOpen(false);
-  };
+  // Advanced Search Job -------------------->
 
-  
+
+  const advancedhandleSearch = (e)=>{
+
+    console.log(searchOptions);
+
+    dis(searchgetJobRequestAdvanced({
+      ...searchOptions,
+      pageNumber: 1  
+
+
+    }));
+
+    }
+
+    const clearAll = () => {
+      dis(getJobRequest(1));
+    }
+
 //Popup up filter state--------------------------------> 
 
 
@@ -486,7 +506,11 @@ const [searchOptions, setSearchOptions] = useState({
                 }}
                 style={{ width: '500px' }}
                 variant="outlined"  
-                />
+                
+              />
+              
+              <Button variant="outlined" style={{margin : "0px 10px", padding : "14px"}} onClick={clearAll}>Clear</Button>
+            
             </Grid>
             <Grid item>
               <IconButton>
@@ -499,10 +523,7 @@ const [searchOptions, setSearchOptions] = useState({
         searchOptions={searchOptions}
         setSearchOptions={setSearchOptions}
         handleClose={() => setFilterOpen(false)}
-        getData={() => {
-
-          setFilterOpen(false);
-        }}
+        getData={advancedhandleSearch}
       />
 
           {listData.length > 0 ? (

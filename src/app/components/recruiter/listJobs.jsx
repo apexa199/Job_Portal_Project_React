@@ -32,6 +32,7 @@ const Container = styled('div')(({ theme }) => ({
     [theme.breakpoints.down('sm')]: { marginBottom: '16px' }
   }
 }));
+
 const useStyles = makeStyles((theme) => ({
   body: {
     height: "inherit",
@@ -505,11 +506,10 @@ const navi = useNavigate();
 const viewApplicationHandleSubmit = (id) =>  {
     
   console.log(id)
-  navi({ pathname : '/recruiter/viewapplications', search : createSearchParams({id : id}).toString() 
+  navi({ pathname : '/recruiter/applications', search : createSearchParams({id : id}).toString() 
 })
   
 };
-
 
 //Popup up filter state--------------------------------> 
 
@@ -585,7 +585,7 @@ const [searchOptions, setSearchOptions] = useState({
         searchOptions={searchOptions}
         setSearchOptions={setSearchOptions}
         handleClose={() => setFilterOpen(false)}
-        getData={advancedhandleSearch}
+        
       />
 
           {listData.length > 0 ? (

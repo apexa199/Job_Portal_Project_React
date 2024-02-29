@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Box, Container, Grid , Typography,
+import { Box,Grid , Typography,
   Button,
   IconButton,
   Paper,
@@ -16,6 +16,16 @@ import { useDispatch, useSelector } from 'react-redux'
 import makeStyles from '@emotion/styled'
 import { useEffect } from 'react'
 import { ViewGetJobRequest } from 'slice/recruiter/viewapplicantSlice';
+import styled from '@emotion/styled';
+
+const Container = styled('div')(({ theme }) => ({
+  margin: '30px',
+  [theme.breakpoints.down('sm')]: { margin: '16px' },
+  '& .breadcrumb': {
+    marginBottom: '15px',
+    [theme.breakpoints.down('sm')]: { marginBottom: '16px' }
+  }
+}));
 
 const FilterPopup = (props) => {
   const classes = useStyles();
