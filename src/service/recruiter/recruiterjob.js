@@ -93,10 +93,18 @@ export const getJobDataSearchAdvanced = (obj) => {
 
 // Veiw Application--------------->
 
-export const ViewApplications =(obj) =>
+export const ViewApplications =(id) =>
 {
 
-    return authFetchGet(`/api/applicants?jobId=${obj._id}&desc=dateOfApplication`,'GET')
+    return authFetchGet(`/api/applicants?jobId=${id}&desc=dateOfApplication`,'GET')
+}
+
+// Veiw Put Data Application--------------->
+
+export const ViewPutApplications =(data) =>
+{
+
+    return authFetch(`/api/applicants`,'Post',data)
 }
 
 
@@ -143,6 +151,69 @@ export const putJobUpdateData = (data) => {
 export const deleteJobData = (id) => {
 
     return authFetchGet(`/api/jobs/${id}`, 'DELETE');
+}
+
+// Filter popup for Applicant-------------------->
+
+export const AdvancedFilterApplicant = (obj)=>{
+
+    let url =`api/applicants?jobId==${obj.jobId}`
+
+    if(obj.status.all)
+    {
+        url = url + "&status=" + "rejected"
+    }  
+    if(obj.status.applied)
+    {
+        url = url + "&status=" + "applied"
+    }   
+    if(obj.status.shortlisted)
+    {
+        url = url + "&status=" + "shortlisted"
+    }    
+       
+    if(obj.sort["jobApplicant.name"])
+    {
+        if(obj.sort["jobApplicant.name"].desc == true)
+        {
+        url = url + "&desc=" + "jobApplicant.name"
+        }
+        else
+        {
+            url = url + "&asc=" + "jobApplicant.name" 
+        }
+
+    }
+
+    if(obj.sort["jobApplicant.rating"])
+    {
+        if(obj.sort["jobApplicant.rating"].desc == true)
+        {
+        url = url + "&desc=" + "jobApplicant.rating"
+        }
+        else
+        {
+            url = url + "&asc=" + "jobApplicant.rating" 
+        }
+
+    }
+
+    if(obj.sort["dateOfApplication"])
+    {
+        if(obj.sort["dateOfApplication"].desc == true)
+        {
+        url = url + "&desc=" + "dateOfApplication"
+        }
+        else
+        {
+            url = url + "&asc=" + "dateOfApplication" 
+        }
+
+    }
+
+
+  return   authFetchGet(url, 'GET');;
+
 }
 
 

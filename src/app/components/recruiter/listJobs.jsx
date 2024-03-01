@@ -392,11 +392,12 @@ const useStyles = makeStyles((theme) => ({
 
 
 function ListJob() {
-  const { listData, data } = useSelector((y) => y.jobs);
+
+  const { listData} = useSelector((y) => y.jobs);
 
   console.log(listData);
 
-  console.log(data);
+  
 
   const dis = useDispatch();
 
@@ -542,7 +543,7 @@ const [searchOptions, setSearchOptions] = useState({
   return (
     <>
       <Container>
-        <div>
+        
           <Box className="breadcrumb">
             <Breadcrumb
               routeSegments={[{ name: 'Recruiter', path: '/recruiter/listJobs' }, { name: 'My Jobs' }]}
@@ -585,7 +586,7 @@ const [searchOptions, setSearchOptions] = useState({
         searchOptions={searchOptions}
         setSearchOptions={setSearchOptions}
         handleClose={() => setFilterOpen(false)}
-        
+        getData = {advancedhandleSearch}
       />
 
           {listData.length > 0 ? (
@@ -602,7 +603,7 @@ const [searchOptions, setSearchOptions] = useState({
                         <Rating value={v.rating !== -1 ? v.rating : null} readOnly />
                       </Typography>
                       <Typography gutterBottom variant="body" component="div">
-                        Date: {(v.dateOfPosting).todate}
+                        Date: {v.dateOfPosting}
                       </Typography>
                       <Typography gutterBottom variant="body" component="div">
                         Duration :{v.duration !== 0 ? `${v.duration} month` : `Flexible`}
@@ -687,7 +688,7 @@ const [searchOptions, setSearchOptions] = useState({
               No jobs found
             </Typography>
           )}
-        </div>
+        
         {/*Delete Pop Up-----------------> */}
 
         <Dialog
