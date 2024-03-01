@@ -14,7 +14,7 @@ const viewapplicationSlice = createSlice({
     initialState,
     reducers: {
         
-    //View Applications---------------->
+    //View Applications getdata---------------->
 
     ViewGetJobRequest: function (state) {
         state.isloading = true;
@@ -27,11 +27,25 @@ const viewapplicationSlice = createSlice({
         state.isloading = false;
         state.error = payload;
       },
+
+       //View Applications putdata---------------->
+
+    ViewPutJobRequest: function (state) {
+      state.isloading = true;
+    },
+    SucViewPutJobRequest: function (state, { payload }) {
+      state.isloading = false;
+    state.listData = payload;
+    },
+    FailViewPutJobRequest: function (state, { payload }) {
+      state.isloading = false;
+      state.error = payload;
+    },
   }
   
   });
   
-  export const {FailViewGetJobRequest,SucViewGetJobRequest,ViewGetJobRequest
+  export const {FailViewGetJobRequest,SucViewGetJobRequest,ViewGetJobRequest,FailViewPutJobRequest, SucViewPutJobRequest,ViewPutJobRequest
   
   } = viewapplicationSlice.actions
   

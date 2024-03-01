@@ -431,7 +431,7 @@ export const ListJobApplicant = () => {
   // Advanced Search Job -------------------->
 
 
-  const advancedhandleSearch = (e)=>{
+  const advancedhandleSearch = ()=>{
 
     console.log(searchOptions);
 
@@ -451,7 +451,6 @@ export const ListJobApplicant = () => {
 //Popup up filter state--------------------------------> 
 
 
-const [jobs, setJobs] = useState([]);
 const [filterOpen, setFilterOpen] = useState(false);
 const [searchOptions, setSearchOptions] = useState({
   query: "",

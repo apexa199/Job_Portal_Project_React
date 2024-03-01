@@ -592,7 +592,7 @@ const [searchOptions, setSearchOptions] = useState({
           {listData.length > 0 ? (
             listData?.map((v) => {
               return (
-                <Card sx={{ maxWidth: 1200, margin: '25px', background: '#E8E8E8' }}>
+                <Card sx={{ minWidth: 270, margin: '25px', background: '#E8E8E8' }}>
                   <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                     <CardContent>
                       <Typography gutterBottom variant="h6" component="div">
