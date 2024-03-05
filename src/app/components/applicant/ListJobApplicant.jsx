@@ -551,7 +551,7 @@ const [searchOptions, setSearchOptions] = useState({
                       Posted By : {v.name}
                       </Typography>
                       <Typography gutterBottom variant="body" component="div">
-                      Application Deadline: {v.deadline}
+                      Application Deadline: {(new Date(v.deadline)).toLocaleDateString()}
                       </Typography>
                       <Typography gutterBottom variant="body" component="div">
                         {v.skillsets.map((skill) => (
