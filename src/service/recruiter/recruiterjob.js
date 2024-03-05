@@ -101,10 +101,10 @@ export const ViewApplications =(id) =>
 
 // Veiw Put Data Application--------------->
 
-export const ViewPutApplications =(data) =>
+export const ViewPutApplications =(id,data) =>
 {
 
-    return authFetch(`/api/applicants`,'Post',data)
+    return authFetch(`/api/applicants?jobId=${id}&desc=dateOfApplication`,'Put',data)
 }
 
 

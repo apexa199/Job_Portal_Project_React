@@ -503,15 +503,12 @@ const clearAll = () => {
 // View Applications---------->
 
 const navi = useNavigate();
-
 const viewApplicationHandleSubmit = (id) =>  {
     
   console.log(id)
-  navi({ pathname : '/recruiter/applications', search : createSearchParams({id : id}).toString() 
-})
-  
-};
+  navi('/recruiter/applications/'+ id); 
 
+}
 //Popup up filter state--------------------------------> 
 
 
@@ -603,7 +600,7 @@ const [searchOptions, setSearchOptions] = useState({
                         <Rating value={v.rating !== -1 ? v.rating : null} readOnly />
                       </Typography>
                       <Typography gutterBottom variant="body" component="div">
-                        Date: {v.dateOfPosting}
+                        Date: {(new Date(v.dateOfPosting)).toLocaleDateString()}
                       </Typography>
                       <Typography gutterBottom variant="body" component="div">
                         Duration :{v.duration !== 0 ? `${v.duration} month` : `Flexible`}

@@ -15,13 +15,15 @@ import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 import FilterListIcon from '@mui/icons-material/FilterList';
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 import { Breadcrumb } from 'app/components'
-import { useSearchParams } from 'react-router-dom'
+import { useParams, useSearchParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import makeStyles from '@emotion/styled'
 import { useEffect } from 'react'
-import { ViewGetJobRequest } from 'slice/recruiter/viewapplicantSlice';
+import { ViewGetJobRequest, ViewPutJobRequest } from 'slice/recruiter/viewapplicantSlice';
 import styled from '@emotion/styled';
 import { Card } from 'react-bootstrap';
+import { ViewPutApplications } from 'service/recruiter/recruiterjob';
+import { searchgetJobRequestAdvanced } from 'slice/recruiter/createjobSlice';
 
 
 
@@ -305,7 +307,8 @@ const FilterPopup = (props) => {
               variant="contained"
               color="primary"
               style={{ padding: "10px 50px" }}
-              onClick={() => getData()}
+              onClick={() => {getData(); handleClose()}
+              }
             >
               Apply
             </Button>
@@ -362,58 +365,79 @@ const useStyles = makeStyles((theme) => ({
 const buttonSet = {
   applied: (
     <>
-      <Grid item xs>
+    
+      <Grid item xs >
+      <div style={{display :"flex"}}>
         <Button
           
           style={{
             background: colorSet["shortlisted"],
             color: "#ffffff",
-            width : "200px"
+            width : "150px",
+            height : "100px",
+            padding : "40px 75px",
+      
+           
           }}
           // onClick={() => updateStatus("shortlisted")}
         >
           SHORTLIST
         </Button>
-      </Grid>
-      <Grid item xs>
+  
         <Button
           
           style={{
             background: colorSet["rejected"],
             color: "#ffffff",
+            width : "150px",
+            height : "100px",
+            padding : "40px 75px",
+        
+          
           }}
           // onClick={() => updateStatus("rejected")}
         >
           REJECT
         </Button>
+        </div>
       </Grid>
+    
     </>
   ),
   shortlisted: (
     <>
       <Grid item xs>
+        <div style={{display :"flex"}}>
         <Button
           
           style={{
             background: colorSet["accepted"],
             color: "#ffffff",
+            width : "150px",
+            height : "100px",
+           padding : "40px 75px",
+      
           }}
           // onClick={() => updateStatus("accepted")}
         >
           ACCEPT
         </Button>
-      </Grid>
-      <Grid item xs>
+      
         <Button
         
           style={{
             background: colorSet["rejected"],
             color: "#ffffff",
+            width : "150px",
+            height : "100px",
+           padding : "40px 75px",
+ 
           }}
           // onClick={() => updateStatus("rejected")}
         >
           REJECT
         </Button>
+        </div>
       </Grid>
     </>
   ),
@@ -427,7 +451,7 @@ const buttonSet = {
             color: "#ffffff",
             width : "300px",
             height : "100px",
-           padding : "36px 121px"
+           padding : "40px 121px",
 
           }}
         >
@@ -444,6 +468,10 @@ const buttonSet = {
           style={{
             background: colorSet["accepted"],
             color: "#ffffff",
+            width : "300px",
+            height : "100px",
+           padding : "40px 121px",
+          
           }}
         >
           ACCEPTED
@@ -459,6 +487,10 @@ const buttonSet = {
           style={{
             background: colorSet["cancelled"],
             color: "#ffffff",
+            width : "300px",
+            height : "100px",
+           padding : "40px 121px",
+          
           }}
         >
           CANCELLED
@@ -474,6 +506,10 @@ const buttonSet = {
           style={{
             background: colorSet["finished"],
             color: "#ffffff",
+            width : "300px",
+            height : "100px",
+           padding : "40px 121px",
+     
           }}
         >
           FINISHED
@@ -508,10 +544,11 @@ export const Applications = () => {
     },
   });
 
-  const[val]=useSearchParams()
-  console.log(val)
+ 
+  const{id}=useParams()
+  console.log(id)
 
-  const [idtoShow, setIdToShow] = useState("");
+  const [idtoShow,setIdToShow] = useState("");
 
   const {listData} = useSelector((y) => y.viewApplication);
   
@@ -520,11 +557,34 @@ export const Applications = () => {
  const dis = useDispatch();
 
  useEffect(() => {
-     dis(ViewGetJobRequest(idtoShow))
+  
+     dis(ViewGetJobRequest(id))
+     
+    
   },[idtoShow])
 
+  // Advanced Search popup ------------->
+
+  const advancedhandleSearch = (e)=>{
+
+    console.log(searchOptions);
+
+    dis(searchgetJobRequestAdvanced({
+      ...searchOptions,
+      pageNumber: 1  
 
 
+    }));
+
+    }
+
+// Update button Status-------------->
+
+const updateStatus = () => {
+
+
+  }
+  
 
   return (
     <>
@@ -545,16 +605,14 @@ export const Applications = () => {
         searchOptions={searchOptions}
         setSearchOptions={setSearchOptions}
         handleClose={() => setFilterOpen(false)}
-        getData={() => {
-          setFilterOpen(false);
-        }}
+        getData={advancedhandleSearch}
       />
        {listData.length > 0 ? (
             listData?.map((v) => {
               return (
                 <Card sx={{ minWidth: 270, margin: '20px' }} >
                 
-                  <div style={{ display: 'flex',filter: "drop-shadow(0px 0px 1px grey)", justifyContent: 'space-between',backgroundColor : "#E8E8E8", marginTop : "25px", width : "100%", borderRadius : "10px", }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between',backgroundColor : "#E8E8E8", marginTop : "30px", width : "100%", borderRadius : "10px", }}>
                                      
                     <CardContent>
                     <div style={{display : "flex", gap : "20px"}}>
@@ -571,7 +629,7 @@ export const Applications = () => {
                       <Rating value={v.jobApplicant.rating !== -1? v.jobApplicant.rating : null}readOnly/>
                       </Typography>
                       <Typography gutterBottom variant="body" component="div">
-                        Applied On : {v.dateOfApplication}
+                        Applied On : {(new Date(v.dateOfApplication)).toLocaleDateString()}
                       </Typography>
                       <Typography gutterBottom variant="body" component="div">
                       Education :  {v.jobApplicant.education
@@ -607,7 +665,7 @@ export const Applications = () => {
               variant="contained"
               color="primary"
               // onClick={() => getResume()}
-              style={{backgroundColor : "#3f51b5", color :"white",padding: "6px 75px", borderradius: "5px", width : "300px"}}
+              style={{backgroundColor : "#3f51b5", color :"white",padding: "6px 75px", borderradius: "5px", width : "300px",    margintop: "-18px"}}
             >
             DOWNLOAD RESUME
             </Button>
