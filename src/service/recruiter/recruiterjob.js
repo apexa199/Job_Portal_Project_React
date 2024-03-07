@@ -91,22 +91,6 @@ export const getJobDataSearchAdvanced = (obj) => {
     
 }
 
-// Veiw Application--------------->
-
-export const ViewApplications =(id) =>
-{
-
-    return authFetchGet(`/api/applicants?jobId=${id}&desc=dateOfApplication`,'GET')
-}
-
-// Veiw Put Data Application--------------->
-
-export const ViewPutApplications =(id,data) =>
-{
-
-    return authFetch(`/api/applicants?jobId=${id}&desc=dateOfApplication`,'Put',data)
-}
-
 
 // Profile update ---------------->
 
@@ -153,28 +137,36 @@ export const deleteJobData = (id) => {
     return authFetchGet(`/api/jobs/${id}`, 'DELETE');
 }
 
-// Filter popup for Applicant-------------------->
 
-export const AdvancedFilterApplicant = (obj)=>{
+// Veiw Application--------------->
 
-    let url =`api/applicants?jobId==${obj.jobId}`
+export const ViewApplications =(id) =>
+{
 
-    if(obj.status.all)
+    return authFetchGet(`/api/applicants?jobId=${id}&desc=dateOfApplication`,'GET')
+}
+
+// Filter popup  Advanced Search for Applicant-------------------->
+
+export const advanceviewjobpoup = (obj) => {
+
+    let url =`/api/applicants?jobId=${obj.id}`
+
+    if(obj.status.rejected)
     {
         url = url + "&status=" + "rejected"
     }  
-    if(obj.status.applied)
+    if(obj.status.accepted)
     {
-        url = url + "&status=" + "applied"
-    }   
+        url = url + "&status=" + "Accepted"
+    }  
     if(obj.status.shortlisted)
     {
         url = url + "&status=" + "shortlisted"
-    }    
-       
+    }  
     if(obj.sort["jobApplicant.name"])
     {
-        if(obj.sort["jobApplicant.name"].desc == true)
+        if(obj.sort["jobApplicant.name"].desc)
         {
         url = url + "&desc=" + "jobApplicant.name"
         }
@@ -182,12 +174,10 @@ export const AdvancedFilterApplicant = (obj)=>{
         {
             url = url + "&asc=" + "jobApplicant.name" 
         }
-
     }
-
     if(obj.sort["jobApplicant.rating"])
     {
-        if(obj.sort["jobApplicant.rating"].desc == true)
+        if(obj.sort["jobApplicant.rating"].desc)
         {
         url = url + "&desc=" + "jobApplicant.rating"
         }
@@ -195,12 +185,10 @@ export const AdvancedFilterApplicant = (obj)=>{
         {
             url = url + "&asc=" + "jobApplicant.rating" 
         }
-
     }
-
-    if(obj.sort["dateOfApplication"])
+    if(obj.sort.dateOfApplication)
     {
-        if(obj.sort["dateOfApplication"].desc == true)
+        if(obj.sort.dateOfApplication.desc)
         {
         url = url + "&desc=" + "dateOfApplication"
         }
@@ -208,12 +196,20 @@ export const AdvancedFilterApplicant = (obj)=>{
         {
             url = url + "&asc=" + "dateOfApplication" 
         }
-
     }
+    
+
+    
+    return authFetchGet(url, 'GET');
+}
 
 
-  return   authFetchGet(url, 'GET');;
+// View Employee Data--------------->
 
+export const ViewEmployeeData =(obj) =>
+{
+
+    return authFetchGet(`/api/applicants?status=accepted&desc=${obj.deadline}`,'GET', obj)
 }
 
 

@@ -15,15 +15,14 @@ import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 import FilterListIcon from '@mui/icons-material/FilterList';
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 import { Breadcrumb } from 'app/components'
-import { useParams, useSearchParams } from 'react-router-dom'
+import { useParams} from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import makeStyles from '@emotion/styled'
 import { useEffect } from 'react'
-import { ViewGetJobRequest, ViewPutJobRequest } from 'slice/recruiter/viewapplicantSlice';
+import { ViewGetJobRequest, advancesearchviewgetJobrequest } from 'slice/recruiter/viewapplicantSlice';
 import styled from '@emotion/styled';
 import { Card } from 'react-bootstrap';
-import { ViewPutApplications } from 'service/recruiter/recruiterjob';
-import { searchgetJobRequestAdvanced } from 'slice/recruiter/createjobSlice';
+
 
 
 
@@ -307,9 +306,7 @@ const FilterPopup = (props) => {
               variant="contained"
               color="primary"
               style={{ padding: "10px 50px" }}
-              onClick={() => {getData(); handleClose()}
-              }
-            >
+              onClick={() => {getData(); handleClose()}}>
               Apply
             </Button>
           </Grid>
@@ -565,32 +562,22 @@ export const Applications = () => {
 
   // Advanced Search popup ------------->
 
-  const advancedhandleSearch = (e)=>{
+  const advancedhandleSearch2 = ()=>{
 
-    console.log(searchOptions);
-
-    dis(searchgetJobRequestAdvanced({
+    dis(advancesearchviewgetJobrequest({
       ...searchOptions,
-      pageNumber: 1  
-
-
+       id : id,
     }));
 
     }
 
-// Update button Status-------------->
 
-const updateStatus = () => {
-
-
-  }
-  
 
   return (
     <>
     <Container >
          <Box style={{marginTop:"15px"}} className="breadcrumb">
-        <Breadcrumb routeSegments={[{ name: 'Listjobs', path: '/Recruiter/Listjobs' }, { name: 'Application' }]} />
+        <Breadcrumb routeSegments={[{ name: 'Recruiter', path: '/recruiter/applications' }, { name: 'Application' }]} />
       </Box>
       <Grid item >
         <Typography variant="h4" style={{display:'flex', justifyContent:'center'}}>Application</Typography>
@@ -605,7 +592,7 @@ const updateStatus = () => {
         searchOptions={searchOptions}
         setSearchOptions={setSearchOptions}
         handleClose={() => setFilterOpen(false)}
-        getData={advancedhandleSearch}
+        getData={advancedhandleSearch2}
       />
        {listData.length > 0 ? (
             listData?.map((v) => {

@@ -115,6 +115,14 @@ const Layout1Topbar = () => {
   
   const[name,setName] = useState();
 
+  const getFirstChar = (str) => {
+    const firstChars = str
+      .split(" ")
+      .map((word) => word[0])
+      .join("");
+
+    return firstChars;
+  };
   useEffect( () => {
     
     setName(localStorage.getItem('name'))
@@ -161,7 +169,7 @@ const Layout1Topbar = () => {
                     Hi <strong>{name}</strong>
                   </Span>
                 </Hidden>
-                <Avatar src={user.avatar} sx={{ cursor: 'pointer' }} />
+                <Avatar sx={{ cursor: 'pointer' ,bgcolor : "orange"}} >{name}</Avatar>
               </UserMenu>
             }
           >

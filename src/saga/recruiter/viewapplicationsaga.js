@@ -1,8 +1,8 @@
 
 
 import { call, put, takeEvery } from "redux-saga/effects";
-import { ViewApplications, ViewPutApplications } from "service/recruiter/recruiterjob";
-import { FailViewGetJobRequest, FailViewPutJobRequest, SucViewGetJobRequest, SucViewPutJobRequest, ViewGetJobRequest, ViewPutJobRequest } from "slice/recruiter/viewapplicantSlice";
+import {  ViewApplications, advanceviewjobpoup } from "service/recruiter/recruiterjob";
+import { FailViewGetJobRequest, SucViewGetJobRequest, ViewGetJobRequest, advancesearchviewfailgetJobrequest, advancesearchviewgetJobrequest, advancesearchviewsucgetJobrequest } from "slice/recruiter/viewapplicantSlice";
 
 // Veiw Applications getData---------------->
 
@@ -20,18 +20,22 @@ function* viewgetjob(action) {
     return yield takeEvery(ViewGetJobRequest, viewgetjob);
   }
 
-  // Veiw Applications PutData---------------->
+       
+//  Advanced Search view applicantion--------------->
 
-  function* viewputjob(action) {
-    try {
-      let mydata = yield call(ViewPutApplications, action.payload);
-      yield put(SucViewPutJobRequest(mydata));
-     
-    } catch (error) {
-      yield put(FailViewPutJobRequest(error));
-    }
-  }
+function* advancesearchviewgetJobs (action)
+
+{
+  try{
+    let mydat = yield call(advanceviewjobpoup, action.payload)
+  yield put(advancesearchviewsucgetJobrequest(mydat))
+}
+catch(error){
+     yield put(advancesearchviewfailgetJobrequest(error))
+ }
+}
+export function* advancedwatchgetviwjobs ()
+{
+  return yield takeEvery(advancesearchviewgetJobrequest, advancesearchviewgetJobs )
+}
   
-  export function* watchviewputjob() {
-    return yield takeEvery(ViewPutJobRequest, viewputjob);
-  }

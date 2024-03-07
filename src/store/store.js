@@ -8,6 +8,7 @@ import userSlice from "slice/recruiter/userSlice";
 import viewapplicantSlice from "slice/recruiter/viewapplicantSlice";
 
 
+
 const sagaMiddleware = createSagaMiddleware();
 
 const store = configureStore({
@@ -16,7 +17,8 @@ const store = configureStore({
     user : userSlice,
     update : updatejobSlice,
     profileApplicant : profileUpdateSlice,
-    viewApplication : viewapplicantSlice
+    viewApplication : viewapplicantSlice,
+    
 
   },
   middleware: [sagaMiddleware],

@@ -5,7 +5,6 @@ import {
   Grid,
   IconButton,
   InputAdornment,
-  makeStyles,
   Paper,
   TextField,
   Typography,
@@ -15,8 +14,12 @@ import {
   FormGroup,
   MenuItem,
   Checkbox,
-  Rating
+  Rating,
+
 } from "@mui/material";
+import { Box, styled } from '@mui/material';
+import makeStyles from '@emotion/styled';
+import { Breadcrumb } from "..";
 
 
 const Container = styled('div')(({ theme }) => ({
@@ -29,31 +32,31 @@ const Container = styled('div')(({ theme }) => ({
   }));
 
 
-const useStyles = makeStyles((theme) => ({
-  body: {
-    height: "inherit",
-  },
-  statusBlock: {
-    width: "100%",
-    height: "100%",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    textTransform: "uppercase",
-  },
-  jobTileOuter: {
-    padding: "30px",
-    margin: "20px 0",
-    boxSizing: "border-box",
-    width: "100%",
-  },
-  popupDialog: {
-    height: "100%",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-}));
+// const useStyles = makeStyles((theme) => ({
+//   body: {
+//     height: "inherit",
+//   },
+//   statusBlock: {
+//     width: "100%",
+//     height: "100%",
+//     display: "flex",
+//     alignItems: "center",
+//     justifyContent: "center",
+//     textTransform: "uppercase",
+//   },
+//   jobTileOuter: {
+//     padding: "30px",
+//     margin: "20px 0",
+//     boxSizing: "border-box",
+//     width: "100%",
+//   },
+//   popupDialog: {
+//     height: "100%",
+//     display: "flex",
+//     alignItems: "center",
+//     justifyContent: "center",
+//   },
+// }));
 
 export const Applications = () => {
 
@@ -64,7 +67,7 @@ export const Applications = () => {
   return (
     <Container>
     <div>
-      <Box className="breadcrumb">
+      <Box   className="breadcrumb">
         <Breadcrumb
           routeSegments={[{ name: 'Applicant', path: '/Applicant' }, { name: 'Applications' }]}
         />
@@ -91,7 +94,7 @@ export const Applications = () => {
       {applications.length > 0 ? (
         applications.map((obj) => (
           <Grid item>
-            <ApplicationTile application={obj} />
+           
           </Grid>
         ))
       ) : (

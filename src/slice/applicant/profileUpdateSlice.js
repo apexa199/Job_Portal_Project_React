@@ -35,10 +35,25 @@ const profileUpdateSlice = createSlice({
     FailPutProfileAppliRequest: function (state, { payload }) {
       state.isloading = false;
       state.error = payload;
-    }
+    },
+
+    // accepted applicant data of employee------------------------->
+    
+    GetApplicantUserDataRequest: function (state) {
+      state.isloading = true;
+    },
+    SucGetApplicantUserDataRequest: function (state, { payload }) {
+      state.isloading = false;
+      state.data = payload;
+    },
+    FailGetApplicantUserDataRequest: function (state, { payload }) {
+      state.isloading = false;
+      state.error = payload;
+    },
 }
 });
 
-export const {FailGetProfileAppliRequest,FailPutProfileAppliRequest,GetProfileAppliRequest,PutProfileAppliRequest,SucGetProfileAppliRequest,SucPutProfileAppliRequest,} = profileUpdateSlice.actions
+export const {FailGetProfileAppliRequest,FailPutProfileAppliRequest,GetProfileAppliRequest,PutProfileAppliRequest,SucGetProfileAppliRequest,SucPutProfileAppliRequest,
+FailGetApplicantUserDataRequest,GetApplicantUserDataRequest,SucGetApplicantUserDataRequest} = profileUpdateSlice.actions
 
 export default profileUpdateSlice.reducer
