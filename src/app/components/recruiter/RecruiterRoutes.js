@@ -1,10 +1,8 @@
-import { lazy } from 'react';
-import Loadable from 'app/components/Loadable';
 import { CreateJob } from './createJob';
 import Profile from './profile';
 import ListJob from './listJobs';
-import { Applications } from './applications';
 import { AcceptedApplicant } from './AcceptedAppilcant';
+import { Applications } from './ViewApplications';
 
 
 

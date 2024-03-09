@@ -14,6 +14,9 @@ import { Box,Grid , Typography,
   CardContent,
   Rating,
   CardActions,
+  Dialog,
+  DialogTitle,
+  DialogActions,
 } from '@mui/material';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
@@ -21,7 +24,9 @@ import FilterListIcon from '@mui/icons-material/FilterList';
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 import makeStyles from '@emotion/styled'
 import styled from '@emotion/styled';
-import { GetApplicantUserDataRequest } from 'slice/applicant/profileUpdateSlice';
+import { GetAdvancedSearchEmployeeRequest, GetApplicantUserDataRequest, GetEndJobDataRequest, GetRatingJobRequest } from 'slice/applicant/profileUpdateSlice';
+import { deleteJobRequest } from 'slice/recruiter/updatejobSlice';
+import { toast } from 'react-toastify';
 
 
 const Container = styled('div')(({ theme }) => ({
@@ -84,79 +89,7 @@ const useStyles = makeStyles((theme) => ({
           }}
         >
           <Grid container direction="column" alignItems="center" spacing={3}>
-            {/* <Grid container item alignItems="center">
-              <Grid item xs={3}>
-                Application Status
-              </Grid>
-              <Grid
-                container
-                item
-                xs={9}
-                justify="space-around"
-                // alignItems="center"
-              >
-                <Grid item>
-                  <FormControlLabel
-                    control={
-                      <Checkbox
-                        name="rejected"
-                        checked={searchOptions.status.rejected}
-                        onChange={(event) => {
-                          setSearchOptions({
-                            ...searchOptions,
-                            status: {
-                              ...searchOptions.status,
-                              [event.target.name]: event.target.checked,
-                            },
-                          });
-                        }}
-                      />
-                    }
-                    label="Rejected"
-                  />
-                </Grid>
-                <Grid item>
-                  <FormControlLabel
-                    control={
-                      <Checkbox
-                        name="applied"
-                        checked={searchOptions.status.applied}
-                        onChange={(event) => {
-                          setSearchOptions({
-                            ...searchOptions,
-                            status: {
-                              ...searchOptions.status,
-                              [event.target.name]: event.target.checked,
-                            },
-                          });
-                        }}
-                      />
-                    }
-                    label="Applied"
-                  />
-                </Grid>
-                <Grid item>
-                  <FormControlLabel
-                    control={
-                      <Checkbox
-                        name="shortlisted"
-                        checked={searchOptions.status.shortlisted}
-                        onChange={(event) => {
-                          setSearchOptions({
-                            ...searchOptions,
-                            status: {
-                              ...searchOptions.status,
-                              [event.target.name]: event.target.checked,
-                            },
-                          });
-                        }}
-                      />
-                    }
-                    label="Shortlisted"
-                  />
-                </Grid>
-              </Grid>
-            </Grid> */}
+           
             <Grid container item alignItems="center">
               <Grid item xs={3}>
                 Sort
@@ -395,7 +328,7 @@ const useStyles = makeStyles((theme) => ({
                 variant="contained"
                 color="primary"
                 style={{ padding: "10px 50px" }}
-                onClick={() => getData()}
+                onClick={() =>{ getData(); handleClose()}}
               >
                 Apply
               </Button>
@@ -408,24 +341,91 @@ const useStyles = makeStyles((theme) => ({
   
 export const AcceptedApplicant = () => {
 
-    const data =  useSelector((state) => state.profileApplicant.data)
+    const {listData} =  useSelector((state) => state.profileApplicant)
 
-    console.log(data)
+    console.log(listData)
 
     const dis = useDispatch();
 
     const[user,setUser] = useState('')
 
     useEffect(() => {
-        setUser(data)
+        setUser(listData)
     },[])
 
     useEffect(() => {
         dis(GetApplicantUserDataRequest(user))
     },[user])
 
+    //Advanced Seacrh popup---------->
 
+const AdvancedSearchPopup = () => {
+
+  dis(GetAdvancedSearchEmployeeRequest({
+    ...searchOptions
+  }))
+}
+
+// End Job popup state--------------->
+
+const[idToEndJob,setIdToEndJob] = useState();
+const [openEndJob, setOpenEndJob] = useState(false);
+const handleOpenEndJob = (id) => { 
+
+  setOpenEndJob(true)
+  setIdToEndJob(id)};
+
+const handleCloseEndJob = () => {
+  setOpenEndJob(false);
+};
+
+const updateStatus = (id) => {
+dis(GetEndJobDataRequest(idToEndJob));
+setIdToEndJob(id)
+handleCloseEndJob()
+}
+
+
+// rating job------------->
+
+const[idToUpdate,setIdToUpdate] = useState();
+const [open, setOpen] = useState(false);
+
+const handleClose = () => {setOpen(false)}
+
+const handleClickOpenRating = (id) =>  {
+  
+  setOpen(true);
+  setIdToUpdate(id)
+
+
+};
+const updateRating = useSelector((y) => y.profileApplicant.data)
+console.log(updateRating)
+
+const[rating,setRating] = useState({
+  rating : updateRating.rating
+});
+
+useEffect(() => {
+  dis(GetRatingJobRequest())
+},[])
+
+// useEffect(() =>{
+//   setRating(updateRating)
+// },[updateRating])
+
+const changeRating = () => {
     
+    // dis (({...rating,_id:idToUpdate}));
+    // toast.success("Rating updated successfully!")
+    // handleClose()    
+}
+
+
+
+//Filter Popup state--------> 
+
     const [filterOpen, setFilterOpen] = useState(false);
     const [searchOptions, setSearchOptions] = useState({
       sort: {
@@ -453,7 +453,7 @@ export const AcceptedApplicant = () => {
     <>
     <Container >
          <Box style={{marginTop:"15px"}} className="breadcrumb">
-        <Breadcrumb routeSegments={[{ name: 'Recruiter', path: '/recruiter/acceptedapplicant' }, { name: 'AcceptedApplicant' }]} />
+        <Breadcrumb routeSegments={[{ name: 'Recruiter', path: '/recruiter/acceptedapplicant' }, { name: 'Employees' }]} />
       </Box>
       <Grid item >
         <Typography variant="h4" style={{display:'flex', justifyContent:'center'}}>Employees</Typography>
@@ -467,13 +467,12 @@ export const AcceptedApplicant = () => {
         searchOptions={searchOptions}
         setSearchOptions={setSearchOptions}
         handleClose={() => setFilterOpen(false)}
-        // getData={() => {        }}
+         getData={AdvancedSearchPopup}
         />
         </Grid>
       
-           {
-            <div>
-            {data?.map((v) => {
+         <Grid>
+            {listData?.map((v) => {
               return (
                 <Card sx={{ minWidth: 270, margin: '20px' }} >
                 
@@ -529,10 +528,7 @@ export const AcceptedApplicant = () => {
                 background: "#09BC8A",
                 padding : "35px 110px"
               }}
-              // onClick={() => {
-              //   setOpenEndJob(true);
-              // }}
-            >
+              onClick={()=>{ handleOpenEndJob(v.jobApplicant.userId) }}>
               End Job
             </Button>
           </Grid>
@@ -541,9 +537,10 @@ export const AcceptedApplicant = () => {
               variant="contained"
               color="primary"
               style={{padding : "10px 88px",marginBottom : "-15px"}}
-              // onClick={() => {
-              //   setOpen(true);
-              // }}
+              onClick={() => {
+                handleClickOpenRating(v._id)
+              }}
+          
             >
               Rate Applicant
             </Button>
@@ -559,11 +556,87 @@ export const AcceptedApplicant = () => {
             })
           
           }   
-          </div> 
-        }  
+       </Grid>
          
+  {/*Delete Pop Up-----------------> */}
 
+  <Dialog style={{marginLeft :"240px"}}
+         open={openEndJob} onClose={handleCloseEndJob}
+          aria-describedby="alert-dialog-slide-description"
+        >
+          <DialogTitle variant="h5" align="center">
+            Are You Sure?
+          </DialogTitle>
+          <DialogActions style={{marginTop :"-24px",marginRight : "17px"}}>
+            <Button
+              style={{
+                backgroundColor: '#f50057',
+                color: 'white',
+                margin: '20px',
+                padding: '11px 60px',
+                borderRadius: '7px',
+                border: 'none'
+              }}
+              size="small"
+              onClick={() => {
+                updateStatus("finished");
+              }}
+            >
+              YES
+            </Button>
+            <Button
+              style={{
+                backgroundColor: 'rgb(34 42 68)',
+                color: 'white',
+                margin: '0px 0px',
+                padding: '11px 60px',
+                borderRadius: '7px',
+                border: 'none'
+              }}
+              size="small"
+              onClick={() => handleCloseEndJob()}
+            >
+              CANCEL
+            </Button>
+          </DialogActions>
+        </Dialog> 
+
+        {/* /delete popup end-------------> */}
       
+      {/* //Rating Pop Up --------------> */}
+      
+      <Modal open={open} onClose={handleClose} >
+        <Paper
+          style={{
+            padding: "20px",
+            outline: "none",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            minWidth: "30%",
+            alignItems: "center",
+            margin: "203px 578px"
+          }}
+        >
+          <Rating
+            name="simple-controlled"
+            style={{ marginBottom: "30px" }}
+            value={rating === -1 ? null : rating}
+            onChange={(event, newValue) => {
+              setRating(newValue);
+              
+            }}
+          />
+          <Button
+            variant="contained"
+            color="primary"
+            style={{ padding: "10px 50px" }}
+            onClick={() => changeRating()}
+          >
+            Submit
+          </Button>
+        </Paper>
+      </Modal>
     </Container>
     </>
   )

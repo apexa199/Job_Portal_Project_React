@@ -32,31 +32,31 @@ const Container = styled('div')(({ theme }) => ({
   }));
 
 
-// const useStyles = makeStyles((theme) => ({
-//   body: {
-//     height: "inherit",
-//   },
-//   statusBlock: {
-//     width: "100%",
-//     height: "100%",
-//     display: "flex",
-//     alignItems: "center",
-//     justifyContent: "center",
-//     textTransform: "uppercase",
-//   },
-//   jobTileOuter: {
-//     padding: "30px",
-//     margin: "20px 0",
-//     boxSizing: "border-box",
-//     width: "100%",
-//   },
-//   popupDialog: {
-//     height: "100%",
-//     display: "flex",
-//     alignItems: "center",
-//     justifyContent: "center",
-//   },
-// }));
+const useStyles = makeStyles((theme) => ({
+  body: {
+    height: "inherit",
+  },
+  statusBlock: {
+    width: "100%",
+    height: "100%",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    textTransform: "uppercase",
+  },
+  jobTileOuter: {
+    padding: "30px",
+    margin: "20px 0",
+    boxSizing: "border-box",
+    width: "100%",
+  },
+  popupDialog: {
+    height: "100%",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+}));
 
 export const Applications = () => {
 
@@ -69,7 +69,7 @@ export const Applications = () => {
     <div>
       <Box   className="breadcrumb">
         <Breadcrumb
-          routeSegments={[{ name: 'Applicant', path: '/Applicant' }, { name: 'Applications' }]}
+          routeSegments={[{ name: 'Applicant', path: '/applicant/appliactions' }, { name: 'Applications' }]}
         />
       </Box>
     <Grid
@@ -77,10 +77,10 @@ export const Applications = () => {
     item
     direction="column"
     alignItems="center"
-    style={{ padding: "30px", minHeight: "93vh" }}
+    style={{ padding: "12px", minHeight: "93vh" }}
   >
     <Grid item>
-      <Typography variant="h3">Applications</Typography>
+      <Typography variant="h4">Applications</Typography>
     </Grid>
     <Grid
       container
@@ -98,7 +98,7 @@ export const Applications = () => {
           </Grid>
         ))
       ) : (
-        <Typography variant="h5" style={{ textAlign: "center" }}>
+        <Typography variant="h5" style={{ textAlign: "center", marginTop:"20px" }}>
           No Applications Found
         </Typography>
       )}

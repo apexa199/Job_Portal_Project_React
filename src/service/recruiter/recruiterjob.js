@@ -25,6 +25,8 @@ export const getJobDataSearch = (obj) => {
 
 export const getJobDataSearchAdvanced = (obj) => {
 
+    // http://localhost:4444/api/jobs?myjobs=1&jobType=Full%20Time&jobType=Part%20Time&jobType=Work%20From%20Home&asc=salary&asc=duration&asc=rating
+
      let url =`/api/jobs?myjobs=${obj.pageNumber}`
 
     if(obj.jobType.fullTime)
@@ -150,6 +152,9 @@ export const ViewApplications =(id) =>
 
 export const advanceviewjobpoup = (obj) => {
 
+    
+// http://localhost:4444/api/applicants?jobId=65e99882ecfa9241bc51b1aa&status=rejected&status=applied&status=shortlisted&asc=jobApplicant.name&asc=jobApplicant.rating&desc=dateOfApplicatio
+
     let url =`/api/applicants?jobId=${obj.id}`
 
     if(obj.status.rejected)
@@ -204,7 +209,7 @@ export const advanceviewjobpoup = (obj) => {
 }
 
 
-// View Employee Data--------------->
+// View Employee Accepted Applicant Data--------------->
 
 export const ViewEmployeeData =(obj) =>
 {
@@ -212,5 +217,76 @@ export const ViewEmployeeData =(obj) =>
     return authFetchGet(`/api/applicants?status=accepted&desc=${obj.deadline}`,'GET', obj)
 }
 
+//Advanced Search in view Employee  Data---------->
+
+export const AdvancedSearchEmployee =(obj) =>
+{
+    // http://localhost:4444/api/applicants?status=accepted&asc=jobApplicant.name&asc=job.title&asc=jobApplicant.rating&desc=dateOfJoining
+
+    let url =`/api/applicants?status=${obj.accepted}`         
+
+ if(obj.sort["job.title"])
+ {
+    if(obj.sort["job.title"].desc)
+    {
+    url = url + "&desc=" + "job.title"
+    }
+    else
+    {
+        url = url + "&asc=" + "job.title" 
+    }
+}
+    if(obj.sort["jobApplicant.name"])
+    {
+        if(obj.sort["jobApplicant.name"].desc)
+        {
+        url = url + "&desc=" + "jobApplicant.name"
+        }
+        else
+        {
+            url = url + "&asc=" + "jobApplicant.name" 
+        }
+    }
+    if(obj.sort["jobApplicant.rating"])
+    {
+        if(obj.sort["jobApplicant.rating"].desc)
+        {
+        url = url + "&desc=" + "jobApplicant.rating"
+        }
+        else
+        {
+            url = url + "&asc=" + "jobApplicant.rating" 
+        }
+    }
+    if(obj.sort.dateOfJoining)
+    {
+        if(obj.sort.dateOfJoining.desc)
+        {
+        url = url + "&desc=" + "dateOfJoining"
+        }
+        else
+        {
+            url = url + "&asc=" + "dateOfJoining" 
+        }
+    }
+    
+    return authFetchGet(url, 'GET')}
+
+
+// Applicant Rating Job Data------------->
+
+export const RatingJobData = (data) => {
+// http://localhost:4444/api/rating  
+
+        return authFetch(`/api/${data.rating}`,'Put',data)
+    }
+
+
+// Applicant End job update-------------->
+
+export const EndJobUpdate = (id) => {
+// http://localhost:4444/api/applications/65ec441a4a605b5b28586898
+    return authFetch(`/api/applications/${id}`,'Put')
+}
 
 export default createJob;

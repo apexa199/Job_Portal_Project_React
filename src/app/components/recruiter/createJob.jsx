@@ -29,7 +29,7 @@ export const CreateJob = () => {
   const handleSubmit = () => {
     dis(createJobRequest(jobDetails));
     toast.success("Job Created Successfully.");
-  
+    
   };
 
   const [jobDetails, setJobDetails] = useState({

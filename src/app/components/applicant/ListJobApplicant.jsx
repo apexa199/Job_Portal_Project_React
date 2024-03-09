@@ -539,7 +539,7 @@ const [searchOptions, setSearchOptions] = useState({
                         <Rating value={v.rating !== -1 ? v.rating : null} readOnly />
                       </Typography>
                       <Typography gutterBottom variant="body" component="div">
-                        Role : {v.title}
+                        Role : {v.jobType}
                       </Typography>
                       <Typography gutterBottom variant="body" component="div">
                         Salary : &#8377;{v.salary} per month
@@ -548,7 +548,7 @@ const [searchOptions, setSearchOptions] = useState({
                       Duration  :  {v.duration !== 0 ? `${v.duration} month` : `Flexible`}
                       </Typography>
                       <Typography gutterBottom variant="body" component="div">
-                      Posted By : {v.name}
+                      Posted By : {v.recruiter.name}
                       </Typography>
                       <Typography gutterBottom variant="body" component="div">
                       Application Deadline: {(new Date(v.deadline)).toLocaleDateString()}
@@ -567,7 +567,7 @@ const [searchOptions, setSearchOptions] = useState({
                         style={{
                           backgroundColor: 'rgb(34 42 68)',
                           color: 'white',
-                          padding: '105px 105px',
+                          padding: '90px',
                           borderRadius: '5px',
                           border: 'none',
                           fontSize : 'medium'

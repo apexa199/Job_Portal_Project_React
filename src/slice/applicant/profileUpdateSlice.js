@@ -4,6 +4,8 @@ const initialState = {
     isloading: false,
     data: 'null',
     error: 'null',
+    listData: []
+    
 
 }
 
@@ -44,16 +46,63 @@ const profileUpdateSlice = createSlice({
     },
     SucGetApplicantUserDataRequest: function (state, { payload }) {
       state.isloading = false;
-      state.data = payload;
+      state.listData = payload;
     },
     FailGetApplicantUserDataRequest: function (state, { payload }) {
       state.isloading = false;
       state.error = payload;
     },
+
+    //Advanced Search in Employee-------------------------->
+
+    GetAdvancedSearchEmployeeRequest: function (state) {
+      state.isloading = true;
+    },
+    SucAdvancedSearchEmployeeRequest: function (state, { payload }) {
+      state.isloading = false;
+      state.data = payload;
+    },
+    FailAdvancedSearchEmployeeRequest: function (state, { payload }) {
+      state.isloading = false;
+      state.error = payload;
+    },
+
+    // End Job data Get------------------->
+
+    GetEndJobDataRequest: function (state) {
+      state.isloading = true;
+    },
+    SucEndJobDataRequest: function (state, { payload }) {
+      state.isloading = false;
+      state.data = payload;
+    },
+    FailEndJobDataRequest: function (state, { payload }) {
+      state.isloading = false;
+      state.error = payload;
+    },
+
+    // Rating data Get------------------->
+
+    GetRatingJobRequest: function (state) {
+      state.isloading = true;
+    },
+    SucRatingJobRequest: function (state, { payload }) {
+      state.isloading = false;
+      state.data = payload;
+    },
+    FailRatingJobRequest: function (state, { payload }) {
+      state.isloading = false;
+      state.error = payload;
+    },
+
 }
 });
 
 export const {FailGetProfileAppliRequest,FailPutProfileAppliRequest,GetProfileAppliRequest,PutProfileAppliRequest,SucGetProfileAppliRequest,SucPutProfileAppliRequest,
-FailGetApplicantUserDataRequest,GetApplicantUserDataRequest,SucGetApplicantUserDataRequest} = profileUpdateSlice.actions
+FailGetApplicantUserDataRequest,GetApplicantUserDataRequest,SucGetApplicantUserDataRequest,
+FailAdvancedSearchEmployeeRequest,SucAdvancedSearchEmployeeRequest,GetAdvancedSearchEmployeeRequest,
+FailEndJobDataRequest,GetEndJobDataRequest,SucEndJobDataRequest,
+FailRatingJobRequest,GetRatingJobRequest,SucRatingJobRequest} = profileUpdateSlice.actions
+
 
 export default profileUpdateSlice.reducer

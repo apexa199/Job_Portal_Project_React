@@ -485,9 +485,8 @@ const handleInput = (key, value) => {
   setUpdate({
     ...update,
     [key]: value,
-  });
+  });};
   
-};
 const handleUpdate =(e)=>{
   e.preventDefault()
   dis (PutUpdateRequest({...update,_id:idToUpdate}));
@@ -635,7 +634,7 @@ const [searchOptions, setSearchOptions] = useState({
                         style={{
                           backgroundColor: 'rgb(34 42 68)',
                           color: 'white',
-                          padding: '70px 70px',
+                          padding: '71px 68px',
                           borderRadius: '5px',
                           border: 'none',
                         
@@ -651,7 +650,7 @@ const [searchOptions, setSearchOptions] = useState({
                           backgroundColor: 'rgb(252, 143, 30)',
                           color: 'white',
                           margin: '0px 0px',
-                          padding: '13px 0px',
+                          padding: '8px 0px',
                           borderRadius: '5px',    
                           border: 'none'
                         }}
@@ -665,7 +664,7 @@ const [searchOptions, setSearchOptions] = useState({
                           backgroundColor: '#f50057',
                           color: 'white',
                           margin: '0px 0px',                         
-                          padding: '13px 0px',
+                          padding: '8px 0px',
                           borderRadius: '5px',
                           border: 'none'
                         }}
