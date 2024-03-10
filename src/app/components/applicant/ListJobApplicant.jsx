@@ -76,8 +76,9 @@ const Container = styled('div')(({ theme }) => ({
           style={{
             padding: '50px',
             outline: 'none',
-            minWidth : '58%',
-            height :'80%',
+            minWidth : '60%',
+            height :'70%',
+            marginLeft:"160px",
             marginTop :"58px"           
           
           }}
@@ -594,7 +595,7 @@ const [searchOptions, setSearchOptions] = useState({
 
 {/* Apply Pop up ---------------->        */}
 
-<React.Fragment   style={{width:"33%",height:"44%"}}>
+<React.Fragment   style={{width:"33%",height:"44%",marginLeft:"60px"}}>
       <Dialog
         open={open}
         onClose={handleClose}
@@ -604,17 +605,16 @@ const [searchOptions, setSearchOptions] = useState({
         <DialogContent   style={{width:"550px", height:"250px",padding:"30px"}}>
         <Box
       sx={{
-        width: 500,
         maxWidth: '100%',
         height: 200,
-        maxHeight:"50%",
+        maxHeight:"60%",
+      
       }}
     >
       <TextField
           id="outlined-multiline-static"
           label="Write SOP (upto 250 words)"
           fullWidth
-
           multiline
           rows={9}
         />
