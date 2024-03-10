@@ -1,6 +1,6 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
-import { AdvancedSearchEmployee, EndJobUpdate, GetProfileAppliData, PutProfileAppliData, RatingJobData, ViewEmployeeData } from 'service/recruiter/recruiterjob';
-import { FailAdvancedSearchEmployeeRequest, FailEndJobDataRequest, FailGetApplicantUserDataRequest, FailGetProfileAppliRequest, FailPutProfileAppliRequest, FailRatingJobRequest, GetAdvancedSearchEmployeeRequest, GetApplicantUserDataRequest, GetEndJobDataRequest, GetProfileAppliRequest, GetRatingJobRequest, PutProfileAppliRequest, SucAdvancedSearchEmployeeRequest, SucEndJobDataRequest, SucGetApplicantUserDataRequest, SucGetProfileAppliRequest, SucPutProfileAppliRequest, SucRatingJobRequest } from 'slice/applicant/profileUpdateSlice';
+import { AdvancedSearchEmployee, EndJobUpdate, GetProfileAppliData, PutProfileAppliData, PutRatingJobData, RatingJobData, ViewEmployeeData } from 'service/recruiter/recruiterjob';
+import { FailAdvancedSearchEmployeeRequest, FailEndJobDataRequest, FailGetApplicantUserDataRequest, FailGetProfileAppliRequest, FailPutProfileAppliRequest, FailPutRatingJobRequest, FailRatingJobRequest, GetAdvancedSearchEmployeeRequest, GetApplicantUserDataRequest, GetEndJobDataRequest, GetProfileAppliRequest, GetRatingJobRequest, PutProfileAppliRequest, PutRatingJobRequest, SucAdvancedSearchEmployeeRequest, SucEndJobDataRequest, SucGetApplicantUserDataRequest, SucGetProfileAppliRequest, SucPutProfileAppliRequest, SucPutRatingJobRequest, SucRatingJobRequest } from 'slice/applicant/profileUpdateSlice';
 
 
 function* GetProfileAppli(action) {
@@ -76,7 +76,7 @@ export function* watchGetEndJobData() {
    yield takeEvery(GetEndJobDataRequest, GetEndJobData);
 }
 
-// Rating pop up--------------------------->
+// Get Rating pop up--------------------------->
 
 function* GetRatingJob(action) {
   try {
@@ -89,4 +89,18 @@ function* GetRatingJob(action) {
 
 export function* watchGetRatingJob() {
    yield takeEvery(GetRatingJobRequest, GetRatingJob);
+}
+
+// Put Rating pop up--------------------------->
+function* PutRatingJob(action) {
+  try {
+    let RateData = yield call(PutRatingJobData, action.payload);
+    yield put(SucPutRatingJobRequest(RateData));
+  } catch (error) {
+    yield put(FailPutRatingJobRequest(error));
+  }
+}
+
+export function* watchPutRatingJob() {
+   yield takeEvery(PutRatingJobRequest, PutRatingJob);
 }

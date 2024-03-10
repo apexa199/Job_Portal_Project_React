@@ -24,7 +24,7 @@ import FilterListIcon from '@mui/icons-material/FilterList';
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 import makeStyles from '@emotion/styled'
 import styled from '@emotion/styled';
-import { GetAdvancedSearchEmployeeRequest, GetApplicantUserDataRequest, GetEndJobDataRequest, GetRatingJobRequest } from 'slice/applicant/profileUpdateSlice';
+import { GetAdvancedSearchEmployeeRequest, GetApplicantUserDataRequest, GetEndJobDataRequest, GetRatingJobRequest, PutRatingJobRequest } from 'slice/applicant/profileUpdateSlice';
 import { deleteJobRequest } from 'slice/recruiter/updatejobSlice';
 import { toast } from 'react-toastify';
 
@@ -408,18 +408,18 @@ const[rating,setRating] = useState({
 });
 
 useEffect(() => {
-  dis(GetRatingJobRequest())
-},[])
+  dis(GetRatingJobRequest(idToUpdate))
+},[idToUpdate])
 
-// useEffect(() =>{
-//   setRating(updateRating)
-// },[updateRating])
+useEffect(() =>{
+  setRating(updateRating)
+},[updateRating])
 
-const changeRating = () => {
-    
-    // dis (({...rating,_id:idToUpdate}));
-    // toast.success("Rating updated successfully!")
-    // handleClose()    
+const changeRating = (e) => {
+    e.preventDefault()
+    dis (PutRatingJobRequest({...rating,_id:idToUpdate}));
+    toast.success("Rating updated successfully!")
+    handleClose()    
 }
 
 
@@ -513,7 +513,7 @@ const changeRating = () => {
             <Button
               variant="contained"
               color="primary"
-              style={{padding : "10px 75px",marginTop : "-15px"}}
+              style={{padding : "7px 75px",marginTop : "-15px"}}
               // onClick={() => getResume()}
             >
               Download Resume
@@ -536,7 +536,7 @@ const changeRating = () => {
             <Button
               variant="contained"
               color="primary"
-              style={{padding : "10px 88px",marginBottom : "-15px"}}
+              style={{padding : "7px 88px",marginBottom : "-15px"}}
               onClick={() => {
                 handleClickOpenRating(v._id)
               }}
@@ -631,7 +631,7 @@ const changeRating = () => {
             variant="contained"
             color="primary"
             style={{ padding: "10px 50px" }}
-            onClick={() => changeRating()}
+            onClick={changeRating}
           >
             Submit
           </Button>
