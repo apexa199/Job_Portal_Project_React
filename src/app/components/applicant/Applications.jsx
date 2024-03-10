@@ -97,7 +97,7 @@ export const Applications = () => {
     <Container>
       <div>
      <Box style={{marginTop:"15px"}} className="breadcrumb">
-        <Breadcrumb routeSegments={[{ name: 'Applicant', path: '/applicant/applications' }, { name: 'Applications' }]} />
+        <Breadcrumb routeSegments={[{ name: 'Applicant', path: '/applicant/appliactions' }, { name: 'Applications' }]} />
       </Box>
     
     <Grid

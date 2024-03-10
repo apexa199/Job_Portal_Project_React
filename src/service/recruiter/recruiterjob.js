@@ -1,3 +1,4 @@
+
 import { da } from 'date-fns/locale';
 import authFetch, { authFetchGet } from 'service/recruiter/authfetch';
 
@@ -11,6 +12,13 @@ const createJob = (data) => {
 export const getJobData = (pageId) => {
 
     return authFetchGet(`/api/jobs?myjobs=${pageId}`, 'GET');
+}
+
+//job get ------>
+
+export const JobGetData = (data) => {
+
+    return authFetchGet(`/api/jobs`, 'GET',data);
 }
 
 //Search Job ------------>
@@ -276,7 +284,6 @@ export const AdvancedSearchEmployee =(obj) =>
 // Applicant Rating Job Data------------->
 
 export const RatingJobData = (data) => {
-// http://localhost:4444/api/rating  
 
         return authFetchGet(`/api/rating/+data`,'GET',data)
     }
@@ -288,7 +295,7 @@ export const PutRatingJobData = (data1) => {
 // Applicant End job update-------------->
 
 export const EndJobUpdate = (id) => {
-// http://localhost:4444/api/applications/65ec441a4a605b5b28586898
+
     return authFetch(`/api/applications/${id}`,'Put')
 }
 

@@ -1,8 +1,9 @@
-import * as React from 'react';
+import React from 'react';
 import {Box, CardActions, Chip,Grid,IconButton,InputAdornment,Button,TextField,Paper,FormControlLabel,Checkbox,Slider,MenuItem,Modal,Rating,
 } from '@mui/material';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
+import DialogTitle from '@mui/material/DialogTitle';
 import { Breadcrumb } from 'app/components';
 import Card from '@mui/material/Card';
 import styled from '@emotion/styled';
@@ -13,13 +14,12 @@ import FilterListIcon from '@mui/icons-material/FilterList';
 import makeStyles from '@emotion/styled';
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
+import { toast } from 'react-toastify';
 import { useState } from 'react';
-import { getJobRequest, searchgetJobRequest, searchgetJobRequestAdvanced } from 'slice/recruiter/createjobSlice';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import DialogContent from '@mui/material/DialogContent';
-
-
+import { getJobRequest, searchgetJobRequest, searchgetJobRequestAdvanced } from 'slice/recruiter/createjobSlice';
 
 const Container = styled('div')(({ theme }) => ({
     margin: '30px',
@@ -30,39 +30,38 @@ const Container = styled('div')(({ theme }) => ({
     }
   }));
 
+  const useStyles = makeStyles((theme) => ({
+    body: {
+      height: "inherit",
+    },
+    button: {
+      width: "100%",
+      height: "100%",
+    },
+    jobTileOuter: {
+      padding: "30px",
+      margin: "20px 0",
+      boxSizing: "border-box",
+      width: "100%",
+    },
+    popupDialog: {
+      height: "100%",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+    },
+    statusBlock: {
+      width: "100%",
+      height: "100%",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      textTransform: "uppercase",
+    },
+  }));
 
-    const useStyles = makeStyles((theme) => ({
-      body: {
-        height: "inherit",
-      },
-      button: {
-        width: "100%",
-        height: "100%",
-      },
-      jobTileOuter: {
-        padding: "30px",
-        margin: "20px 0",
-        boxSizing: "border-box",
-        width: "100%",
-      },
-      popupDialog: {
-        height: "100%",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-      },
-      statusBlock: {
-        width: "100%",
-        height: "100%",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        textTransform: "uppercase",
-      },
-    }));
-  
-  
-   // FilterPop up Show------------------------->
+   
+//    FilterPop up Show------------------------->
   
    const FilterPopup = (props) => {
     const classes = useStyles();
@@ -389,9 +388,8 @@ const Container = styled('div')(({ theme }) => ({
       </Modal>
     );
   };
-
-export const ListJobApplicant = () => {
-
+export const Jobs = () => {
+    
     const { listData} = useSelector((y) => y.jobs);
 
     console.log(listData);
@@ -401,9 +399,9 @@ export const ListJobApplicant = () => {
     const dis = useDispatch();
   
     useEffect(() => {
-      dis(getJobRequest(1));
-      
-    }, []);
+        dis(getJobRequest(1));
+        
+      }, []);
 
 
   const [open, setOpen] = React.useState(false);
@@ -475,14 +473,12 @@ const [searchOptions, setSearchOptions] = useState({
     },
   },
 });
-
-
   return (
-    <Container>
-    <div>
+     <Container>
+          <div>
       <Box className="breadcrumb">
         <Breadcrumb
-          routeSegments={[{ name: 'Applicant', path: '/applicant/listjobapplicant' }, { name: 'Jobs' }]}
+          routeSegments={[{ name: 'Recruiter', path: '/recruiter/jobs' }, { name: ' Jobs' }]}
         />
       </Box>
       <Grid item container direction="column" justify="center" alignItems="center">
@@ -591,38 +587,8 @@ const [searchOptions, setSearchOptions] = useState({
           )}
           </div>
 
-{/* Apply Pop up ---------------->        */}
+     </Container>
+  );
+};
+  
 
-<React.Fragment   style={{width:"33%",height:"44%",marginLeft:"60px"}}>
-      <Dialog
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="alert-dialog-title"
-        aria-describedby="alert-dialog-description"
-      >
-        <DialogContent   style={{width:"550px", height:"250px",padding:"30px"}}>
-        <Box
-      sx={{
-        maxWidth: '100%',
-        height: 200,
-        maxHeight:"60%",
-      
-      }}
-    >
-      <TextField
-          id="outlined-multiline-static"
-          label="Write SOP (upto 250 words)"
-          fullWidth
-          multiline
-          rows={9}
-        />
-    </Box>
-        </DialogContent>
-        <DialogActions style={{justifyContent:"center", padding:"17px 0px 17px 0px"}}>
-          <Button style={{backgroundColor:"#1976d2",color:"white",padding:"8px 18px"}} >SUBMIT</Button>
-        </DialogActions>
-      </Dialog>
-    </React.Fragment>
-   </Container>
-  )
-}
