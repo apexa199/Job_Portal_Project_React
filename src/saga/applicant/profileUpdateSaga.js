@@ -1,6 +1,6 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
-import { AdvancedSearchEmployee, EndJobUpdate, GetProfileAppliData, PutProfileAppliData, PutRatingJobData, RatingJobData, ViewEmployeeData } from 'service/recruiter/recruiterjob';
-import { FailAdvancedSearchEmployeeRequest, FailEndJobDataRequest, FailGetApplicantUserDataRequest, FailGetProfileAppliRequest, FailPutProfileAppliRequest, FailPutRatingJobRequest, FailRatingJobRequest, GetAdvancedSearchEmployeeRequest, GetApplicantUserDataRequest, GetEndJobDataRequest, GetProfileAppliRequest, GetRatingJobRequest, PutProfileAppliRequest, PutRatingJobRequest, SucAdvancedSearchEmployeeRequest, SucEndJobDataRequest, SucGetApplicantUserDataRequest, SucGetProfileAppliRequest, SucPutProfileAppliRequest, SucPutRatingJobRequest, SucRatingJobRequest } from 'slice/applicant/profileUpdateSlice';
+import { AdvancedSearchEmployee, ApplicationJobData, EndJobUpdate, GetProfileAppliData, PutProfileAppliData, PutRatingJobData, RatingJobData, ViewEmployeeData } from 'service/recruiter/recruiterjob';
+import { FailAdvancedSearchEmployeeRequest, FailEndJobDataRequest, FailGetApplicantUserDataRequest, FailGetApplicationsDataRequest, FailGetProfileAppliRequest, FailPutProfileAppliRequest, FailPutRatingJobRequest, FailRatingJobRequest, GetAdvancedSearchEmployeeRequest, GetApplicantUserDataRequest, GetApplicationsDataRequest, GetEndJobDataRequest, GetProfileAppliRequest, GetRatingJobRequest, PutProfileAppliRequest, PutRatingJobRequest, SucAdvancedSearchEmployeeRequest, SucEndJobDataRequest, SucGetApplicantUserDataRequest, SucGetApplicationsDataRequest, SucGetProfileAppliRequest, SucPutProfileAppliRequest, SucPutRatingJobRequest, SucRatingJobRequest } from 'slice/applicant/profileUpdateSlice';
 
 
 function* GetProfileAppli(action) {
@@ -103,4 +103,19 @@ function* PutRatingJob(action) {
 
 export function* watchPutRatingJob() {
    yield takeEvery(PutRatingJobRequest, PutRatingJob);
+}
+
+//applications data get------------------------->
+
+function* GetApplicationsData(action) {
+  try {
+    let ApplicationdData = yield call(ApplicationJobData, action.payload);
+    yield put(SucGetApplicationsDataRequest(ApplicationdData));
+  } catch (error) {
+    yield put(FailGetApplicationsDataRequest(error));
+  }
+}
+
+export function* watchGetApplicationsData() {
+   yield takeEvery(GetApplicationsDataRequest, GetApplicationsData);
 }

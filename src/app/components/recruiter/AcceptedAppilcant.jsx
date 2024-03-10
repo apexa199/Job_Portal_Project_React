@@ -9,11 +9,9 @@ import { Box,Grid , Typography,
   IconButton,
   Paper,
   Modal,
-  FormControlLabel,
   Checkbox,
   CardContent,
   Rating,
-  CardActions,
   Dialog,
   DialogTitle,
   DialogActions,
@@ -25,7 +23,6 @@ import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 import makeStyles from '@emotion/styled'
 import styled from '@emotion/styled';
 import { GetAdvancedSearchEmployeeRequest, GetApplicantUserDataRequest, GetEndJobDataRequest, GetRatingJobRequest, PutRatingJobRequest } from 'slice/applicant/profileUpdateSlice';
-import { deleteJobRequest } from 'slice/recruiter/updatejobSlice';
 import { toast } from 'react-toastify';
 
 

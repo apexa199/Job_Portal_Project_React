@@ -278,12 +278,12 @@ export const AdvancedSearchEmployee =(obj) =>
 export const RatingJobData = (data) => {
 // http://localhost:4444/api/rating  
 
-        return authFetchGet(`/api/rating`,'GET',data)
+        return authFetchGet(`/api/rating/+data`,'GET',data)
     }
     
 export const PutRatingJobData = (data1) => {       
                 
-    return authFetch(`/api/rating`,'Put',data1) }
+    return authFetch(`/api/rating/${data1.jobApplicant.userId}`,'Put',data1) }
 
 // Applicant End job update-------------->
 
@@ -291,5 +291,11 @@ export const EndJobUpdate = (id) => {
 // http://localhost:4444/api/applications/65ec441a4a605b5b28586898
     return authFetch(`/api/applications/${id}`,'Put')
 }
+
+// Applications Get Job Data------------->
+
+export const ApplicationJobData = (data) => {
+    return authFetchGet(`/api/applications`,'GET',data)}
+
 
 export default createJob;
