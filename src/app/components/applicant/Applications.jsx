@@ -23,7 +23,7 @@ import { Box, styled } from '@mui/material';
 import makeStyles from '@emotion/styled';
 import { Breadcrumb } from "..";
 import { useDispatch, useSelector } from "react-redux";
-import { GetApplicationsDataRequest, PutRatingJobRequest } from "slice/applicant/profileUpdateSlice";
+import { ApplicationsRatingJobRequest, GetApplicationsDataRequest, GetApplicationsRatingJobRequest} from "slice/applicant/profileUpdateSlice";
 import { toast } from "react-toastify";
 
 
@@ -105,6 +105,7 @@ const handleClickOpenRating = (id,rating) =>  {
   setOpen(true);
   setRating(rating)
   setIdToUpdate(id)
+ 
 
 };
 const updateRating = useSelector((y) => y.profileApplicant.data)
@@ -112,14 +113,18 @@ console.log(updateRating)
 
 const changeRating = () => {
   
-    dis (PutRatingJobRequest({
-      rating : rating, applicantId: idToUpdate}));
+  dis(GetApplicationsRatingJobRequest({
+    id : idToUpdate,
+    rating : updateRating 
+  }))
+    dis (ApplicationsRatingJobRequest({
+      rating : rating, jobId: idToUpdate}));
     toast.success("Rating updated successfully!")
     handleClose();
-    setApplication(listData)
-   
-
+     console.log({rating :rating})
+    
 }
+
 
   
   return (
@@ -207,7 +212,7 @@ const changeRating = () => {
                   color="primary"
                   className={classes.statusBlock}
                   onClick={() => {
-                    handleClickOpenRating(v.userId, v.jobApplicant.rating)
+                    handleClickOpenRating(v.jobId, v.job.rating)
                   }}
                   style={{padding: "10px 98px"}}
                 >

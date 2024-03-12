@@ -51,12 +51,27 @@ const userSlice = createSlice({
       state.isloading = false;
       state.error = payload;
     },
+
+    // Advanced search recruiter Job Show Apply or not-------------->
+
+    AdvancedSeacrchJobsRequest: function (state) {
+      state.isloading = true;
+    },
+    SucAdvancedSeacrchJobsRequest: function (state, { payload }) {
+      state.isloading = false;
+      state.listData = payload;
+    },
+    FaiAdvancedSeacrchJobsRequest: function (state, { payload }) {
+      state.isloading = false;
+      state.error = payload;
+    },
   }
 });
 
 
 export const {FailGetUserRequest,FailPutUserRequest, GetUserRequest, PutUserRequest, SucGetUserRequest,SucPutUserRequest,
-  GetDataJobsApplyRequest,FaiGetDataJobsApplyRequest,SucGetDataJobsApplyRequest
+  GetDataJobsApplyRequest,FaiGetDataJobsApplyRequest,SucGetDataJobsApplyRequest,
+  FaiAdvancedSeacrchJobsRequest,AdvancedSeacrchJobsRequest,SucAdvancedSeacrchJobsRequest
 } = userSlice.actions
 
 export default userSlice.reducer

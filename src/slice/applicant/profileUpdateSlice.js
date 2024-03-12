@@ -67,7 +67,7 @@ const profileUpdateSlice = createSlice({
       state.error = payload;
     },
 
-    // End Job data Get------------------->
+    //Employees End Job data Get------------------->
 
     GetEndJobDataRequest: function (state) {
       state.isloading = true;
@@ -81,7 +81,7 @@ const profileUpdateSlice = createSlice({
       state.error = payload;
     },
     
-     // Rating data put------------------->
+     // Employees Rating data put------------------->
 
      PutRatingJobRequest: function (state) {
       state.isloading = true;
@@ -109,6 +109,32 @@ const profileUpdateSlice = createSlice({
       state.error = payload;
     },
 
+    // Applications Rating data update------------------->
+
+    GetApplicationsRatingJobRequest: function (state) {
+      state.isloading = true;
+    },
+    SucGetApplicationsRatingJobRequest: function (state, { payload }) {
+      state.isloading = false;
+      state.listData = payload;
+    },
+    FailGetApplicationsRatingJobRequest: function (state, { payload }) {
+      state.isloading = false;
+      state.error = payload;
+    },
+
+    ApplicationsRatingJobRequest: function (state) {
+      state.isloading = true;
+    },
+    SucApplicationsRatingJobRequest: function (state, { payload }) {
+      state.isloading = false;
+      state.listData = payload;
+    },
+    FailApplicationsRatingJobRequest: function (state, { payload }) {
+      state.isloading = false;
+      state.error = payload;
+    },
+
 }
 });
 
@@ -118,7 +144,9 @@ FailAdvancedSearchEmployeeRequest,SucAdvancedSearchEmployeeRequest,GetAdvancedSe
 FailEndJobDataRequest,GetEndJobDataRequest,SucEndJobDataRequest,
 FailRatingJobRequest,GetRatingJobRequest,SucRatingJobRequest,
 FailPutRatingJobRequest,PutRatingJobRequest,SucPutRatingJobRequest,
-FailGetApplicationsDataRequest,GetApplicationsDataRequest,SucGetApplicationsDataRequest
+FailGetApplicationsDataRequest,GetApplicationsDataRequest,SucGetApplicationsDataRequest,
+ApplicationsRatingJobRequest,FailApplicationsRatingJobRequest, SucApplicationsRatingJobRequest,
+FailGetApplicationsRatingJobRequest,GetApplicationsRatingJobRequest,SucGetApplicationsRatingJobRequest
 } = profileUpdateSlice.actions
 
 

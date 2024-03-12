@@ -303,4 +303,86 @@ export const ApplicationJobData = (data) => {
     return authFetchGet(`/api/applications`,'GET',data)}
 
 
+// Applications rate job update-------------->
+
+export const ApplicationsRatingJobData = (data1) => {       
+                
+    return authFetch(`/api/rating`,'Put',data1) }
+    
+export const GetApplicationsRatingJobData = (data1) => {       
+                
+    return authFetchGet(`/api/rating?id=${data1.id}`,'GET',data1) }
+    
+// Advanced job search in Jobs------------>
+
+export const JobsDataSearchAdvanced = (obj) => {
+
+    // http://localhost:4444/api/jobs?jobType=Full%20Time&jobType=Part%20Time&jobType=Work%20From%20Home&salaryMin=18000&asc=salary&asc=duration&asc=rating
+
+     let url1 =`/api/jobs?`
+
+    if(obj.jobType.fullTime)
+    {
+        url1 = url1 + "&jobType=" + "Full Time"
+    }  
+    if(obj.jobType.partTime)
+    {
+        url1 = url1 + "&jobType=" + "Part Time"
+    }   
+    if(obj.jobType.wfh)
+    {
+        url1 = url1 + "&jobType=" + "Work From Home"
+    }    
+    if(obj.salary && obj.salary.length> 0)
+    {
+        if(obj.salary[1] >0)
+        {
+        url1 = url1 + "&salaryMin=" + obj.salary[0]
+        url1 = url1 + "&salaryMax=" + obj.salary[1]
+        }
+    }
+    if(obj.duration && obj.duration != "0")
+    {
+        url1 = url1 + "&duration=" + obj.duration
+    }
+    if(obj.sort.salary)
+    {
+        if(obj.sort.salary.desc)
+        {
+        url1 = url1 + "&desc=" + "salary"
+        }
+        else
+        {
+            url1 = url1 + "&asc=" + "salary" 
+        }
+    }
+
+    if(obj.sort.duration)
+    {
+        if(obj.sort.duration.desc)
+        {
+        url1 = url1 + "&desc=" + "duration"
+        }
+        else
+        {
+            url1 = url1 + "&asc=" + "duration" 
+        }
+    }
+
+    if(obj.sort.rating)
+    {
+        if(obj.sort.rating.desc)
+        {
+        url1 = url1 + "&desc=" + "rating"
+        }
+        else
+        {
+            url1 = url1 + "&asc=" + "rating" 
+        }
+    }
+    
+    return authFetchGet(url1, 'GET');
+    
+}
+
 export default createJob;

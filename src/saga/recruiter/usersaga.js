@@ -1,6 +1,6 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
-import {  GetUserData, JobGetData, PutUserData} from 'service/recruiter/recruiterjob';
-import { FaiGetDataJobsApplyRequest, FailGetJobApplyRequest, FailGetUserRequest, FailPutUserRequest, GetDataJobsApplyRequest, GetJobApplyRequest, GetUserRequest, PutUserRequest, SucGetDataJobsApplyRequest, SucGetJobApplyRequest, SucGetUserRequest, SucPutUserRequest } from 'slice/recruiter/userSlice';
+import {  GetUserData, JobGetData, JobsDataSearchAdvanced, PutUserData} from 'service/recruiter/recruiterjob';
+import { FaiAdvancedSeacrchJobsRequest, FaiGetDataJobsApplyRequest, FailGetUserRequest, FailPutUserRequest, AdvancedSeacrchJobsRequest, GetDataJobsApplyRequest, GetJobApplyRequest, GetUserRequest, PutUserRequest, SucAdvancedSeacrchJobsRequest, SucGetDataJobsApplyRequest, SucGetJobApplyRequest, SucGetUserRequest, SucPutUserRequest } from 'slice/recruiter/userSlice';
 
 
 function* GetUser(action) {
@@ -45,4 +45,19 @@ function* GetDataJobsApply(action) {
 
 export function* watchGetDataJobsApply() {
    yield takeEvery(GetDataJobsApplyRequest, GetDataJobsApply);
+}
+
+// Advance Searched Job Get recruiter Apply or not-------------->
+
+function* AdvancedSeacrchJobs(action) {
+  try {
+    let mydata = yield call(JobsDataSearchAdvanced, action.payload);
+    yield put(SucAdvancedSeacrchJobsRequest(mydata));
+  } catch (error) {
+    yield put(FaiAdvancedSeacrchJobsRequest(error));
+  }
+}
+
+export function* watchAdvancedSeacrchJobs() {
+   yield takeEvery(AdvancedSeacrchJobsRequest, AdvancedSeacrchJobs);
 }

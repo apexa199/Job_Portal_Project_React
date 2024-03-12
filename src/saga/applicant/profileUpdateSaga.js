@@ -1,6 +1,6 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
-import { AdvancedSearchEmployee, ApplicationJobData, EndJobUpdate, GetProfileAppliData, PutProfileAppliData, PutRatingJobData, RatingJobData, ViewEmployeeData } from 'service/recruiter/recruiterjob';
-import { FailAdvancedSearchEmployeeRequest, FailEndJobDataRequest, FailGetApplicantUserDataRequest, FailGetApplicationsDataRequest, FailGetProfileAppliRequest, FailPutProfileAppliRequest, FailPutRatingJobRequest, FailRatingJobRequest, GetAdvancedSearchEmployeeRequest, GetApplicantUserDataRequest, GetApplicationsDataRequest, GetEndJobDataRequest, GetProfileAppliRequest, GetRatingJobRequest, PutProfileAppliRequest, PutRatingJobRequest, SucAdvancedSearchEmployeeRequest, SucEndJobDataRequest, SucGetApplicantUserDataRequest, SucGetApplicationsDataRequest, SucGetProfileAppliRequest, SucPutProfileAppliRequest, SucPutRatingJobRequest, SucRatingJobRequest } from 'slice/applicant/profileUpdateSlice';
+import { AdvancedSearchEmployee, ApplicationJobData, ApplicationsRatingJobData, EndJobUpdate, GetApplicationsRatingJobData, GetProfileAppliData, PutProfileAppliData, PutRatingJobData, RatingJobData, ViewEmployeeData } from 'service/recruiter/recruiterjob';
+import { ApplicationsRatingJobRequest, FailAdvancedSearchEmployeeRequest, FailApplicationsRatingJobRequest, FailEndJobDataRequest, FailGetApplicantUserDataRequest, FailGetApplicationsDataRequest, FailGetApplicationsRatingJobRequest, FailGetProfileAppliRequest, FailPutProfileAppliRequest, FailPutRatingJobRequest, FailRatingJobRequest, GetAdvancedSearchEmployeeRequest, GetApplicantUserDataRequest, GetApplicationsDataRequest, GetApplicationsRatingJobRequest, GetEndJobDataRequest, GetProfileAppliRequest, GetRatingJobRequest, PutProfileAppliRequest, PutRatingJobRequest, SucAdvancedSearchEmployeeRequest, SucApplicationsRatingJobRequest, SucEndJobDataRequest, SucGetApplicantUserDataRequest, SucGetApplicationsDataRequest, SucGetApplicationsRatingJobRequest, SucGetProfileAppliRequest, SucPutProfileAppliRequest, SucPutRatingJobRequest, SucRatingJobRequest } from 'slice/applicant/profileUpdateSlice';
 
 
 function* GetProfileAppli(action) {
@@ -61,7 +61,7 @@ export function* watchGetAdvancedSearchEmployee() {
    yield takeEvery(GetAdvancedSearchEmployeeRequest, GetAdvancedSearchEmployee);
 }
 
-// End Job Pop up--------------->
+// EMPLOYEEs End Job Pop up--------------->
 
 function* GetEndJobData(action) {
   try {
@@ -77,7 +77,7 @@ export function* watchGetEndJobData() {
 }
 
 
-// Put Rating pop up--------------------------->
+// EMPLOYEEs Rating pop up--------------------------->
 
 function* PutRatingJob(action) {
   try {
@@ -102,7 +102,35 @@ function* GetApplicationsData(action) {
     yield put(FailGetApplicationsDataRequest(error));
   }
 }
-
 export function* watchGetApplicationsData() {
-   yield takeEvery(GetApplicationsDataRequest, GetApplicationsData);
+  yield takeEvery(GetApplicationsDataRequest, GetApplicationsData);
 }
+
+// Applications get/put rating data update------------------->
+
+function* GetApplicationsRatingJob(action) {
+  try {
+    let RateDataGet = yield call(GetApplicationsRatingJobData, action.payload);
+    yield put(SucGetApplicationsRatingJobRequest(RateDataGet));
+  } catch (error) {
+    yield put(FailGetApplicationsRatingJobRequest(error));
+  }
+}
+
+export function* watchGetApplicationsRatingJob() {
+   yield takeEvery(GetApplicationsRatingJobRequest, GetApplicationsRatingJob);
+}
+
+function* ApplicationsRatingJob(action) {
+  try {
+    let RateData = yield call(ApplicationsRatingJobData, action.payload);
+    yield put(SucApplicationsRatingJobRequest(RateData));
+  } catch (error) {
+    yield put(FailApplicationsRatingJobRequest(error));
+  }
+}
+
+export function* watchApplicationsRatingJob() {
+   yield takeEvery(ApplicationsRatingJobRequest, ApplicationsRatingJob);
+}
+

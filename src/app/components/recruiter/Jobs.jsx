@@ -1,9 +1,6 @@
 import React from 'react';
 import {Box, CardActions, Chip,Grid,IconButton,InputAdornment,Button,TextField,Paper,FormControlLabel,Checkbox,Slider,MenuItem,Modal,Rating,
 } from '@mui/material';
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogTitle from '@mui/material/DialogTitle';
 import { Breadcrumb } from 'app/components';
 import Card from '@mui/material/Card';
 import styled from '@emotion/styled';
@@ -18,9 +15,8 @@ import { toast } from 'react-toastify';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import DialogContent from '@mui/material/DialogContent';
-import { getJobRequest, searchgetJobRequest, searchgetJobRequestAdvanced } from 'slice/recruiter/createjobSlice';
-import { GetDataJobsApplyRequest} from 'slice/recruiter/userSlice';
+import { getJobRequest, searchgetJobRequest } from 'slice/recruiter/createjobSlice';
+import { AdvancedSeacrchJobsRequest, GetDataJobsApplyRequest} from 'slice/recruiter/userSlice';
 
 const Container = styled('div')(({ theme }) => ({
     margin: '30px',
@@ -423,7 +419,6 @@ export const Jobs = () => {
 
     dis(searchgetJobRequest({
 
-      pageNumber: 1,
       searchTerm :e.target.value
     }));
 
@@ -436,17 +431,14 @@ export const Jobs = () => {
 
     console.log(searchOptions);
 
-    dis(searchgetJobRequestAdvanced({
+    dis(AdvancedSeacrchJobsRequest({
       ...searchOptions,
-      pageNumber: 1  
-
-
     }));
 
     }
 
     const clearAll = () => {
-      dis(getJobRequest(1));
+      dis(GetDataJobsApplyRequest());
     }
 
 //Popup up filter state--------------------------------> 
