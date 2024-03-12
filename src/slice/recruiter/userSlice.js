@@ -4,6 +4,7 @@ const initialState = {
     isloading: false,
     data: 'null',
     error: 'null',
+    listData : []
 
 }
 
@@ -37,14 +38,14 @@ const userSlice = createSlice({
       state.error = payload;
     },
 
-    // Job Get recruiter Apply or not-------------->
+    //  recruiter Job Show Apply or not-------------->
 
     GetDataJobsApplyRequest: function (state) {
       state.isloading = true;
     },
     SucGetDataJobsApplyRequest: function (state, { payload }) {
       state.isloading = false;
-      state.data = payload;
+      state.listData = payload;
     },
     FaiGetDataJobsApplyRequest: function (state, { payload }) {
       state.isloading = false;

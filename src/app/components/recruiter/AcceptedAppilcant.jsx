@@ -360,7 +360,7 @@ const AdvancedSearchPopup = () => {
 
   dis(GetAdvancedSearchEmployeeRequest({
     ...searchOptions,
-  
+    
   }))
 }
 
@@ -406,12 +406,14 @@ const handleClickOpenRating = (id,rating) =>  {
 const updateRating = useSelector((y) => y.profileApplicant.data)
 console.log(updateRating)
 
-const changeRating = (e) => {
-    e.preventDefault()
+const changeRating = () => {
+  
     dis (PutRatingJobRequest({
       rating : rating, applicantId: idToUpdate}));
     toast.success("Rating updated successfully!")
-    handleClose()    
+    handleClose();
+    setUser(listData)
+
 }
 
 
@@ -532,7 +534,7 @@ const changeRating = (e) => {
               color="primary"
               style={{padding : "7px 88px",marginBottom : "-15px"}}
               onClick={() => {
-                handleClickOpenRating(v.jobApplicant._id, v.jobApplicant.rating)
+                handleClickOpenRating(v.userId, v.jobApplicant.rating)
               }}
           
             >

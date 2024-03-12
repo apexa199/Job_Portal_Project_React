@@ -23,7 +23,8 @@ import { Box, styled } from '@mui/material';
 import makeStyles from '@emotion/styled';
 import { Breadcrumb } from "..";
 import { useDispatch, useSelector } from "react-redux";
-import { GetApplicationsDataRequest } from "slice/applicant/profileUpdateSlice";
+import { GetApplicationsDataRequest, PutRatingJobRequest } from "slice/applicant/profileUpdateSlice";
+import { toast } from "react-toastify";
 
 
 const Container = styled('div')(({ theme }) => ({
@@ -90,8 +91,36 @@ export const Applications = () => {
         dis(GetApplicationsDataRequest(application))
     },[application])
   
-    const [open, setOpen] = useState(false);
-    const [rating, setRating] = useState();
+   
+// rating job------------->
+
+const[idToUpdate,setIdToUpdate] = useState();
+const [open, setOpen] = useState(false);
+const[rating,setRating] = useState();
+
+const handleClose = () => {setOpen(false)}
+
+const handleClickOpenRating = (id,rating) =>  {
+  
+  setOpen(true);
+  setRating(rating)
+  setIdToUpdate(id)
+
+};
+const updateRating = useSelector((y) => y.profileApplicant.data)
+console.log(updateRating)
+
+const changeRating = () => {
+  
+    dis (PutRatingJobRequest({
+      rating : rating, applicantId: idToUpdate}));
+    toast.success("Rating updated successfully!")
+    handleClose();
+    setApplication(listData)
+   
+
+}
+
   
   return (
     <Container>
@@ -162,27 +191,30 @@ export const Applications = () => {
                   color: "#ffffff",
                   width: "255px",
                   padding: "70px 87px",
-                  textAlign :"center"
+                  textAlign :"center",
+                  textTransform : "capitalize"
                                    
                 }}
               >
                 {v.status}
               </Paper>
             </Grid>
+            {v.status === "accepted" ||
+          v.status === "finished" ? (
            <Grid item style={{marginBottom : "-50px"}}>
                 <Button
                   variant="contained"
                   color="primary"
                   className={classes.statusBlock}
                   onClick={() => {
-                    setOpen(true);
+                    handleClickOpenRating(v.userId, v.jobApplicant.rating)
                   }}
                   style={{padding: "10px 98px"}}
                 >
                   Rate Job
                 </Button>
               </Grid>
-       
+         ) : null}
         </Grid>              
                 </CardContent>
                   </div>
@@ -201,6 +233,40 @@ export const Applications = () => {
     </Grid>
   </Grid>
   </div>
+  {/* //Rating Pop Up --------------> */}
+      
+  <Modal open={open} onClose={handleClose} >
+        <Paper
+          style={{
+            padding: "20px",
+            outline: "none",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            minWidth: "30%",
+            alignItems: "center",
+            margin: "203px 578px"
+          }}
+        >
+          <Rating
+            name="simple-controlled"
+            style={{ marginBottom: "30px" }}
+            value={rating === -1 ? null : rating}
+            onChange={(event, newValue) => {
+              setRating(newValue);
+              
+            }}
+          />
+          <Button
+            variant="contained"
+            color="primary"
+            style={{ padding: "10px 50px" }}
+            onClick={changeRating}
+          >
+            Submit
+          </Button>
+        </Paper>
+      </Modal>
  </Container>
 );
 };

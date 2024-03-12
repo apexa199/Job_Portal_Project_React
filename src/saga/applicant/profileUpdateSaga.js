@@ -78,6 +78,7 @@ export function* watchGetEndJobData() {
 
 
 // Put Rating pop up--------------------------->
+
 function* PutRatingJob(action) {
   try {
     let RateData = yield call(PutRatingJobData, action.payload);

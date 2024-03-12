@@ -524,10 +524,10 @@ const [searchOptions, setSearchOptions] = useState({
         getData={advancedhandleSearch}
       />
 
-          {
+          {listData.length > 0 ? (
             listData?.map((v) => {
               return (
-                <Card sx={{ maxWidth: 1200, margin: '25px', background: '#DCDCDC' }}>
+                <Card sx={{ maxWidth: 1200, margin: '25px' }}>
                   <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                     <CardContent>
                       <Typography gutterBottom variant="h6" component="div">
@@ -564,8 +564,8 @@ const [searchOptions, setSearchOptions] = useState({
                     <CardActions style={{ display: 'grid', margin: "20px"}}>
                       <Button
                         style={{
-                          backgroundColor: 'rgb(34 42 68)',
-                          color: 'white',
+                          backgroundColor: "#e0e0e0",
+                          color: '#c5c5c5',
                           padding: '90px',
                           borderRadius: '5px',
                           border: 'none',
@@ -583,11 +583,12 @@ const [searchOptions, setSearchOptions] = useState({
                 </Card>
                 
               );
-            })}
-
-            <Typography variant="h5" style={{ textAlign: 'center' }}>
-              No jobs found
-            </Typography>
+            })
+            ) : (
+              <Typography variant="h5" style={{ textAlign: 'center' }}>
+                No jobs found
+              </Typography>
+            )}
           
           </div>
 
