@@ -20,6 +20,7 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import DialogContent from '@mui/material/DialogContent';
 import { getJobRequest, searchgetJobRequest, searchgetJobRequestAdvanced } from 'slice/recruiter/createjobSlice';
+import { GetDataJobsApplyRequest} from 'slice/recruiter/userSlice';
 
 const Container = styled('div')(({ theme }) => ({
     margin: '30px',
@@ -390,18 +391,21 @@ const Container = styled('div')(({ theme }) => ({
   };
 export const Jobs = () => {
     
-    const { listData} = useSelector((y) => y.jobs);
+    const { listData} = useSelector((y) => y.user);
 
     console.log(listData);
-  
-    
-  
     const dis = useDispatch();
   
+    const[jobs, setJobs] = useState()
+  
+  useEffect(() => {
+      setJobs(listData)
+  },[])
+  
     useEffect(() => {
-        dis(getJobRequest(1));
+        dis(GetDataJobsApplyRequest(jobs));
         
-      }, []);
+      }, [jobs]);
 
 
   const [open, setOpen] = React.useState(false);
@@ -520,7 +524,7 @@ const [searchOptions, setSearchOptions] = useState({
         getData={advancedhandleSearch}
       />
 
-          {listData.length > 0 ? (
+          {
             listData?.map((v) => {
               return (
                 <Card sx={{ maxWidth: 1200, margin: '25px', background: '#DCDCDC' }}>
@@ -579,12 +583,12 @@ const [searchOptions, setSearchOptions] = useState({
                 </Card>
                 
               );
-            })
-          ) : (
+            })}
+
             <Typography variant="h5" style={{ textAlign: 'center' }}>
               No jobs found
             </Typography>
-          )}
+          
           </div>
 
      </Container>

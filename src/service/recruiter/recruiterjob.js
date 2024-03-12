@@ -231,41 +231,33 @@ export const AdvancedSearchEmployee =(obj) =>
 {
     // http://localhost:4444/api/applicants?status=accepted&asc=jobApplicant.name&asc=job.title&asc=jobApplicant.rating&desc=dateOfJoining
 
-    let url =`/api/applicants?status=${obj.accepted}`         
+    let url = `/api/applicants?status=accepted`
 
- if(obj.sort["job.title"])
- {
-    if(obj.sort["job.title"].desc)
-    {
-    url = url + "&desc=" + "job.title"
-    }
-    else
-    {
-        url = url + "&asc=" + "job.title" 
-    }
-}
-    if(obj.sort["jobApplicant.name"])
+     
+     if(obj.sort["jobApplicant.name"])
     {
         if(obj.sort["jobApplicant.name"].desc)
         {
-        url = url + "&desc=" + "jobApplicant.name"
+        url = url + "&asc=" + "jobApplicant.name"
         }
         else
         {
             url = url + "&asc=" + "jobApplicant.name" 
         }
     }
-    if(obj.sort["jobApplicant.rating"])
+
+    if(obj.sort["job.title"])
     {
-        if(obj.sort["jobApplicant.rating"].desc)
+        if(obj.sort["job.title"].desc)
         {
-        url = url + "&desc=" + "jobApplicant.rating"
+        url = url + "&desc=" + "job.title"
         }
         else
         {
-            url = url + "&asc=" + "jobApplicant.rating" 
+            url = url + "&asc=" + "job.title" 
         }
     }
+
     if(obj.sort.dateOfJoining)
     {
         if(obj.sort.dateOfJoining.desc)
@@ -277,26 +269,32 @@ export const AdvancedSearchEmployee =(obj) =>
             url = url + "&asc=" + "dateOfJoining" 
         }
     }
-    
-    return authFetchGet(url, 'GET')}
+        if(obj.sort["jobApplicant.rating"])
+        {
+            if(obj.sort["jobApplicant.rating"].desc)
+            {
+                url = url + "&desc=" + "jobApplicant.rating"
+            }
+            else
+            {
+                url = url + "&asc=" + "jobApplicant.rating" 
+            }
+        }
+       
+        return authFetchGet(url, 'GET');
+}
 
+// Employees rate job update-------------->
 
-// Applicant Rating Job Data------------->
-
-export const RatingJobData = (data) => {
-
-        return authFetchGet(`/api/rating/+data`,'GET',data)
-    }
-    
 export const PutRatingJobData = (data1) => {       
                 
-    return authFetch(`/api/rating/${data1.jobApplicant.userId}`,'Put',data1) }
+    return authFetch(`/api/rating`,'Put',data1) }
 
-// Applicant End job update-------------->
+// Employees End job update-------------->
 
-export const EndJobUpdate = (id) => {
+export const EndJobUpdate = (data) => {
 
-    return authFetch(`/api/applications/${id}`,'Put')
+    return authFetch(`/api/applications/${data.id}`,'Put',data)
 }
 
 // Applications Get Job Data------------->

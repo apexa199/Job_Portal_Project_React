@@ -76,20 +76,6 @@ export function* watchGetEndJobData() {
    yield takeEvery(GetEndJobDataRequest, GetEndJobData);
 }
 
-// Get Rating pop up--------------------------->
-
-function* GetRatingJob(action) {
-  try {
-    let RateData = yield call(RatingJobData, action.payload);
-    yield put(SucRatingJobRequest(RateData));
-  } catch (error) {
-    yield put(FailRatingJobRequest(error));
-  }
-}
-
-export function* watchGetRatingJob() {
-   yield takeEvery(GetRatingJobRequest, GetRatingJob);
-}
 
 // Put Rating pop up--------------------------->
 function* PutRatingJob(action) {

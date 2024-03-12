@@ -80,20 +80,6 @@ const profileUpdateSlice = createSlice({
       state.isloading = false;
       state.error = payload;
     },
-
-    // Rating data Get------------------->
-
-    GetRatingJobRequest: function (state) {
-      state.isloading = true;
-    },
-    SucRatingJobRequest: function (state, { payload }) {
-      state.isloading = false;
-      state.data = payload;
-    },
-    FailRatingJobRequest: function (state, { payload }) {
-      state.isloading = false;
-      state.error = payload;
-    },
     
      // Rating data put------------------->
 

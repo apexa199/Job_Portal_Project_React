@@ -35,11 +35,27 @@ const userSlice = createSlice({
     FailPutUserRequest: function (state, { payload }) {
       state.isloading = false;
       state.error = payload;
-    }
+    },
+
+    // Job Get recruiter Apply or not-------------->
+
+    GetDataJobsApplyRequest: function (state) {
+      state.isloading = true;
+    },
+    SucGetDataJobsApplyRequest: function (state, { payload }) {
+      state.isloading = false;
+      state.data = payload;
+    },
+    FaiGetDataJobsApplyRequest: function (state, { payload }) {
+      state.isloading = false;
+      state.error = payload;
+    },
   }
 });
 
 
-export const {FailGetUserRequest,FailPutUserRequest, GetUserRequest, PutUserRequest, SucGetUserRequest,SucPutUserRequest} = userSlice.actions
+export const {FailGetUserRequest,FailPutUserRequest, GetUserRequest, PutUserRequest, SucGetUserRequest,SucPutUserRequest,
+  GetDataJobsApplyRequest,FaiGetDataJobsApplyRequest,SucGetDataJobsApplyRequest
+} = userSlice.actions
 
 export default userSlice.reducer

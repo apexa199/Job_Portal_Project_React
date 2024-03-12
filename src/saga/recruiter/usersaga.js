@@ -1,6 +1,6 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
-import {  GetUserData, PutUserData} from 'service/recruiter/recruiterjob';
-import { FailGetUserRequest, FailPutUserRequest, GetUserRequest, PutUserRequest, SucGetUserRequest, SucPutUserRequest } from 'slice/recruiter/userSlice';
+import {  GetUserData, JobGetData, PutUserData} from 'service/recruiter/recruiterjob';
+import { FaiGetDataJobsApplyRequest, FailGetJobApplyRequest, FailGetUserRequest, FailPutUserRequest, GetDataJobsApplyRequest, GetJobApplyRequest, GetUserRequest, PutUserRequest, SucGetDataJobsApplyRequest, SucGetJobApplyRequest, SucGetUserRequest, SucPutUserRequest } from 'slice/recruiter/userSlice';
 
 
 function* GetUser(action) {
@@ -29,4 +29,20 @@ function* PutUser(action) {
 
 export function* watchPutUser() {
   return yield takeEvery(PutUserRequest, PutUser);
+}
+
+
+// Job Get recruiter Apply or not-------------->
+
+function* GetDataJobsApply(action) {
+  try {
+    let mydata = yield call(JobGetData, action.payload);
+    yield put(SucGetDataJobsApplyRequest(mydata));
+  } catch (error) {
+    yield put(FaiGetDataJobsApplyRequest(error));
+  }
+}
+
+export function* watchGetDataJobsApply() {
+   yield takeEvery(GetDataJobsApplyRequest, GetDataJobsApply);
 }

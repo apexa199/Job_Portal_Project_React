@@ -359,26 +359,31 @@ export const AcceptedApplicant = () => {
 const AdvancedSearchPopup = () => {
 
   dis(GetAdvancedSearchEmployeeRequest({
-    ...searchOptions
+    ...searchOptions,
+  
   }))
 }
 
 // End Job popup state--------------->
-
-const[idToEndJob,setIdToEndJob] = useState();
+const[idToEndJob, setIdToEndJob] = useState("")
 const [openEndJob, setOpenEndJob] = useState(false);
 const handleOpenEndJob = (id) => { 
 
+  setIdToEndJob(id)
   setOpenEndJob(true)
-  setIdToEndJob(id)};
+};
 
 const handleCloseEndJob = () => {
   setOpenEndJob(false);
 };
 
-const updateStatus = (id) => {
-dis(GetEndJobDataRequest(idToEndJob));
-setIdToEndJob(id)
+const updateStatus = () => {
+dis(GetEndJobDataRequest({
+  status : "finished",
+  dateOfJoining : new Date().toLocaleDateString(),
+  id : idToEndJob
+}));
+setUser(listData)
 handleCloseEndJob()
 }
 
@@ -387,34 +392,24 @@ handleCloseEndJob()
 
 const[idToUpdate,setIdToUpdate] = useState();
 const [open, setOpen] = useState(false);
+const[rating,setRating] = useState();
 
 const handleClose = () => {setOpen(false)}
 
-const handleClickOpenRating = (id) =>  {
+const handleClickOpenRating = (id,rating) =>  {
   
   setOpen(true);
+  setRating(rating)
   setIdToUpdate(id)
-
 
 };
 const updateRating = useSelector((y) => y.profileApplicant.data)
 console.log(updateRating)
 
-const[rating,setRating] = useState({
-  rating : updateRating.rating
-});
-
-useEffect(() => {
-  dis(GetRatingJobRequest(idToUpdate))
-},[idToUpdate])
-
-useEffect(() =>{
-  setRating(updateRating)
-},[updateRating])
-
 const changeRating = (e) => {
     e.preventDefault()
-    dis (PutRatingJobRequest({...rating,_id:idToUpdate}));
+    dis (PutRatingJobRequest({
+      rating : rating, applicantId: idToUpdate}));
     toast.success("Rating updated successfully!")
     handleClose()    
 }
@@ -469,7 +464,9 @@ const changeRating = (e) => {
         </Grid>
       
          <Grid>
-            {listData?.map((v) => {
+          
+         {listData.length > 0 ? (
+            listData?.map((v) => {
               return (
                 <Card sx={{ minWidth: 270, margin: '20px' }} >
                 
@@ -525,7 +522,7 @@ const changeRating = (e) => {
                 background: "#09BC8A",
                 padding : "35px 110px"
               }}
-              onClick={()=>{ handleOpenEndJob(v.jobApplicant.userId) }}>
+              onClick={()=>{ handleOpenEndJob(v._id) }}>
               End Job
             </Button>
           </Grid>
@@ -535,7 +532,7 @@ const changeRating = (e) => {
               color="primary"
               style={{padding : "7px 88px",marginBottom : "-15px"}}
               onClick={() => {
-                handleClickOpenRating(v._id)
+                handleClickOpenRating(v.jobApplicant._id, v.jobApplicant.rating)
               }}
           
             >
@@ -551,8 +548,13 @@ const changeRating = (e) => {
             
             );
             })
+            ) : (
+              <Typography variant="h5" style={{ textAlign: 'center' }}>
+                No Applicant Found
+              </Typography>
+            )}
           
-          }   
+           
        </Grid>
          
   {/*Delete Pop Up-----------------> */}
@@ -576,7 +578,8 @@ const changeRating = (e) => {
               }}
               size="small"
               onClick={() => {
-                updateStatus("finished");
+                updateStatus();
+                
               }}
             >
               YES
