@@ -410,11 +410,11 @@ const changeRating = () => {
   
     dis (PutRatingJobRequest({
       rating : rating, applicantId: idToUpdate}));
-    toast.success("Rating updated successfully!")
-    handleClose();
-    setUser(listData)
-
+      toast.success("Rating updated successfully!")
+      setUser(listData)
+      handleClose();
 }
+
 
 
 

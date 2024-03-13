@@ -45,6 +45,18 @@ const routes = [
         path: '/charts/echarts',
         element: <AppEchart />,
         auth: authRoles.editor
+      },
+        // recruiter routes
+      {
+        path: '/components/recruiter/RecruiterRoutes',
+        element: <recruiterRoutes/>,
+        auth: authRoles.recruiter
+      },
+      //applicant routes
+      {
+        path: '/components/applicant/ApplicantRoute',
+        element: <applicantRoutes/>,
+        auth: authRoles.applicant
       }
     ]
   },

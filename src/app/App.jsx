@@ -7,6 +7,17 @@ import routes from './routes';
 import '../fake-db';
 
 const App = () => {
+
+  //local storage ro
+
+  // let b =routes.children.filter((b)=>{
+
+  //   return b.auth == "recruiter";
+
+  // })
+
+  // routes.children = b;
+
   const content = useRoutes(routes);
 
   return (

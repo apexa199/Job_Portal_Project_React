@@ -18,6 +18,7 @@ import { getJobRequest, searchgetJobRequest, searchgetJobRequestAdvanced } from 
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import DialogContent from '@mui/material/DialogContent';
+import { GetDataJobsApplyRequest, JobSearchGetRequest } from 'slice/recruiter/userSlice';
 
 
 
@@ -392,18 +393,17 @@ const Container = styled('div')(({ theme }) => ({
 
 export const ListJobApplicant = () => {
 
-    const { listData} = useSelector((y) => y.jobs);
+    const { listData} = useSelector((y) => y.user);
 
     console.log(listData);
-  
     
   
     const dis = useDispatch();
   
-    useEffect(() => {
-      dis(getJobRequest(1));
-      
-    }, []);
+      useEffect(() => {
+          dis(GetDataJobsApplyRequest());
+          
+        }, []);
 
 
   const [open, setOpen] = React.useState(false);
@@ -416,12 +416,10 @@ export const ListJobApplicant = () => {
   };
 
    // search job ----------------------->
-
    const handleSearch = (e)=>{
 
-    dis(searchgetJobRequest({
+    dis(JobSearchGetRequest({
 
-      pageNumber: 1,
       searchTerm :e.target.value
     }));
 
@@ -436,15 +434,12 @@ export const ListJobApplicant = () => {
 
     dis(searchgetJobRequestAdvanced({
       ...searchOptions,
-      pageNumber: 1  
-
-
     }));
 
     }
 
     const clearAll = () => {
-      dis(getJobRequest(1));
+      dis(GetDataJobsApplyRequest());
     }
 
 //Popup up filter state--------------------------------> 

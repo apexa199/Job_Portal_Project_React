@@ -1,6 +1,6 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
-import {  GetUserData, JobGetData, JobsDataSearchAdvanced, PutUserData} from 'service/recruiter/recruiterjob';
-import { FaiAdvancedSeacrchJobsRequest, FaiGetDataJobsApplyRequest, FailGetUserRequest, FailPutUserRequest, AdvancedSeacrchJobsRequest, GetDataJobsApplyRequest, GetJobApplyRequest, GetUserRequest, PutUserRequest, SucAdvancedSeacrchJobsRequest, SucGetDataJobsApplyRequest, SucGetJobApplyRequest, SucGetUserRequest, SucPutUserRequest } from 'slice/recruiter/userSlice';
+import {  GetUserData, JobDataSearch, JobGetData, JobsDataSearchAdvanced, PutUserData} from 'service/recruiter/recruiterjob';
+import { FaiAdvancedSeacrchJobsRequest, FaiGetDataJobsApplyRequest, FailGetUserRequest, FailPutUserRequest, AdvancedSeacrchJobsRequest, GetDataJobsApplyRequest, GetJobApplyRequest, GetUserRequest, PutUserRequest, SucAdvancedSeacrchJobsRequest, SucGetDataJobsApplyRequest, SucGetJobApplyRequest, SucGetUserRequest, SucPutUserRequest, SucJobSearchGetRequest, FailJobSearchGetRequest, JobSearchGetRequest } from 'slice/recruiter/userSlice';
 
 
 function* GetUser(action) {
@@ -47,6 +47,21 @@ export function* watchGetDataJobsApply() {
    yield takeEvery(GetDataJobsApplyRequest, GetDataJobsApply);
 }
 
+// Jobs search Data----------------------->
+
+function* JobSearchGet(action) {
+  try {
+    let mydata = yield call(JobDataSearch, action.payload);
+    yield put(SucJobSearchGetRequest(mydata));
+   
+  } catch (error) {
+    yield put(FailJobSearchGetRequest(error));
+  }
+}
+
+export function* watchJobSearchGet() {
+  return yield takeEvery(JobSearchGetRequest, JobSearchGet);
+}
 // Advance Searched Job Get recruiter Apply or not-------------->
 
 function* AdvancedSeacrchJobs(action) {

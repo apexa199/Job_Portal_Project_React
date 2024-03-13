@@ -1,5 +1,4 @@
 
-import { da } from 'date-fns/locale';
 import authFetch, { authFetchGet } from 'service/recruiter/authfetch';
 
 // Create & list job start------->
@@ -313,6 +312,14 @@ export const GetApplicationsRatingJobData = (data1) => {
                 
     return authFetchGet(`/api/rating?id=${data1.id}`,'GET',data1) }
     
+    
+//Jobs Data Search ------------>
+
+export const JobDataSearch = (obj) => {
+    
+    return authFetchGet(`/api/jobs?&q=${obj.searchTerm}`, 'GET');
+}
+
 // Advanced job search in Jobs------------>
 
 export const JobsDataSearchAdvanced = (obj) => {
@@ -323,7 +330,7 @@ export const JobsDataSearchAdvanced = (obj) => {
 
     if(obj.jobType.fullTime)
     {
-        url1 = url1 + "&jobType=" + "Full Time"
+        url1 = url1 + "jobType=" + "Full Time"
     }  
     if(obj.jobType.partTime)
     {

@@ -16,7 +16,7 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getJobRequest, searchgetJobRequest } from 'slice/recruiter/createjobSlice';
-import { AdvancedSeacrchJobsRequest, GetDataJobsApplyRequest} from 'slice/recruiter/userSlice';
+import { AdvancedSeacrchJobsRequest, GetDataJobsApplyRequest, JobSearchGetRequest} from 'slice/recruiter/userSlice';
 
 const Container = styled('div')(({ theme }) => ({
     margin: '30px',
@@ -391,17 +391,11 @@ export const Jobs = () => {
 
     console.log(listData);
     const dis = useDispatch();
-  
-    const[jobs, setJobs] = useState()
-  
-  useEffect(() => {
-      setJobs(listData)
-  },[])
-  
+ 
     useEffect(() => {
-        dis(GetDataJobsApplyRequest(jobs));
+        dis(GetDataJobsApplyRequest());
         
-      }, [jobs]);
+      }, []);
 
 
   const [open, setOpen] = React.useState(false);
@@ -417,7 +411,7 @@ export const Jobs = () => {
 
    const handleSearch = (e)=>{
 
-    dis(searchgetJobRequest({
+    dis(JobSearchGetRequest({
 
       searchTerm :e.target.value
     }));
