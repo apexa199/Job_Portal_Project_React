@@ -172,8 +172,8 @@ export const ProfileApllicant = () => {
   
     const handleFormSubmit = (e) => {
       e.preventDefault()
-      dis(PutProfileAppliData(profileDetails))
-      localStorage.setItem('name1' , profileDetails.name)
+      dis(PutProfileAppliRequest(profileDetails))
+      localStorage.setItem('name' , profileDetails.name)
       toast.success("Profile Updated Successfully!");
       
     }  
@@ -318,7 +318,7 @@ export const ProfileApllicant = () => {
               fullWidth
               align = 'center'
               style={{ padding: "7px 65px" }}
-              onSubmit={handleFormSubmit}
+              onClick={handleFormSubmit}
           
             >
               Update Details

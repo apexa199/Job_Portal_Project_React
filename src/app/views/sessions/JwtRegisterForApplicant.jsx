@@ -191,6 +191,7 @@ export const JwtRegisterForApplicant = () => {
           if (!y.errors && !y.driver) {
             navigate('/session/signin');
             localStorage.setItem("token" , JSON.stringify((y)))
+            localStorage.setItem('name',values.name)
           }
         })
         .catch((error) => {
