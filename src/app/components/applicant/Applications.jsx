@@ -74,7 +74,7 @@ const colorSet = {
 };
 
 export const Applications = () => {
-  const classes = useStyles();  
+    
   const {listData} =  useSelector((state) => state.profileApplicant)
 
     console.log(listData)
@@ -91,40 +91,6 @@ export const Applications = () => {
         dis(GetApplicationsDataRequest(application))
     },[application])
   
-   
-// rating job------------->
-
-const[idToUpdate,setIdToUpdate] = useState();
-const [open, setOpen] = useState(false);
-const[rating,setRating] = useState();
-
-const handleClose = () => {setOpen(false)}
-
-const handleClickOpenRating = (id,rating) =>  {
-  
-  setOpen(true);
-  setRating(rating)
-  setIdToUpdate(id)
- 
-
-};
-const updateRating = useSelector((y) => y.profileApplicant.data)
-console.log(updateRating)
-
-const changeRating = () => {
-  
-  dis(GetApplicationsRatingJobRequest({
-    id : idToUpdate,
-    rating : updateRating 
-  }))
-    dis (ApplicationsRatingJobRequest({
-      rating : rating, jobId: idToUpdate}));
-    toast.success("Rating updated successfully!")
-    handleClose();
-     console.log({rating :rating})
-    
-}
-
 
   
   return (
@@ -204,22 +170,7 @@ const changeRating = () => {
                 {v.status}
               </Paper>
             </Grid>
-            {v.status === "accepted" ||
-          v.status === "finished" ? (
-           <Grid item style={{marginBottom : "-50px"}}>
-                <Button
-                  variant="contained"
-                  color="primary"
-                  className={classes.statusBlock}
-                  onClick={() => {
-                    handleClickOpenRating(v.jobId, v.job.rating)
-                  }}
-                  style={{padding: "10px 98px"}}
-                >
-                  Rate Job
-                </Button>
-              </Grid>
-         ) : null}
+        
         </Grid>              
                 </CardContent>
                   </div>
@@ -238,40 +189,7 @@ const changeRating = () => {
     </Grid>
   </Grid>
   </div>
-  {/* //Rating Pop Up --------------> */}
-      
-  <Modal open={open} onClose={handleClose} >
-        <Paper
-          style={{
-            padding: "20px",
-            outline: "none",
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "center",
-            minWidth: "30%",
-            alignItems: "center",
-            margin: "203px 578px"
-          }}
-        >
-          <Rating
-            name="simple-controlled"
-            style={{ marginBottom: "30px" }}
-            value={rating === -1 ? null : rating}
-            onChange={(event, newValue) => {
-              setRating(newValue);
-              
-            }}
-          />
-          <Button
-            variant="contained"
-            color="primary"
-            style={{ padding: "10px 50px" }}
-            onClick={changeRating}
-          >
-            Submit
-          </Button>
-        </Paper>
-      </Modal>
+ 
  </Container>
 );
 };

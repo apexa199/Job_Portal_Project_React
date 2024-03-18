@@ -123,7 +123,7 @@ export const GetProfileAppliData = (dataUser) => {
 
 export const PutProfileAppliData = (data) => {
 
-    return authFetch("/api/user",'PUT', data)
+    return authFetch("/api/user",'Put', data)
 }
 
 

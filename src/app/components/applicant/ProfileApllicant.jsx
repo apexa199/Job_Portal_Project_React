@@ -14,6 +14,8 @@ import { Breadcrumb } from '..';
 import { Stack } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { GetProfileAppliRequest, PutProfileAppliRequest } from 'slice/applicant/profileUpdateSlice';
+import { toast } from 'react-toastify';
+import { PutProfileAppliData } from 'service/recruiter/recruiterjob';
 
 const VisuallyHiddenInput = styled('input')({
     clip: 'rect(0 0 0 0)',
@@ -135,13 +137,12 @@ export const ProfileApllicant = () => {
 
     const dis = useDispatch();
 
-    const [loading, setLoading] = useState(false);      
     const [profileDetails, setProfileDetails] = useState({
       name: "",
       education: [],
       skills: [],
-      resume: "",
       profile: "",
+      rating : -1
     });
   
     const [education, setEducation] = useState([
@@ -163,16 +164,18 @@ export const ProfileApllicant = () => {
     const handleInput = (key, value) => {
       setProfileDetails({
         ...profileDetails,
+        ...education,
         [key]: value,
       });
-    };
-  
+    }; 
 
   
     const handleFormSubmit = (e) => {
       e.preventDefault()
-      dis(PutProfileAppliRequest(profileDetails))
-      setLoading(true);
+      dis(PutProfileAppliData(profileDetails))
+      localStorage.setItem('name1' , profileDetails.name)
+      toast.success("Profile Updated Successfully!");
+      
     }  
 
    return (
@@ -203,7 +206,7 @@ export const ProfileApllicant = () => {
         <Grid item sm={6} xs={12}>
           <Box p={4} height="100%">
             <Formik 
-              onSubmit={handleFormSubmit}
+           
              
             >
               {({ values, errors, touched, handleChange, handleBlur, handleSubmit }) => (
@@ -215,6 +218,7 @@ export const ProfileApllicant = () => {
                     name="name"
                     label="Name"
                     variant="outlined"
+                    value={profileDetails?.name}
                     onBlur={handleBlur}                    
                     onChange={(e) => {
                       handleInput("name", e.target.value)
@@ -230,6 +234,7 @@ export const ProfileApllicant = () => {
                 name="education"
                 label="education"
                 variant="outlined"
+                
                 sx={{ mb: 3 }}
               />
             
@@ -240,9 +245,10 @@ export const ProfileApllicant = () => {
                    name="skills"
                    label="Skills"
                    variant="outlined"
+                   value={profileDetails?.skills}
                    onBlur={handleBlur}
                    onChange={(e) => {
-                    handleInput("name", e.target.value)
+                    handleInput("skills", e.target.value)
                   }}
                    helperText={touched.skills && errors.skills}
                    error={Boolean(errors.skills && touched.skills)}
@@ -312,6 +318,7 @@ export const ProfileApllicant = () => {
               fullWidth
               align = 'center'
               style={{ padding: "7px 65px" }}
+              onSubmit={handleFormSubmit}
           
             >
               Update Details
