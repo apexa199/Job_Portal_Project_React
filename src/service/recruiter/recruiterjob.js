@@ -324,7 +324,7 @@ export const JobDataSearch = (obj) => {
 
 //http://localhost:4444/api/jobs/65f2a4af1290614e981de758/applications
 
-const ApplyJobApplicant = (data) => {
+export const ApplyJobApplicantData = (data) => {
 
     return authFetch(`/api/jobs/${data.id}/applications`,'Post', data)
 }

@@ -189,7 +189,7 @@ export const JwtRegisterForApplicant = () => {
           setLoading(false);
 
           if (!y.errors && !y.driver) {
-            navigate('/session/signinForApplicant');
+            navigate('/session/signin');
             localStorage.setItem("token" , JSON.stringify((y)))
           }
         })
@@ -381,7 +381,7 @@ export const JwtRegisterForApplicant = () => {
                   <Paragraph>
                     Already have an account?
                     <NavLink
-                      to="/session/signinForApplicant"
+                      to="/session/signin"
                       style={{ color: theme.palette.primary.main, marginLeft: 5 }}
                     >
                       Login

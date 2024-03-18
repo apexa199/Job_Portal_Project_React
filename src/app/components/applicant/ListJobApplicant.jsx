@@ -19,6 +19,8 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import DialogContent from '@mui/material/DialogContent';
 import { GetDataJobsApplyRequest, JobSearchGetRequest } from 'slice/recruiter/userSlice';
+import { ApplyJobApplicantRequest } from 'slice/applicant/profileUpdateSlice';
+import { toast } from 'react-toastify';
 
 
 
@@ -395,20 +397,41 @@ export const ListJobApplicant = () => {
 
     const { listData} = useSelector((y) => y.user);
 
-    console.log(listData);
-    
-  
+    console.log(listData);    
+
     const dis = useDispatch();
   
-      useEffect(() => {
-          dis(GetDataJobsApplyRequest());
+    useEffect(() => {
+        dis(GetDataJobsApplyRequest());
           
         }, []);
+    
+  
+    const[id, setId] = useState()
 
+    const[applyJob,setApplyJob] = useState({
+      sop : '',
+      id : id
+    })
+
+    const handleSubmit = () => {
+      dis(ApplyJobApplicantRequest(applyJob));
+      toast.success("Job Applied Successfully.");
+      
+    };
+
+    const handleInput = (key, value) => {
+      setApplyJob({
+        ...applyJob,
+        [key]: value
+      });
+    };
+  
 
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
+    setId(id)
     setOpen(true);
   };
   const handleClose = () => {
@@ -568,7 +591,7 @@ const [searchOptions, setSearchOptions] = useState({
                         
                         }}
                         size="small"
-                        onClick={handleClickOpen}
+                        onClick={() => handleClickOpen(v._id)}
                       >
                         APPLY
                       </Button>
@@ -609,12 +632,13 @@ const [searchOptions, setSearchOptions] = useState({
           label="Write SOP (upto 250 words)"
           fullWidth
           multiline
+          onChange={(event) => handleInput('sop', event.target.value)}
           rows={9}
         />
     </Box>
         </DialogContent>
         <DialogActions style={{justifyContent:"center", padding:"17px 0px 17px 0px"}}>
-          <Button style={{backgroundColor:"#1976d2",color:"white",padding:"8px 18px"}} >SUBMIT</Button>
+          <Button style={{backgroundColor:"#1976d2",color:"white",padding:"8px 18px"}} onClick={handleSubmit} >SUBMIT</Button>
         </DialogActions>
       </Dialog>
     </React.Fragment>

@@ -1,6 +1,6 @@
 const applicantLogin = [
 
-  { name: 'Applicant', path: '/session/signupForApplicant',icon: 'dashboard' },  
+
   { name: 'Applicant Jobs', path: '/applicant/listjobapplicant',icon: 'assignment' },
   { name: 'Applicant Profile', path: '/applicant/profileapplicant',icon: 'person' },    
   { name: 'Applications', path: '/applicant/appliactions',icon: 'launch' },  

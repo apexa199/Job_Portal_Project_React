@@ -135,6 +135,21 @@ const profileUpdateSlice = createSlice({
       state.error = payload;
     },
 
+    ApplyJobApplicantRequest :function(state)
+    {
+    state.isloading = true
+    },
+    SucApplyJobApplicant :function(state,{payload})
+    {
+    state.isloading = false;
+    state.listData = payload;
+    },
+    FailApplyJobApplicant :function(state,{payload})
+    {
+    state.isloading = false;
+    state.error = payload;
+    },
+
 }
 });
 
@@ -146,7 +161,8 @@ FailRatingJobRequest,GetRatingJobRequest,SucRatingJobRequest,
 FailPutRatingJobRequest,PutRatingJobRequest,SucPutRatingJobRequest,
 FailGetApplicationsDataRequest,GetApplicationsDataRequest,SucGetApplicationsDataRequest,
 ApplicationsRatingJobRequest,FailApplicationsRatingJobRequest, SucApplicationsRatingJobRequest,
-FailGetApplicationsRatingJobRequest,GetApplicationsRatingJobRequest,SucGetApplicationsRatingJobRequest
+FailGetApplicationsRatingJobRequest,GetApplicationsRatingJobRequest,SucGetApplicationsRatingJobRequest,
+ApplyJobApplicantRequest,FailApplyJobApplicant,SucApplyJobApplicant
 } = profileUpdateSlice.actions
 
 

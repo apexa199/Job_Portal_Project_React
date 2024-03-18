@@ -7,7 +7,6 @@ import MatxLayout from './components/MatxLayout/MatxLayout';
 import materialRoutes from 'app/views/material-kit/MaterialRoutes';
 import recruiterRoutes from './components/recruiter/RecruiterRoutes';
 import applicantRoutes from './components/applicant/ApplicantRoute'
-import { JwtLoginForApplicant } from './views/sessions/JwtLoginForApplicant';
 import {  JwtRegisterForApplicant } from './views/sessions/JwtRegisterForApplicant';
 
 // session pages
@@ -46,6 +45,7 @@ const routes = [
         element: <AppEchart />,
         auth: authRoles.editor
       },
+    
         // recruiter routes
       {
         path: '/components/recruiter/RecruiterRoutes',
@@ -65,11 +65,10 @@ const routes = [
   { path: '/session/404', element: <NotFound /> },
   { path: '/session/signin', element: <JwtLogin /> },
   { path: '/session/signup', element: <JwtRegister /> },
-  { path: '/session/signinForApplicant', element: <JwtLoginForApplicant/> },
   { path: '/session/signupForApplicant', element: < JwtRegisterForApplicant/> },
   { path: '/session/forgot-password', element: <ForgotPassword /> },
 
-  { path: '/', element: <Navigate to="dashboard/default" /> },
+  { path: '/', element: <Navigate to="/dashboard/default" /> },
   { path: '*', element: <NotFound /> }
 ];
 
