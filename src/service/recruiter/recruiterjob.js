@@ -40,11 +40,11 @@ export const getJobDataSearchAdvanced = (obj) => {
     {
         url = url + "&jobType=" + "Full Time"
     }  
-    if(obj.jobType.partTime)
+    else if(obj.jobType.partTime)
     {
         url = url + "&jobType=" + "Part Time"
     }   
-    if(obj.jobType.wfh)
+    else if(obj.jobType.wfh)
     {
         url = url + "&jobType=" + "Work From Home"
     }    

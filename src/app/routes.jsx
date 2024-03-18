@@ -46,18 +46,6 @@ const routes = [
         auth: authRoles.editor
       },
     
-        // recruiter routes
-      {
-        path: '/components/recruiter/RecruiterRoutes',
-        element: <recruiterRoutes/>,
-        auth: authRoles.recruiter
-      },
-      //applicant routes
-      {
-        path: '/components/applicant/ApplicantRoute',
-        element: <applicantRoutes/>,
-        auth: authRoles.applicant
-      }
     ]
   },
 
@@ -68,7 +56,7 @@ const routes = [
   { path: '/session/signupForApplicant', element: < JwtRegisterForApplicant/> },
   { path: '/session/forgot-password', element: <ForgotPassword /> },
 
-  { path: '/', element: <Navigate to="/dashboard/default" /> },
+  { path: '/', element: <Navigate to="/session/signin" /> },
   { path: '*', element: <NotFound /> }
 ];
 

@@ -164,6 +164,7 @@ const JwtLogin = () => {
                       loading={loading}
                       variant="contained"
                       sx={{ my: 2 }}
+                        
                     >
                       Login
                     </LoadingButton>
@@ -177,7 +178,7 @@ const JwtLogin = () => {
                         Register For Recruiter
                       </NavLink>
                     </Paragraph>
-                    <Paragraph>
+                    <Paragraph  sx={{ my: 2 }}>
                       Don't have an account?
                       <NavLink
                         to="/session/signupForApplicant"
