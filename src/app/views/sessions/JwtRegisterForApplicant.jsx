@@ -172,7 +172,7 @@ export const JwtRegisterForApplicant = () => {
     ]);
 
     const handleFormSubmit = (values) => {
-      alert('r');
+
       setLoading(true);
     
 
@@ -190,7 +190,7 @@ export const JwtRegisterForApplicant = () => {
 
           if (!y.errors && !y.driver) {
             navigate('/session/signinForApplicant');
-            localStorage.setItem("Token For Applicant" , JSON.stringify((y)))
+            localStorage.setItem("token" , JSON.stringify((y)))
           }
         })
         .catch((error) => {

@@ -169,9 +169,9 @@ export const ProfileApllicant = () => {
   
 
   
-    const handleFormSubmit = (values) => {
-      alert('r');
-      dis(PutProfileAppliRequest())
+    const handleFormSubmit = (e) => {
+      e.preventDefault()
+      dis(PutProfileAppliRequest(profileDetails))
       setLoading(true);
     }  
 

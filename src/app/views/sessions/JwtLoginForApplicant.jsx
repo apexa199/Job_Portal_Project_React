@@ -71,7 +71,7 @@ export const JwtLoginForApplicant = () => {
         .then((y) => {
           if(!y.message){
             toast.success("Login Successfull")
-          localStorage.setItem('Token For Applicant', JSON.stringify(y));
+          localStorage.setItem('token', JSON.stringify(y));
          
           div('/');
           }

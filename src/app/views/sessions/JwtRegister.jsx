@@ -59,7 +59,6 @@ const JwtRegister = () => {
   const [loading, setLoading] = useState(false);
 
   const handleFormSubmit = (values) => {  
-    alert('r');
     setLoading(true);
 
     try {
@@ -75,7 +74,7 @@ const JwtRegister = () => {
           setLoading(false);
 
           if (!y.errors && !y.driver) {
-            localStorage.setItem("Token" , JSON.stringify((y)))
+            localStorage.setItem("token" , JSON.stringify((y)))
             localStorage.setItem('name',values.name)
             navigate('/session/signin');
           }

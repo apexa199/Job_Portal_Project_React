@@ -320,6 +320,15 @@ export const JobDataSearch = (obj) => {
     return authFetchGet(`/api/jobs?&q=${obj.searchTerm}`, 'GET');
 }
 
+//Jobs Apply from applicant------------------------->
+
+//http://localhost:4444/api/jobs/65f2a4af1290614e981de758/applications
+
+const ApplyJobApplicant = (data) => {
+
+    return authFetch(`/api/jobs/${data.id}/applications`,'Post', data)
+}
+
 // Advanced job search in Jobs------------>
 
 export const JobsDataSearchAdvanced = (obj) => {
