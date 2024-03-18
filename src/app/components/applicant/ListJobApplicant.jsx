@@ -409,13 +409,13 @@ export const ListJobApplicant = () => {
   
     const[id, setId] = useState()
 
-    const[applyJob,setApplyJob] = useState({
-      sop : '',
-      id : id
-    })
+    const[applyJob,setApplyJob] = useState()
 
     const handleSubmit = () => {
-      dis(ApplyJobApplicantRequest(applyJob));
+      dis(ApplyJobApplicantRequest({
+        ...applyJob,
+        id :id
+      }));
       toast.success("Job Applied Successfully.");
       
     };
@@ -430,7 +430,7 @@ export const ListJobApplicant = () => {
 
   const [open, setOpen] = React.useState(false);
 
-  const handleClickOpen = () => {
+  const handleClickOpen = (id) => {
     setId(id)
     setOpen(true);
   };
