@@ -18,7 +18,7 @@ import { getJobRequest, searchgetJobRequest, searchgetJobRequestAdvanced } from 
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import DialogContent from '@mui/material/DialogContent';
-import { GetDataJobsApplyRequest, JobSearchGetRequest } from 'slice/recruiter/userSlice';
+import { AdvancedSeacrchJobsRequest, GetDataJobsApplyRequest, JobSearchGetRequest } from 'slice/recruiter/userSlice';
 import { ApplyJobApplicantRequest } from 'slice/applicant/profileUpdateSlice';
 import { toast } from 'react-toastify';
 
@@ -455,7 +455,7 @@ export const ListJobApplicant = () => {
 
     console.log(searchOptions);
 
-    dis(searchgetJobRequestAdvanced({
+    dis(AdvancedSeacrchJobsRequest({
       ...searchOptions,
     }));
 

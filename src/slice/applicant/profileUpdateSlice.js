@@ -60,7 +60,7 @@ const profileUpdateSlice = createSlice({
     },
     SucAdvancedSearchEmployeeRequest: function (state, { payload }) {
       state.isloading = false;
-      state.data = payload;
+      state.listData = payload;
     },
     FailAdvancedSearchEmployeeRequest: function (state, { payload }) {
       state.isloading = false;

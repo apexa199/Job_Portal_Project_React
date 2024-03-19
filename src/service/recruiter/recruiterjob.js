@@ -44,7 +44,7 @@ export const getJobDataSearchAdvanced = (obj) => {
     {
         url = url + "&jobType=" + "Part Time"
     }   
-    else if(obj.jobType.wfh)
+    else 
     {
         url = url + "&jobType=" + "Work From Home"
     }    
@@ -168,11 +168,11 @@ export const advanceviewjobpoup = (obj) => {
     {
         url = url + "&status=" + "rejected"
     }  
-    if(obj.status.accepted)
+    else if(obj.status.accepted)
     {
         url = url + "&status=" + "Accepted"
     }  
-    if(obj.status.shortlisted)
+    else
     {
         url = url + "&status=" + "shortlisted"
     }  
@@ -237,7 +237,7 @@ export const AdvancedSearchEmployee =(obj) =>
     {
         if(obj.sort["jobApplicant.name"].desc)
         {
-        url = url + "&asc=" + "jobApplicant.name"
+        url = url + "&desc=" + "jobApplicant.name"
         }
         else
         {
@@ -341,11 +341,11 @@ export const JobsDataSearchAdvanced = (obj) => {
     {
         url1 = url1 + "jobType=" + "Full Time"
     }  
-    if(obj.jobType.partTime)
+    else if(obj.jobType.partTime)
     {
         url1 = url1 + "&jobType=" + "Part Time"
     }   
-    if(obj.jobType.wfh)
+    else
     {
         url1 = url1 + "&jobType=" + "Work From Home"
     }    
