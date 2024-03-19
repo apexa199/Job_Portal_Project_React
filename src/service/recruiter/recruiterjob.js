@@ -401,4 +401,11 @@ export const JobsDataSearchAdvanced = (obj) => {
     
 }
 
+export const RejectJobData = () => {
+    
+}
+// http://localhost:4444/api/applications/65f816ad05511309a01f46fe  PUT reject
+
+// http://localhost:4444/api/applicants?jobId=65f80bc2b2da704394d6041c&desc=dateOfApplication  GET
+
 export default createJob;
